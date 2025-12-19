@@ -3,8 +3,16 @@ name: Buf CI
 on:
   push:
     branches: [main]
+    paths:
+      - 'echo/**'
+      - 'buf.yaml'
+      - 'buf.gen.yaml'
   pull_request:
     types: [opened, synchronize, reopened]
+    paths:
+      - 'echo/**'
+      - 'buf.yaml'
+      - 'buf.gen.yaml'
 
 permissions:
   contents: read
