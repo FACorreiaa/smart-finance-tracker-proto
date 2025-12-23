@@ -19,3 +19,4 @@ plugins:
     out: gen
   - remote: buf.build/bufbuild/es:v2.10.1
     out: gen/ts
+    include_imports: true
