@@ -126,6 +126,14 @@ message Transaction {
   google.protobuf.Timestamp updated_at = 31 [(buf.validate.field).required = true];
 }
 
+message CsvMapping {
+  string date_column = 1;
+  string description_column = 2;
+  string amount_column = 3;
+  string debit_column = 4;
+  string credit_column = 5;
+}
+
 message ImportTransactionsCsvRequest {
   // If omitted, the server may create/use a default import account.
   optional string account_id = 1 [(buf.validate.field).string = { uuid: true }];
@@ -136,6 +144,9 @@ message ImportTransactionsCsvRequest {
   // Optional: a client hint, like "MM/DD/YYYY".
   string date_format = 3 [(buf.validate.field).string = { max_len: 32 }];
   string timezone = 4 [(buf.validate.field).string = { max_len: 64 }];
+
+  CsvMapping mapping = 5;
+  int32 header_rows = 6;
 }
 
 message ImportTransactionsCsvResponse {

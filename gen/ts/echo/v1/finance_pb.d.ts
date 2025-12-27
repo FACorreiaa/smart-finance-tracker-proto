@@ -361,6 +361,42 @@ export declare type Transaction = Message<"echo.v1.Transaction"> & {
 export declare const TransactionSchema: GenMessage<Transaction>;
 
 /**
+ * @generated from message echo.v1.CsvMapping
+ */
+export declare type CsvMapping = Message<"echo.v1.CsvMapping"> & {
+  /**
+   * @generated from field: string date_column = 1;
+   */
+  dateColumn: string;
+
+  /**
+   * @generated from field: string description_column = 2;
+   */
+  descriptionColumn: string;
+
+  /**
+   * @generated from field: string amount_column = 3;
+   */
+  amountColumn: string;
+
+  /**
+   * @generated from field: string debit_column = 4;
+   */
+  debitColumn: string;
+
+  /**
+   * @generated from field: string credit_column = 5;
+   */
+  creditColumn: string;
+};
+
+/**
+ * Describes the message echo.v1.CsvMapping.
+ * Use `create(CsvMappingSchema)` to create a new message.
+ */
+export declare const CsvMappingSchema: GenMessage<CsvMapping>;
+
+/**
  * @generated from message echo.v1.ImportTransactionsCsvRequest
  */
 export declare type ImportTransactionsCsvRequest = Message<"echo.v1.ImportTransactionsCsvRequest"> & {
@@ -389,6 +425,16 @@ export declare type ImportTransactionsCsvRequest = Message<"echo.v1.ImportTransa
    * @generated from field: string timezone = 4;
    */
   timezone: string;
+
+  /**
+   * @generated from field: echo.v1.CsvMapping mapping = 5;
+   */
+  mapping?: CsvMapping;
+
+  /**
+   * @generated from field: int32 header_rows = 6;
+   */
+  headerRows: number;
 };
 
 /**
