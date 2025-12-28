@@ -13,6 +13,9 @@ service ImportService {
   rpc GetUserFile(GetUserFileRequest) returns (GetUserFileResponse);
   rpc ListUserFiles(ListUserFilesRequest) returns (ListUserFilesResponse);
 
+  // Analyzes a CSV file and returns detected configuration for mapping UI.
+  rpc AnalyzeCsvFile(AnalyzeCsvFileRequest) returns (AnalyzeCsvFileResponse);
+
   // Creates an import job that parses a file into canonical records (transactions, documents).
   rpc CreateImportJob(CreateImportJobRequest) returns (CreateImportJobResponse);
   rpc GetImportJob(GetImportJobRequest) returns (GetImportJobResponse);
@@ -175,4 +178,54 @@ message ListDocumentsRequest {
 message ListDocumentsResponse {
   repeated Document documents = 1 [(buf.validate.field).repeated = { max_items: 2000 }];
   PageResponse page = 2 [(buf.validate.field).required = true];
+}
+
+// ============================================================================
+// CSV Analysis Messages
+// ============================================================================
+
+message AnalyzeCsvFileRequest {
+  bytes csv_bytes = 1 [(buf.validate.field).bytes = { min_len: 1 max_len: 20000000 }];
+}
+
+message AnalyzeCsvFileResponse {
+  // Detected file configuration
+  repeated string headers = 1;
+  repeated CsvSampleRow sample_rows = 2;
+  string delimiter = 3;
+  int32 skip_lines = 4;
+  string fingerprint = 5;
+
+  // Auto-detected column suggestions
+  CsvColumnSuggestions suggestions = 6;
+
+  // Regional dialect detection
+  CsvRegionalDialect probed_dialect = 7;
+
+  // Whether we found a saved mapping for this bank format
+  bool mapping_found = 8;
+
+  // If true, we can auto-import without user confirmation
+  bool can_auto_import = 9;
+}
+
+message CsvSampleRow {
+  repeated string cells = 1;
+}
+
+message CsvColumnSuggestions {
+  int32 date_col = 1;
+  int32 desc_col = 2;
+  int32 amount_col = 3;
+  int32 debit_col = 4;
+  int32 credit_col = 5;
+  int32 category_col = 6;
+  bool is_double_entry = 7;
+}
+
+message CsvRegionalDialect {
+  bool is_european_format = 1;
+  string date_format = 2;
+  double confidence = 3;
+  string currency_hint = 4;
 }

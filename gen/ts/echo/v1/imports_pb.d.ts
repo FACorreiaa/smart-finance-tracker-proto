@@ -544,6 +544,181 @@ export declare type ListDocumentsResponse = Message<"echo.v1.ListDocumentsRespon
 export declare const ListDocumentsResponseSchema: GenMessage<ListDocumentsResponse>;
 
 /**
+ * @generated from message echo.v1.AnalyzeCsvFileRequest
+ */
+export declare type AnalyzeCsvFileRequest = Message<"echo.v1.AnalyzeCsvFileRequest"> & {
+  /**
+   * @generated from field: bytes csv_bytes = 1;
+   */
+  csvBytes: Uint8Array;
+};
+
+/**
+ * Describes the message echo.v1.AnalyzeCsvFileRequest.
+ * Use `create(AnalyzeCsvFileRequestSchema)` to create a new message.
+ */
+export declare const AnalyzeCsvFileRequestSchema: GenMessage<AnalyzeCsvFileRequest>;
+
+/**
+ * @generated from message echo.v1.AnalyzeCsvFileResponse
+ */
+export declare type AnalyzeCsvFileResponse = Message<"echo.v1.AnalyzeCsvFileResponse"> & {
+  /**
+   * Detected file configuration
+   *
+   * @generated from field: repeated string headers = 1;
+   */
+  headers: string[];
+
+  /**
+   * @generated from field: repeated echo.v1.CsvSampleRow sample_rows = 2;
+   */
+  sampleRows: CsvSampleRow[];
+
+  /**
+   * @generated from field: string delimiter = 3;
+   */
+  delimiter: string;
+
+  /**
+   * @generated from field: int32 skip_lines = 4;
+   */
+  skipLines: number;
+
+  /**
+   * @generated from field: string fingerprint = 5;
+   */
+  fingerprint: string;
+
+  /**
+   * Auto-detected column suggestions
+   *
+   * @generated from field: echo.v1.CsvColumnSuggestions suggestions = 6;
+   */
+  suggestions?: CsvColumnSuggestions;
+
+  /**
+   * Regional dialect detection
+   *
+   * @generated from field: echo.v1.CsvRegionalDialect probed_dialect = 7;
+   */
+  probedDialect?: CsvRegionalDialect;
+
+  /**
+   * Whether we found a saved mapping for this bank format
+   *
+   * @generated from field: bool mapping_found = 8;
+   */
+  mappingFound: boolean;
+
+  /**
+   * If true, we can auto-import without user confirmation
+   *
+   * @generated from field: bool can_auto_import = 9;
+   */
+  canAutoImport: boolean;
+};
+
+/**
+ * Describes the message echo.v1.AnalyzeCsvFileResponse.
+ * Use `create(AnalyzeCsvFileResponseSchema)` to create a new message.
+ */
+export declare const AnalyzeCsvFileResponseSchema: GenMessage<AnalyzeCsvFileResponse>;
+
+/**
+ * @generated from message echo.v1.CsvSampleRow
+ */
+export declare type CsvSampleRow = Message<"echo.v1.CsvSampleRow"> & {
+  /**
+   * @generated from field: repeated string cells = 1;
+   */
+  cells: string[];
+};
+
+/**
+ * Describes the message echo.v1.CsvSampleRow.
+ * Use `create(CsvSampleRowSchema)` to create a new message.
+ */
+export declare const CsvSampleRowSchema: GenMessage<CsvSampleRow>;
+
+/**
+ * @generated from message echo.v1.CsvColumnSuggestions
+ */
+export declare type CsvColumnSuggestions = Message<"echo.v1.CsvColumnSuggestions"> & {
+  /**
+   * @generated from field: int32 date_col = 1;
+   */
+  dateCol: number;
+
+  /**
+   * @generated from field: int32 desc_col = 2;
+   */
+  descCol: number;
+
+  /**
+   * @generated from field: int32 amount_col = 3;
+   */
+  amountCol: number;
+
+  /**
+   * @generated from field: int32 debit_col = 4;
+   */
+  debitCol: number;
+
+  /**
+   * @generated from field: int32 credit_col = 5;
+   */
+  creditCol: number;
+
+  /**
+   * @generated from field: int32 category_col = 6;
+   */
+  categoryCol: number;
+
+  /**
+   * @generated from field: bool is_double_entry = 7;
+   */
+  isDoubleEntry: boolean;
+};
+
+/**
+ * Describes the message echo.v1.CsvColumnSuggestions.
+ * Use `create(CsvColumnSuggestionsSchema)` to create a new message.
+ */
+export declare const CsvColumnSuggestionsSchema: GenMessage<CsvColumnSuggestions>;
+
+/**
+ * @generated from message echo.v1.CsvRegionalDialect
+ */
+export declare type CsvRegionalDialect = Message<"echo.v1.CsvRegionalDialect"> & {
+  /**
+   * @generated from field: bool is_european_format = 1;
+   */
+  isEuropeanFormat: boolean;
+
+  /**
+   * @generated from field: string date_format = 2;
+   */
+  dateFormat: string;
+
+  /**
+   * @generated from field: double confidence = 3;
+   */
+  confidence: number;
+
+  /**
+   * @generated from field: string currency_hint = 4;
+   */
+  currencyHint: string;
+};
+
+/**
+ * Describes the message echo.v1.CsvRegionalDialect.
+ * Use `create(CsvRegionalDialectSchema)` to create a new message.
+ */
+export declare const CsvRegionalDialectSchema: GenMessage<CsvRegionalDialect>;
+
+/**
  * @generated from enum echo.v1.UserFileType
  */
 export enum UserFileType {
@@ -672,6 +847,16 @@ export declare const ImportService: GenService<{
     methodKind: "unary";
     input: typeof ListUserFilesRequestSchema;
     output: typeof ListUserFilesResponseSchema;
+  },
+  /**
+   * Analyzes a CSV file and returns detected configuration for mapping UI.
+   *
+   * @generated from rpc echo.v1.ImportService.AnalyzeCsvFile
+   */
+  analyzeCsvFile: {
+    methodKind: "unary";
+    input: typeof AnalyzeCsvFileRequestSchema;
+    output: typeof AnalyzeCsvFileResponseSchema;
   },
   /**
    * Creates an import job that parses a file into canonical records (transactions, documents).

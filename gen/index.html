@@ -573,11 +573,31 @@
             <ul>
               
                 <li>
+                  <a href="#echo.v1.AnalyzeCsvFileRequest"><span class="badge">M</span>AnalyzeCsvFileRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.AnalyzeCsvFileResponse"><span class="badge">M</span>AnalyzeCsvFileResponse</a>
+                </li>
+              
+                <li>
                   <a href="#echo.v1.CreateImportJobRequest"><span class="badge">M</span>CreateImportJobRequest</a>
                 </li>
               
                 <li>
                   <a href="#echo.v1.CreateImportJobResponse"><span class="badge">M</span>CreateImportJobResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.CsvColumnSuggestions"><span class="badge">M</span>CsvColumnSuggestions</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.CsvRegionalDialect"><span class="badge">M</span>CsvRegionalDialect</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.CsvSampleRow"><span class="badge">M</span>CsvSampleRow</a>
                 </li>
               
                 <li>
@@ -4040,6 +4060,110 @@
       <p></p>
 
       
+        <h3 id="echo.v1.AnalyzeCsvFileRequest">AnalyzeCsvFileRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>csv_bytes</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="echo.v1.AnalyzeCsvFileResponse">AnalyzeCsvFileResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>headers</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Detected file configuration </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sample_rows</td>
+                  <td><a href="#echo.v1.CsvSampleRow">CsvSampleRow</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>delimiter</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>skip_lines</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fingerprint</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>suggestions</td>
+                  <td><a href="#echo.v1.CsvColumnSuggestions">CsvColumnSuggestions</a></td>
+                  <td></td>
+                  <td><p>Auto-detected column suggestions </p></td>
+                </tr>
+              
+                <tr>
+                  <td>probed_dialect</td>
+                  <td><a href="#echo.v1.CsvRegionalDialect">CsvRegionalDialect</a></td>
+                  <td></td>
+                  <td><p>Regional dialect detection </p></td>
+                </tr>
+              
+                <tr>
+                  <td>mapping_found</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether we found a saved mapping for this bank format </p></td>
+                </tr>
+              
+                <tr>
+                  <td>can_auto_import</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>If true, we can auto-import without user confirmation </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="echo.v1.CreateImportJobRequest">CreateImportJobRequest</h3>
         <p></p>
 
@@ -4106,6 +4230,141 @@
                   <td>job</td>
                   <td><a href="#echo.v1.ImportJob">ImportJob</a></td>
                   <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="echo.v1.CsvColumnSuggestions">CsvColumnSuggestions</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>date_col</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>desc_col</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>amount_col</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>debit_col</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>credit_col</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>category_col</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>is_double_entry</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="echo.v1.CsvRegionalDialect">CsvRegionalDialect</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>is_european_format</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>date_format</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>confidence</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency_hint</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="echo.v1.CsvSampleRow">CsvSampleRow</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>cells</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -4957,6 +5216,13 @@
                 <td><a href="#echo.v1.ListUserFilesRequest">ListUserFilesRequest</a></td>
                 <td><a href="#echo.v1.ListUserFilesResponse">ListUserFilesResponse</a></td>
                 <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>AnalyzeCsvFile</td>
+                <td><a href="#echo.v1.AnalyzeCsvFileRequest">AnalyzeCsvFileRequest</a></td>
+                <td><a href="#echo.v1.AnalyzeCsvFileResponse">AnalyzeCsvFileResponse</a></td>
+                <td><p>Analyzes a CSV file and returns detected configuration for mapping UI.</p></td>
               </tr>
             
               <tr>

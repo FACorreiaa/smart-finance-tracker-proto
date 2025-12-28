@@ -1396,6 +1396,367 @@ func (x *ListDocumentsResponse) GetPage() *PageResponse {
 	return nil
 }
 
+type AnalyzeCsvFileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CsvBytes      []byte                 `protobuf:"bytes,1,opt,name=csv_bytes,json=csvBytes,proto3" json:"csv_bytes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AnalyzeCsvFileRequest) Reset() {
+	*x = AnalyzeCsvFileRequest{}
+	mi := &file_echo_v1_imports_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AnalyzeCsvFileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AnalyzeCsvFileRequest) ProtoMessage() {}
+
+func (x *AnalyzeCsvFileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_imports_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AnalyzeCsvFileRequest.ProtoReflect.Descriptor instead.
+func (*AnalyzeCsvFileRequest) Descriptor() ([]byte, []int) {
+	return file_echo_v1_imports_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *AnalyzeCsvFileRequest) GetCsvBytes() []byte {
+	if x != nil {
+		return x.CsvBytes
+	}
+	return nil
+}
+
+type AnalyzeCsvFileResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Detected file configuration
+	Headers     []string        `protobuf:"bytes,1,rep,name=headers,proto3" json:"headers,omitempty"`
+	SampleRows  []*CsvSampleRow `protobuf:"bytes,2,rep,name=sample_rows,json=sampleRows,proto3" json:"sample_rows,omitempty"`
+	Delimiter   string          `protobuf:"bytes,3,opt,name=delimiter,proto3" json:"delimiter,omitempty"`
+	SkipLines   int32           `protobuf:"varint,4,opt,name=skip_lines,json=skipLines,proto3" json:"skip_lines,omitempty"`
+	Fingerprint string          `protobuf:"bytes,5,opt,name=fingerprint,proto3" json:"fingerprint,omitempty"`
+	// Auto-detected column suggestions
+	Suggestions *CsvColumnSuggestions `protobuf:"bytes,6,opt,name=suggestions,proto3" json:"suggestions,omitempty"`
+	// Regional dialect detection
+	ProbedDialect *CsvRegionalDialect `protobuf:"bytes,7,opt,name=probed_dialect,json=probedDialect,proto3" json:"probed_dialect,omitempty"`
+	// Whether we found a saved mapping for this bank format
+	MappingFound bool `protobuf:"varint,8,opt,name=mapping_found,json=mappingFound,proto3" json:"mapping_found,omitempty"`
+	// If true, we can auto-import without user confirmation
+	CanAutoImport bool `protobuf:"varint,9,opt,name=can_auto_import,json=canAutoImport,proto3" json:"can_auto_import,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AnalyzeCsvFileResponse) Reset() {
+	*x = AnalyzeCsvFileResponse{}
+	mi := &file_echo_v1_imports_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AnalyzeCsvFileResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AnalyzeCsvFileResponse) ProtoMessage() {}
+
+func (x *AnalyzeCsvFileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_imports_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AnalyzeCsvFileResponse.ProtoReflect.Descriptor instead.
+func (*AnalyzeCsvFileResponse) Descriptor() ([]byte, []int) {
+	return file_echo_v1_imports_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *AnalyzeCsvFileResponse) GetHeaders() []string {
+	if x != nil {
+		return x.Headers
+	}
+	return nil
+}
+
+func (x *AnalyzeCsvFileResponse) GetSampleRows() []*CsvSampleRow {
+	if x != nil {
+		return x.SampleRows
+	}
+	return nil
+}
+
+func (x *AnalyzeCsvFileResponse) GetDelimiter() string {
+	if x != nil {
+		return x.Delimiter
+	}
+	return ""
+}
+
+func (x *AnalyzeCsvFileResponse) GetSkipLines() int32 {
+	if x != nil {
+		return x.SkipLines
+	}
+	return 0
+}
+
+func (x *AnalyzeCsvFileResponse) GetFingerprint() string {
+	if x != nil {
+		return x.Fingerprint
+	}
+	return ""
+}
+
+func (x *AnalyzeCsvFileResponse) GetSuggestions() *CsvColumnSuggestions {
+	if x != nil {
+		return x.Suggestions
+	}
+	return nil
+}
+
+func (x *AnalyzeCsvFileResponse) GetProbedDialect() *CsvRegionalDialect {
+	if x != nil {
+		return x.ProbedDialect
+	}
+	return nil
+}
+
+func (x *AnalyzeCsvFileResponse) GetMappingFound() bool {
+	if x != nil {
+		return x.MappingFound
+	}
+	return false
+}
+
+func (x *AnalyzeCsvFileResponse) GetCanAutoImport() bool {
+	if x != nil {
+		return x.CanAutoImport
+	}
+	return false
+}
+
+type CsvSampleRow struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Cells         []string               `protobuf:"bytes,1,rep,name=cells,proto3" json:"cells,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CsvSampleRow) Reset() {
+	*x = CsvSampleRow{}
+	mi := &file_echo_v1_imports_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CsvSampleRow) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CsvSampleRow) ProtoMessage() {}
+
+func (x *CsvSampleRow) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_imports_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CsvSampleRow.ProtoReflect.Descriptor instead.
+func (*CsvSampleRow) Descriptor() ([]byte, []int) {
+	return file_echo_v1_imports_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *CsvSampleRow) GetCells() []string {
+	if x != nil {
+		return x.Cells
+	}
+	return nil
+}
+
+type CsvColumnSuggestions struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DateCol       int32                  `protobuf:"varint,1,opt,name=date_col,json=dateCol,proto3" json:"date_col,omitempty"`
+	DescCol       int32                  `protobuf:"varint,2,opt,name=desc_col,json=descCol,proto3" json:"desc_col,omitempty"`
+	AmountCol     int32                  `protobuf:"varint,3,opt,name=amount_col,json=amountCol,proto3" json:"amount_col,omitempty"`
+	DebitCol      int32                  `protobuf:"varint,4,opt,name=debit_col,json=debitCol,proto3" json:"debit_col,omitempty"`
+	CreditCol     int32                  `protobuf:"varint,5,opt,name=credit_col,json=creditCol,proto3" json:"credit_col,omitempty"`
+	CategoryCol   int32                  `protobuf:"varint,6,opt,name=category_col,json=categoryCol,proto3" json:"category_col,omitempty"`
+	IsDoubleEntry bool                   `protobuf:"varint,7,opt,name=is_double_entry,json=isDoubleEntry,proto3" json:"is_double_entry,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CsvColumnSuggestions) Reset() {
+	*x = CsvColumnSuggestions{}
+	mi := &file_echo_v1_imports_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CsvColumnSuggestions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CsvColumnSuggestions) ProtoMessage() {}
+
+func (x *CsvColumnSuggestions) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_imports_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CsvColumnSuggestions.ProtoReflect.Descriptor instead.
+func (*CsvColumnSuggestions) Descriptor() ([]byte, []int) {
+	return file_echo_v1_imports_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *CsvColumnSuggestions) GetDateCol() int32 {
+	if x != nil {
+		return x.DateCol
+	}
+	return 0
+}
+
+func (x *CsvColumnSuggestions) GetDescCol() int32 {
+	if x != nil {
+		return x.DescCol
+	}
+	return 0
+}
+
+func (x *CsvColumnSuggestions) GetAmountCol() int32 {
+	if x != nil {
+		return x.AmountCol
+	}
+	return 0
+}
+
+func (x *CsvColumnSuggestions) GetDebitCol() int32 {
+	if x != nil {
+		return x.DebitCol
+	}
+	return 0
+}
+
+func (x *CsvColumnSuggestions) GetCreditCol() int32 {
+	if x != nil {
+		return x.CreditCol
+	}
+	return 0
+}
+
+func (x *CsvColumnSuggestions) GetCategoryCol() int32 {
+	if x != nil {
+		return x.CategoryCol
+	}
+	return 0
+}
+
+func (x *CsvColumnSuggestions) GetIsDoubleEntry() bool {
+	if x != nil {
+		return x.IsDoubleEntry
+	}
+	return false
+}
+
+type CsvRegionalDialect struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	IsEuropeanFormat bool                   `protobuf:"varint,1,opt,name=is_european_format,json=isEuropeanFormat,proto3" json:"is_european_format,omitempty"`
+	DateFormat       string                 `protobuf:"bytes,2,opt,name=date_format,json=dateFormat,proto3" json:"date_format,omitempty"`
+	Confidence       float64                `protobuf:"fixed64,3,opt,name=confidence,proto3" json:"confidence,omitempty"`
+	CurrencyHint     string                 `protobuf:"bytes,4,opt,name=currency_hint,json=currencyHint,proto3" json:"currency_hint,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *CsvRegionalDialect) Reset() {
+	*x = CsvRegionalDialect{}
+	mi := &file_echo_v1_imports_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CsvRegionalDialect) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CsvRegionalDialect) ProtoMessage() {}
+
+func (x *CsvRegionalDialect) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_imports_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CsvRegionalDialect.ProtoReflect.Descriptor instead.
+func (*CsvRegionalDialect) Descriptor() ([]byte, []int) {
+	return file_echo_v1_imports_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *CsvRegionalDialect) GetIsEuropeanFormat() bool {
+	if x != nil {
+		return x.IsEuropeanFormat
+	}
+	return false
+}
+
+func (x *CsvRegionalDialect) GetDateFormat() string {
+	if x != nil {
+		return x.DateFormat
+	}
+	return ""
+}
+
+func (x *CsvRegionalDialect) GetConfidence() float64 {
+	if x != nil {
+		return x.Confidence
+	}
+	return 0
+}
+
+func (x *CsvRegionalDialect) GetCurrencyHint() string {
+	if x != nil {
+		return x.CurrencyHint
+	}
+	return ""
+}
+
 var File_echo_v1_imports_proto protoreflect.FileDescriptor
 
 const file_echo_v1_imports_proto_rawDesc = "" +
@@ -1504,7 +1865,41 @@ const file_echo_v1_imports_proto_rawDesc = "" +
 	"\x04page\x18\x01 \x01(\v2\x14.echo.v1.PageRequestR\x04page\"\x86\x01\n" +
 	"\x15ListDocumentsResponse\x12:\n" +
 	"\tdocuments\x18\x01 \x03(\v2\x11.echo.v1.DocumentB\t\xbaH\x06\x92\x01\x03\x10\xd0\x0fR\tdocuments\x121\n" +
-	"\x04page\x18\x02 \x01(\v2\x15.echo.v1.PageResponseB\x06\xbaH\x03\xc8\x01\x01R\x04page*\x91\x01\n" +
+	"\x04page\x18\x02 \x01(\v2\x15.echo.v1.PageResponseB\x06\xbaH\x03\xc8\x01\x01R\x04page\"B\n" +
+	"\x15AnalyzeCsvFileRequest\x12)\n" +
+	"\tcsv_bytes\x18\x01 \x01(\fB\f\xbaH\tz\a\x10\x01\x18\x80\xda\xc4\tR\bcsvBytes\"\x9b\x03\n" +
+	"\x16AnalyzeCsvFileResponse\x12\x18\n" +
+	"\aheaders\x18\x01 \x03(\tR\aheaders\x126\n" +
+	"\vsample_rows\x18\x02 \x03(\v2\x15.echo.v1.CsvSampleRowR\n" +
+	"sampleRows\x12\x1c\n" +
+	"\tdelimiter\x18\x03 \x01(\tR\tdelimiter\x12\x1d\n" +
+	"\n" +
+	"skip_lines\x18\x04 \x01(\x05R\tskipLines\x12 \n" +
+	"\vfingerprint\x18\x05 \x01(\tR\vfingerprint\x12?\n" +
+	"\vsuggestions\x18\x06 \x01(\v2\x1d.echo.v1.CsvColumnSuggestionsR\vsuggestions\x12B\n" +
+	"\x0eprobed_dialect\x18\a \x01(\v2\x1b.echo.v1.CsvRegionalDialectR\rprobedDialect\x12#\n" +
+	"\rmapping_found\x18\b \x01(\bR\fmappingFound\x12&\n" +
+	"\x0fcan_auto_import\x18\t \x01(\bR\rcanAutoImport\"$\n" +
+	"\fCsvSampleRow\x12\x14\n" +
+	"\x05cells\x18\x01 \x03(\tR\x05cells\"\xf2\x01\n" +
+	"\x14CsvColumnSuggestions\x12\x19\n" +
+	"\bdate_col\x18\x01 \x01(\x05R\adateCol\x12\x19\n" +
+	"\bdesc_col\x18\x02 \x01(\x05R\adescCol\x12\x1d\n" +
+	"\n" +
+	"amount_col\x18\x03 \x01(\x05R\tamountCol\x12\x1b\n" +
+	"\tdebit_col\x18\x04 \x01(\x05R\bdebitCol\x12\x1d\n" +
+	"\n" +
+	"credit_col\x18\x05 \x01(\x05R\tcreditCol\x12!\n" +
+	"\fcategory_col\x18\x06 \x01(\x05R\vcategoryCol\x12&\n" +
+	"\x0fis_double_entry\x18\a \x01(\bR\risDoubleEntry\"\xa8\x01\n" +
+	"\x12CsvRegionalDialect\x12,\n" +
+	"\x12is_european_format\x18\x01 \x01(\bR\x10isEuropeanFormat\x12\x1f\n" +
+	"\vdate_format\x18\x02 \x01(\tR\n" +
+	"dateFormat\x12\x1e\n" +
+	"\n" +
+	"confidence\x18\x03 \x01(\x01R\n" +
+	"confidence\x12#\n" +
+	"\rcurrency_hint\x18\x04 \x01(\tR\fcurrencyHint*\x91\x01\n" +
 	"\fUserFileType\x12\x1e\n" +
 	"\x1aUSER_FILE_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12USER_FILE_TYPE_CSV\x10\x01\x12\x17\n" +
@@ -1522,11 +1917,12 @@ const file_echo_v1_imports_proto_rawDesc = "" +
 	"\x15IMPORT_STATUS_RUNNING\x10\x02\x12\x1b\n" +
 	"\x17IMPORT_STATUS_SUCCEEDED\x10\x03\x12\x18\n" +
 	"\x14IMPORT_STATUS_FAILED\x10\x04\x12\x1a\n" +
-	"\x16IMPORT_STATUS_CANCELED\x10\x052\x8c\x05\n" +
+	"\x16IMPORT_STATUS_CANCELED\x10\x052\xdf\x05\n" +
 	"\rImportService\x12Q\n" +
 	"\x0eUploadUserFile\x12\x1e.echo.v1.UploadUserFileRequest\x1a\x1f.echo.v1.UploadUserFileResponse\x12H\n" +
 	"\vGetUserFile\x12\x1b.echo.v1.GetUserFileRequest\x1a\x1c.echo.v1.GetUserFileResponse\x12N\n" +
-	"\rListUserFiles\x12\x1d.echo.v1.ListUserFilesRequest\x1a\x1e.echo.v1.ListUserFilesResponse\x12T\n" +
+	"\rListUserFiles\x12\x1d.echo.v1.ListUserFilesRequest\x1a\x1e.echo.v1.ListUserFilesResponse\x12Q\n" +
+	"\x0eAnalyzeCsvFile\x12\x1e.echo.v1.AnalyzeCsvFileRequest\x1a\x1f.echo.v1.AnalyzeCsvFileResponse\x12T\n" +
 	"\x0fCreateImportJob\x12\x1f.echo.v1.CreateImportJobRequest\x1a .echo.v1.CreateImportJobResponse\x12K\n" +
 	"\fGetImportJob\x12\x1c.echo.v1.GetImportJobRequest\x1a\x1d.echo.v1.GetImportJobResponse\x12Q\n" +
 	"\x0eListImportJobs\x12\x1e.echo.v1.ListImportJobsRequest\x1a\x1f.echo.v1.ListImportJobsResponse\x12H\n" +
@@ -1547,7 +1943,7 @@ func file_echo_v1_imports_proto_rawDescGZIP() []byte {
 }
 
 var file_echo_v1_imports_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_echo_v1_imports_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_echo_v1_imports_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_echo_v1_imports_proto_goTypes = []any{
 	(UserFileType)(0),               // 0: echo.v1.UserFileType
 	(ImportKind)(0),                 // 1: echo.v1.ImportKind
@@ -1572,64 +1968,74 @@ var file_echo_v1_imports_proto_goTypes = []any{
 	(*GetDocumentResponse)(nil),     // 20: echo.v1.GetDocumentResponse
 	(*ListDocumentsRequest)(nil),    // 21: echo.v1.ListDocumentsRequest
 	(*ListDocumentsResponse)(nil),   // 22: echo.v1.ListDocumentsResponse
-	(*timestamppb.Timestamp)(nil),   // 23: google.protobuf.Timestamp
-	(*PageRequest)(nil),             // 24: echo.v1.PageRequest
-	(*PageResponse)(nil),            // 25: echo.v1.PageResponse
-	(*Money)(nil),                   // 26: echo.v1.Money
+	(*AnalyzeCsvFileRequest)(nil),   // 23: echo.v1.AnalyzeCsvFileRequest
+	(*AnalyzeCsvFileResponse)(nil),  // 24: echo.v1.AnalyzeCsvFileResponse
+	(*CsvSampleRow)(nil),            // 25: echo.v1.CsvSampleRow
+	(*CsvColumnSuggestions)(nil),    // 26: echo.v1.CsvColumnSuggestions
+	(*CsvRegionalDialect)(nil),      // 27: echo.v1.CsvRegionalDialect
+	(*timestamppb.Timestamp)(nil),   // 28: google.protobuf.Timestamp
+	(*PageRequest)(nil),             // 29: echo.v1.PageRequest
+	(*PageResponse)(nil),            // 30: echo.v1.PageResponse
+	(*Money)(nil),                   // 31: echo.v1.Money
 }
 var file_echo_v1_imports_proto_depIdxs = []int32{
 	0,  // 0: echo.v1.UserFile.type:type_name -> echo.v1.UserFileType
-	23, // 1: echo.v1.UserFile.created_at:type_name -> google.protobuf.Timestamp
+	28, // 1: echo.v1.UserFile.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 2: echo.v1.UploadUserFileRequest.type:type_name -> echo.v1.UserFileType
 	3,  // 3: echo.v1.UploadUserFileResponse.file:type_name -> echo.v1.UserFile
 	3,  // 4: echo.v1.GetUserFileResponse.file:type_name -> echo.v1.UserFile
-	24, // 5: echo.v1.ListUserFilesRequest.page:type_name -> echo.v1.PageRequest
+	29, // 5: echo.v1.ListUserFilesRequest.page:type_name -> echo.v1.PageRequest
 	0,  // 6: echo.v1.ListUserFilesRequest.type:type_name -> echo.v1.UserFileType
 	3,  // 7: echo.v1.ListUserFilesResponse.files:type_name -> echo.v1.UserFile
-	25, // 8: echo.v1.ListUserFilesResponse.page:type_name -> echo.v1.PageResponse
+	30, // 8: echo.v1.ListUserFilesResponse.page:type_name -> echo.v1.PageResponse
 	1,  // 9: echo.v1.ImportJob.kind:type_name -> echo.v1.ImportKind
 	2,  // 10: echo.v1.ImportJob.status:type_name -> echo.v1.ImportStatus
 	10, // 11: echo.v1.ImportJob.stats:type_name -> echo.v1.ImportStats
-	23, // 12: echo.v1.ImportJob.requested_at:type_name -> google.protobuf.Timestamp
-	23, // 13: echo.v1.ImportJob.started_at:type_name -> google.protobuf.Timestamp
-	23, // 14: echo.v1.ImportJob.finished_at:type_name -> google.protobuf.Timestamp
+	28, // 12: echo.v1.ImportJob.requested_at:type_name -> google.protobuf.Timestamp
+	28, // 13: echo.v1.ImportJob.started_at:type_name -> google.protobuf.Timestamp
+	28, // 14: echo.v1.ImportJob.finished_at:type_name -> google.protobuf.Timestamp
 	1,  // 15: echo.v1.CreateImportJobRequest.kind:type_name -> echo.v1.ImportKind
 	11, // 16: echo.v1.CreateImportJobResponse.job:type_name -> echo.v1.ImportJob
 	11, // 17: echo.v1.GetImportJobResponse.job:type_name -> echo.v1.ImportJob
-	24, // 18: echo.v1.ListImportJobsRequest.page:type_name -> echo.v1.PageRequest
+	29, // 18: echo.v1.ListImportJobsRequest.page:type_name -> echo.v1.PageRequest
 	2,  // 19: echo.v1.ListImportJobsRequest.status:type_name -> echo.v1.ImportStatus
 	1,  // 20: echo.v1.ListImportJobsRequest.kind:type_name -> echo.v1.ImportKind
 	11, // 21: echo.v1.ListImportJobsResponse.jobs:type_name -> echo.v1.ImportJob
-	25, // 22: echo.v1.ListImportJobsResponse.page:type_name -> echo.v1.PageResponse
-	23, // 23: echo.v1.Document.issued_at:type_name -> google.protobuf.Timestamp
-	26, // 24: echo.v1.Document.total:type_name -> echo.v1.Money
-	23, // 25: echo.v1.Document.created_at:type_name -> google.protobuf.Timestamp
-	23, // 26: echo.v1.Document.updated_at:type_name -> google.protobuf.Timestamp
+	30, // 22: echo.v1.ListImportJobsResponse.page:type_name -> echo.v1.PageResponse
+	28, // 23: echo.v1.Document.issued_at:type_name -> google.protobuf.Timestamp
+	31, // 24: echo.v1.Document.total:type_name -> echo.v1.Money
+	28, // 25: echo.v1.Document.created_at:type_name -> google.protobuf.Timestamp
+	28, // 26: echo.v1.Document.updated_at:type_name -> google.protobuf.Timestamp
 	18, // 27: echo.v1.GetDocumentResponse.document:type_name -> echo.v1.Document
-	24, // 28: echo.v1.ListDocumentsRequest.page:type_name -> echo.v1.PageRequest
+	29, // 28: echo.v1.ListDocumentsRequest.page:type_name -> echo.v1.PageRequest
 	18, // 29: echo.v1.ListDocumentsResponse.documents:type_name -> echo.v1.Document
-	25, // 30: echo.v1.ListDocumentsResponse.page:type_name -> echo.v1.PageResponse
-	4,  // 31: echo.v1.ImportService.UploadUserFile:input_type -> echo.v1.UploadUserFileRequest
-	6,  // 32: echo.v1.ImportService.GetUserFile:input_type -> echo.v1.GetUserFileRequest
-	8,  // 33: echo.v1.ImportService.ListUserFiles:input_type -> echo.v1.ListUserFilesRequest
-	12, // 34: echo.v1.ImportService.CreateImportJob:input_type -> echo.v1.CreateImportJobRequest
-	14, // 35: echo.v1.ImportService.GetImportJob:input_type -> echo.v1.GetImportJobRequest
-	16, // 36: echo.v1.ImportService.ListImportJobs:input_type -> echo.v1.ListImportJobsRequest
-	19, // 37: echo.v1.ImportService.GetDocument:input_type -> echo.v1.GetDocumentRequest
-	21, // 38: echo.v1.ImportService.ListDocuments:input_type -> echo.v1.ListDocumentsRequest
-	5,  // 39: echo.v1.ImportService.UploadUserFile:output_type -> echo.v1.UploadUserFileResponse
-	7,  // 40: echo.v1.ImportService.GetUserFile:output_type -> echo.v1.GetUserFileResponse
-	9,  // 41: echo.v1.ImportService.ListUserFiles:output_type -> echo.v1.ListUserFilesResponse
-	13, // 42: echo.v1.ImportService.CreateImportJob:output_type -> echo.v1.CreateImportJobResponse
-	15, // 43: echo.v1.ImportService.GetImportJob:output_type -> echo.v1.GetImportJobResponse
-	17, // 44: echo.v1.ImportService.ListImportJobs:output_type -> echo.v1.ListImportJobsResponse
-	20, // 45: echo.v1.ImportService.GetDocument:output_type -> echo.v1.GetDocumentResponse
-	22, // 46: echo.v1.ImportService.ListDocuments:output_type -> echo.v1.ListDocumentsResponse
-	39, // [39:47] is the sub-list for method output_type
-	31, // [31:39] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	30, // 30: echo.v1.ListDocumentsResponse.page:type_name -> echo.v1.PageResponse
+	25, // 31: echo.v1.AnalyzeCsvFileResponse.sample_rows:type_name -> echo.v1.CsvSampleRow
+	26, // 32: echo.v1.AnalyzeCsvFileResponse.suggestions:type_name -> echo.v1.CsvColumnSuggestions
+	27, // 33: echo.v1.AnalyzeCsvFileResponse.probed_dialect:type_name -> echo.v1.CsvRegionalDialect
+	4,  // 34: echo.v1.ImportService.UploadUserFile:input_type -> echo.v1.UploadUserFileRequest
+	6,  // 35: echo.v1.ImportService.GetUserFile:input_type -> echo.v1.GetUserFileRequest
+	8,  // 36: echo.v1.ImportService.ListUserFiles:input_type -> echo.v1.ListUserFilesRequest
+	23, // 37: echo.v1.ImportService.AnalyzeCsvFile:input_type -> echo.v1.AnalyzeCsvFileRequest
+	12, // 38: echo.v1.ImportService.CreateImportJob:input_type -> echo.v1.CreateImportJobRequest
+	14, // 39: echo.v1.ImportService.GetImportJob:input_type -> echo.v1.GetImportJobRequest
+	16, // 40: echo.v1.ImportService.ListImportJobs:input_type -> echo.v1.ListImportJobsRequest
+	19, // 41: echo.v1.ImportService.GetDocument:input_type -> echo.v1.GetDocumentRequest
+	21, // 42: echo.v1.ImportService.ListDocuments:input_type -> echo.v1.ListDocumentsRequest
+	5,  // 43: echo.v1.ImportService.UploadUserFile:output_type -> echo.v1.UploadUserFileResponse
+	7,  // 44: echo.v1.ImportService.GetUserFile:output_type -> echo.v1.GetUserFileResponse
+	9,  // 45: echo.v1.ImportService.ListUserFiles:output_type -> echo.v1.ListUserFilesResponse
+	24, // 46: echo.v1.ImportService.AnalyzeCsvFile:output_type -> echo.v1.AnalyzeCsvFileResponse
+	13, // 47: echo.v1.ImportService.CreateImportJob:output_type -> echo.v1.CreateImportJobResponse
+	15, // 48: echo.v1.ImportService.GetImportJob:output_type -> echo.v1.GetImportJobResponse
+	17, // 49: echo.v1.ImportService.ListImportJobs:output_type -> echo.v1.ListImportJobsResponse
+	20, // 50: echo.v1.ImportService.GetDocument:output_type -> echo.v1.GetDocumentResponse
+	22, // 51: echo.v1.ImportService.ListDocuments:output_type -> echo.v1.ListDocumentsResponse
+	43, // [43:52] is the sub-list for method output_type
+	34, // [34:43] is the sub-list for method input_type
+	34, // [34:34] is the sub-list for extension type_name
+	34, // [34:34] is the sub-list for extension extendee
+	0,  // [0:34] is the sub-list for field type_name
 }
 
 func init() { file_echo_v1_imports_proto_init() }
@@ -1647,7 +2053,7 @@ func file_echo_v1_imports_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_echo_v1_imports_proto_rawDesc), len(file_echo_v1_imports_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   20,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
