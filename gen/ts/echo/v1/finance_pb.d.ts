@@ -388,6 +388,13 @@ export declare type CsvMapping = Message<"echo.v1.CsvMapping"> & {
    * @generated from field: string credit_column = 5;
    */
   creditColumn: string;
+
+  /**
+   * True for European number format (comma as decimal: 1.234,56)
+   *
+   * @generated from field: bool is_european_format = 6;
+   */
+  isEuropeanFormat: boolean;
 };
 
 /**
