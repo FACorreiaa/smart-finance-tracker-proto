@@ -452,6 +452,95 @@ func (x *GetMeResponse) GetUser() *User {
 	return nil
 }
 
+// Push token registration
+type RegisterPushTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PushToken     string                 `protobuf:"bytes,1,opt,name=push_token,json=pushToken,proto3" json:"push_token,omitempty"`
+	Platform      string                 `protobuf:"bytes,2,opt,name=platform,proto3" json:"platform,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterPushTokenRequest) Reset() {
+	*x = RegisterPushTokenRequest{}
+	mi := &file_echo_v1_auth_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterPushTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterPushTokenRequest) ProtoMessage() {}
+
+func (x *RegisterPushTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_auth_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterPushTokenRequest.ProtoReflect.Descriptor instead.
+func (*RegisterPushTokenRequest) Descriptor() ([]byte, []int) {
+	return file_echo_v1_auth_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *RegisterPushTokenRequest) GetPushToken() string {
+	if x != nil {
+		return x.PushToken
+	}
+	return ""
+}
+
+func (x *RegisterPushTokenRequest) GetPlatform() string {
+	if x != nil {
+		return x.Platform
+	}
+	return ""
+}
+
+type RegisterPushTokenResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterPushTokenResponse) Reset() {
+	*x = RegisterPushTokenResponse{}
+	mi := &file_echo_v1_auth_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterPushTokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterPushTokenResponse) ProtoMessage() {}
+
+func (x *RegisterPushTokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_auth_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterPushTokenResponse.ProtoReflect.Descriptor instead.
+func (*RegisterPushTokenResponse) Descriptor() ([]byte, []int) {
+	return file_echo_v1_auth_proto_rawDescGZIP(), []int{10}
+}
+
 var File_echo_v1_auth_proto protoreflect.FileDescriptor
 
 const file_echo_v1_auth_proto_rawDesc = "" +
@@ -485,13 +574,20 @@ const file_echo_v1_auth_proto_rawDesc = "" +
 	"\x0eLogoutResponse\"\x0e\n" +
 	"\fGetMeRequest\":\n" +
 	"\rGetMeResponse\x12)\n" +
-	"\x04user\x18\x01 \x01(\v2\r.echo.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user2\xaf\x02\n" +
+	"\x04user\x18\x01 \x01(\v2\r.echo.v1.UserB\x06\xbaH\x03\xc8\x01\x01R\x04user\"{\n" +
+	"\x18RegisterPushTokenRequest\x12)\n" +
+	"\n" +
+	"push_token\x18\x01 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x14\x18\xff\x01R\tpushToken\x124\n" +
+	"\bplatform\x18\x02 \x01(\tB\x18\xbaH\x15r\x13R\x03iosR\aandroidR\x03webR\bplatform\"\x1b\n" +
+	"\x19RegisterPushTokenResponse2\x8b\x03\n" +
 	"\vAuthService\x12;\n" +
 	"\bRegister\x12\x18.echo.v1.RegisterRequest\x1a\x15.echo.v1.AuthResponse\x125\n" +
 	"\x05Login\x12\x15.echo.v1.LoginRequest\x1a\x15.echo.v1.AuthResponse\x129\n" +
 	"\aRefresh\x12\x17.echo.v1.RefreshRequest\x1a\x15.echo.v1.AuthResponse\x129\n" +
 	"\x06Logout\x12\x16.echo.v1.LogoutRequest\x1a\x17.echo.v1.LogoutResponse\x126\n" +
-	"\x05GetMe\x12\x15.echo.v1.GetMeRequest\x1a\x16.echo.v1.GetMeResponseB\xa0\x01\n" +
+	"\x05GetMe\x12\x15.echo.v1.GetMeRequest\x1a\x16.echo.v1.GetMeResponse\x12Z\n" +
+	"\x11RegisterPushToken\x12!.echo.v1.RegisterPushTokenRequest\x1a\".echo.v1.RegisterPushTokenResponseB\xa0\x01\n" +
 	"\vcom.echo.v1B\tAuthProtoP\x01ZGgithub.com/FACorreiaa/smart-finance-tracker-proto/gen/go/echo/v1;echov1\xa2\x02\x03EXX\xaa\x02\aEcho.V1\xca\x02\bEcho_\\V1\xe2\x02\x14Echo_\\V1\\GPBMetadata\xea\x02\bEcho::V1b\x06proto3"
 
 var (
@@ -506,37 +602,41 @@ func file_echo_v1_auth_proto_rawDescGZIP() []byte {
 	return file_echo_v1_auth_proto_rawDescData
 }
 
-var file_echo_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_echo_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_echo_v1_auth_proto_goTypes = []any{
-	(*RegisterRequest)(nil),       // 0: echo.v1.RegisterRequest
-	(*LoginRequest)(nil),          // 1: echo.v1.LoginRequest
-	(*RefreshRequest)(nil),        // 2: echo.v1.RefreshRequest
-	(*LogoutRequest)(nil),         // 3: echo.v1.LogoutRequest
-	(*AuthTokens)(nil),            // 4: echo.v1.AuthTokens
-	(*AuthResponse)(nil),          // 5: echo.v1.AuthResponse
-	(*LogoutResponse)(nil),        // 6: echo.v1.LogoutResponse
-	(*GetMeRequest)(nil),          // 7: echo.v1.GetMeRequest
-	(*GetMeResponse)(nil),         // 8: echo.v1.GetMeResponse
-	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
-	(*User)(nil),                  // 10: echo.v1.User
+	(*RegisterRequest)(nil),           // 0: echo.v1.RegisterRequest
+	(*LoginRequest)(nil),              // 1: echo.v1.LoginRequest
+	(*RefreshRequest)(nil),            // 2: echo.v1.RefreshRequest
+	(*LogoutRequest)(nil),             // 3: echo.v1.LogoutRequest
+	(*AuthTokens)(nil),                // 4: echo.v1.AuthTokens
+	(*AuthResponse)(nil),              // 5: echo.v1.AuthResponse
+	(*LogoutResponse)(nil),            // 6: echo.v1.LogoutResponse
+	(*GetMeRequest)(nil),              // 7: echo.v1.GetMeRequest
+	(*GetMeResponse)(nil),             // 8: echo.v1.GetMeResponse
+	(*RegisterPushTokenRequest)(nil),  // 9: echo.v1.RegisterPushTokenRequest
+	(*RegisterPushTokenResponse)(nil), // 10: echo.v1.RegisterPushTokenResponse
+	(*timestamppb.Timestamp)(nil),     // 11: google.protobuf.Timestamp
+	(*User)(nil),                      // 12: echo.v1.User
 }
 var file_echo_v1_auth_proto_depIdxs = []int32{
-	9,  // 0: echo.v1.AuthTokens.access_token_expires_at:type_name -> google.protobuf.Timestamp
-	10, // 1: echo.v1.AuthResponse.user:type_name -> echo.v1.User
+	11, // 0: echo.v1.AuthTokens.access_token_expires_at:type_name -> google.protobuf.Timestamp
+	12, // 1: echo.v1.AuthResponse.user:type_name -> echo.v1.User
 	4,  // 2: echo.v1.AuthResponse.tokens:type_name -> echo.v1.AuthTokens
-	10, // 3: echo.v1.GetMeResponse.user:type_name -> echo.v1.User
+	12, // 3: echo.v1.GetMeResponse.user:type_name -> echo.v1.User
 	0,  // 4: echo.v1.AuthService.Register:input_type -> echo.v1.RegisterRequest
 	1,  // 5: echo.v1.AuthService.Login:input_type -> echo.v1.LoginRequest
 	2,  // 6: echo.v1.AuthService.Refresh:input_type -> echo.v1.RefreshRequest
 	3,  // 7: echo.v1.AuthService.Logout:input_type -> echo.v1.LogoutRequest
 	7,  // 8: echo.v1.AuthService.GetMe:input_type -> echo.v1.GetMeRequest
-	5,  // 9: echo.v1.AuthService.Register:output_type -> echo.v1.AuthResponse
-	5,  // 10: echo.v1.AuthService.Login:output_type -> echo.v1.AuthResponse
-	5,  // 11: echo.v1.AuthService.Refresh:output_type -> echo.v1.AuthResponse
-	6,  // 12: echo.v1.AuthService.Logout:output_type -> echo.v1.LogoutResponse
-	8,  // 13: echo.v1.AuthService.GetMe:output_type -> echo.v1.GetMeResponse
-	9,  // [9:14] is the sub-list for method output_type
-	4,  // [4:9] is the sub-list for method input_type
+	9,  // 9: echo.v1.AuthService.RegisterPushToken:input_type -> echo.v1.RegisterPushTokenRequest
+	5,  // 10: echo.v1.AuthService.Register:output_type -> echo.v1.AuthResponse
+	5,  // 11: echo.v1.AuthService.Login:output_type -> echo.v1.AuthResponse
+	5,  // 12: echo.v1.AuthService.Refresh:output_type -> echo.v1.AuthResponse
+	6,  // 13: echo.v1.AuthService.Logout:output_type -> echo.v1.LogoutResponse
+	8,  // 14: echo.v1.AuthService.GetMe:output_type -> echo.v1.GetMeResponse
+	10, // 15: echo.v1.AuthService.RegisterPushToken:output_type -> echo.v1.RegisterPushTokenResponse
+	10, // [10:16] is the sub-list for method output_type
+	4,  // [4:10] is the sub-list for method input_type
 	4,  // [4:4] is the sub-list for extension type_name
 	4,  // [4:4] is the sub-list for extension extendee
 	0,  // [0:4] is the sub-list for field type_name
@@ -555,7 +655,7 @@ func file_echo_v1_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_echo_v1_auth_proto_rawDesc), len(file_echo_v1_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

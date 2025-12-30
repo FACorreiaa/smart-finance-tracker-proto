@@ -43,6 +43,9 @@ const (
 	AuthServiceLogoutProcedure = "/echo.v1.AuthService/Logout"
 	// AuthServiceGetMeProcedure is the fully-qualified name of the AuthService's GetMe RPC.
 	AuthServiceGetMeProcedure = "/echo.v1.AuthService/GetMe"
+	// AuthServiceRegisterPushTokenProcedure is the fully-qualified name of the AuthService's
+	// RegisterPushToken RPC.
+	AuthServiceRegisterPushTokenProcedure = "/echo.v1.AuthService/RegisterPushToken"
 )
 
 // AuthServiceClient is a client for the echo.v1.AuthService service.
@@ -52,6 +55,7 @@ type AuthServiceClient interface {
 	Refresh(context.Context, *connect.Request[v1.RefreshRequest]) (*connect.Response[v1.AuthResponse], error)
 	Logout(context.Context, *connect.Request[v1.LogoutRequest]) (*connect.Response[v1.LogoutResponse], error)
 	GetMe(context.Context, *connect.Request[v1.GetMeRequest]) (*connect.Response[v1.GetMeResponse], error)
+	RegisterPushToken(context.Context, *connect.Request[v1.RegisterPushTokenRequest]) (*connect.Response[v1.RegisterPushTokenResponse], error)
 }
 
 // NewAuthServiceClient constructs a client for the echo.v1.AuthService service. By default, it uses
@@ -95,16 +99,23 @@ func NewAuthServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 			connect.WithSchema(authServiceMethods.ByName("GetMe")),
 			connect.WithClientOptions(opts...),
 		),
+		registerPushToken: connect.NewClient[v1.RegisterPushTokenRequest, v1.RegisterPushTokenResponse](
+			httpClient,
+			baseURL+AuthServiceRegisterPushTokenProcedure,
+			connect.WithSchema(authServiceMethods.ByName("RegisterPushToken")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // authServiceClient implements AuthServiceClient.
 type authServiceClient struct {
-	register *connect.Client[v1.RegisterRequest, v1.AuthResponse]
-	login    *connect.Client[v1.LoginRequest, v1.AuthResponse]
-	refresh  *connect.Client[v1.RefreshRequest, v1.AuthResponse]
-	logout   *connect.Client[v1.LogoutRequest, v1.LogoutResponse]
-	getMe    *connect.Client[v1.GetMeRequest, v1.GetMeResponse]
+	register          *connect.Client[v1.RegisterRequest, v1.AuthResponse]
+	login             *connect.Client[v1.LoginRequest, v1.AuthResponse]
+	refresh           *connect.Client[v1.RefreshRequest, v1.AuthResponse]
+	logout            *connect.Client[v1.LogoutRequest, v1.LogoutResponse]
+	getMe             *connect.Client[v1.GetMeRequest, v1.GetMeResponse]
+	registerPushToken *connect.Client[v1.RegisterPushTokenRequest, v1.RegisterPushTokenResponse]
 }
 
 // Register calls echo.v1.AuthService.Register.
@@ -132,6 +143,11 @@ func (c *authServiceClient) GetMe(ctx context.Context, req *connect.Request[v1.G
 	return c.getMe.CallUnary(ctx, req)
 }
 
+// RegisterPushToken calls echo.v1.AuthService.RegisterPushToken.
+func (c *authServiceClient) RegisterPushToken(ctx context.Context, req *connect.Request[v1.RegisterPushTokenRequest]) (*connect.Response[v1.RegisterPushTokenResponse], error) {
+	return c.registerPushToken.CallUnary(ctx, req)
+}
+
 // AuthServiceHandler is an implementation of the echo.v1.AuthService service.
 type AuthServiceHandler interface {
 	Register(context.Context, *connect.Request[v1.RegisterRequest]) (*connect.Response[v1.AuthResponse], error)
@@ -139,6 +155,7 @@ type AuthServiceHandler interface {
 	Refresh(context.Context, *connect.Request[v1.RefreshRequest]) (*connect.Response[v1.AuthResponse], error)
 	Logout(context.Context, *connect.Request[v1.LogoutRequest]) (*connect.Response[v1.LogoutResponse], error)
 	GetMe(context.Context, *connect.Request[v1.GetMeRequest]) (*connect.Response[v1.GetMeResponse], error)
+	RegisterPushToken(context.Context, *connect.Request[v1.RegisterPushTokenRequest]) (*connect.Response[v1.RegisterPushTokenResponse], error)
 }
 
 // NewAuthServiceHandler builds an HTTP handler from the service implementation. It returns the path
@@ -178,6 +195,12 @@ func NewAuthServiceHandler(svc AuthServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(authServiceMethods.ByName("GetMe")),
 		connect.WithHandlerOptions(opts...),
 	)
+	authServiceRegisterPushTokenHandler := connect.NewUnaryHandler(
+		AuthServiceRegisterPushTokenProcedure,
+		svc.RegisterPushToken,
+		connect.WithSchema(authServiceMethods.ByName("RegisterPushToken")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/echo.v1.AuthService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AuthServiceRegisterProcedure:
@@ -190,6 +213,8 @@ func NewAuthServiceHandler(svc AuthServiceHandler, opts ...connect.HandlerOption
 			authServiceLogoutHandler.ServeHTTP(w, r)
 		case AuthServiceGetMeProcedure:
 			authServiceGetMeHandler.ServeHTTP(w, r)
+		case AuthServiceRegisterPushTokenProcedure:
+			authServiceRegisterPushTokenHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -217,4 +242,8 @@ func (UnimplementedAuthServiceHandler) Logout(context.Context, *connect.Request[
 
 func (UnimplementedAuthServiceHandler) GetMe(context.Context, *connect.Request[v1.GetMeRequest]) (*connect.Response[v1.GetMeResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("echo.v1.AuthService.GetMe is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) RegisterPushToken(context.Context, *connect.Request[v1.RegisterPushTokenRequest]) (*connect.Response[v1.RegisterPushTokenResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("echo.v1.AuthService.RegisterPushToken is not implemented"))
 }

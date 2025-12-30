@@ -181,6 +181,41 @@ export declare type GetMeResponse = Message<"echo.v1.GetMeResponse"> & {
 export declare const GetMeResponseSchema: GenMessage<GetMeResponse>;
 
 /**
+ * Push token registration
+ *
+ * @generated from message echo.v1.RegisterPushTokenRequest
+ */
+export declare type RegisterPushTokenRequest = Message<"echo.v1.RegisterPushTokenRequest"> & {
+  /**
+   * @generated from field: string push_token = 1;
+   */
+  pushToken: string;
+
+  /**
+   * @generated from field: string platform = 2;
+   */
+  platform: string;
+};
+
+/**
+ * Describes the message echo.v1.RegisterPushTokenRequest.
+ * Use `create(RegisterPushTokenRequestSchema)` to create a new message.
+ */
+export declare const RegisterPushTokenRequestSchema: GenMessage<RegisterPushTokenRequest>;
+
+/**
+ * @generated from message echo.v1.RegisterPushTokenResponse
+ */
+export declare type RegisterPushTokenResponse = Message<"echo.v1.RegisterPushTokenResponse"> & {
+};
+
+/**
+ * Describes the message echo.v1.RegisterPushTokenResponse.
+ * Use `create(RegisterPushTokenResponseSchema)` to create a new message.
+ */
+export declare const RegisterPushTokenResponseSchema: GenMessage<RegisterPushTokenResponse>;
+
+/**
  * Auth
  *
  * @generated from service echo.v1.AuthService
@@ -225,6 +260,14 @@ export declare const AuthService: GenService<{
     methodKind: "unary";
     input: typeof GetMeRequestSchema;
     output: typeof GetMeResponseSchema;
+  },
+  /**
+   * @generated from rpc echo.v1.AuthService.RegisterPushToken
+   */
+  registerPushToken: {
+    methodKind: "unary";
+    input: typeof RegisterPushTokenRequestSchema;
+    output: typeof RegisterPushTokenResponseSchema;
   },
 }>;
 
