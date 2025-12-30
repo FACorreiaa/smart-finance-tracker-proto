@@ -534,6 +534,170 @@ export declare type GetDashboardBlocksResponse = Message<"echo.v1.GetDashboardBl
 export declare const GetDashboardBlocksResponseSchema: GenMessage<GetDashboardBlocksResponse>;
 
 /**
+ * Alert message
+ *
+ * @generated from message echo.v1.Alert
+ */
+export declare type Alert = Message<"echo.v1.Alert"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string user_id = 2;
+   */
+  userId: string;
+
+  /**
+   * @generated from field: echo.v1.AlertType alert_type = 3;
+   */
+  alertType: AlertType;
+
+  /**
+   * @generated from field: echo.v1.AlertSeverity severity = 4;
+   */
+  severity: AlertSeverity;
+
+  /**
+   * @generated from field: string title = 5;
+   */
+  title: string;
+
+  /**
+   * @generated from field: string message = 6;
+   */
+  message: string;
+
+  /**
+   * @generated from field: bool is_read = 7;
+   */
+  isRead: boolean;
+
+  /**
+   * @generated from field: bool is_dismissed = 8;
+   */
+  isDismissed: boolean;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp alert_date = 9;
+   */
+  alertDate?: Timestamp;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 10;
+   */
+  createdAt?: Timestamp;
+};
+
+/**
+ * Describes the message echo.v1.Alert.
+ * Use `create(AlertSchema)` to create a new message.
+ */
+export declare const AlertSchema: GenMessage<Alert>;
+
+/**
+ * List alerts for user
+ *
+ * @generated from message echo.v1.ListAlertsRequest
+ */
+export declare type ListAlertsRequest = Message<"echo.v1.ListAlertsRequest"> & {
+  /**
+   * Filter to unread only
+   *
+   * @generated from field: bool unread_only = 1;
+   */
+  unreadOnly: boolean;
+
+  /**
+   * @generated from field: int32 limit = 2;
+   */
+  limit: number;
+};
+
+/**
+ * Describes the message echo.v1.ListAlertsRequest.
+ * Use `create(ListAlertsRequestSchema)` to create a new message.
+ */
+export declare const ListAlertsRequestSchema: GenMessage<ListAlertsRequest>;
+
+/**
+ * @generated from message echo.v1.ListAlertsResponse
+ */
+export declare type ListAlertsResponse = Message<"echo.v1.ListAlertsResponse"> & {
+  /**
+   * @generated from field: repeated echo.v1.Alert alerts = 1;
+   */
+  alerts: Alert[];
+};
+
+/**
+ * Describes the message echo.v1.ListAlertsResponse.
+ * Use `create(ListAlertsResponseSchema)` to create a new message.
+ */
+export declare const ListAlertsResponseSchema: GenMessage<ListAlertsResponse>;
+
+/**
+ * Mark alert as read
+ *
+ * @generated from message echo.v1.MarkAlertReadRequest
+ */
+export declare type MarkAlertReadRequest = Message<"echo.v1.MarkAlertReadRequest"> & {
+  /**
+   * @generated from field: string alert_id = 1;
+   */
+  alertId: string;
+};
+
+/**
+ * Describes the message echo.v1.MarkAlertReadRequest.
+ * Use `create(MarkAlertReadRequestSchema)` to create a new message.
+ */
+export declare const MarkAlertReadRequestSchema: GenMessage<MarkAlertReadRequest>;
+
+/**
+ * @generated from message echo.v1.MarkAlertReadResponse
+ */
+export declare type MarkAlertReadResponse = Message<"echo.v1.MarkAlertReadResponse"> & {
+};
+
+/**
+ * Describes the message echo.v1.MarkAlertReadResponse.
+ * Use `create(MarkAlertReadResponseSchema)` to create a new message.
+ */
+export declare const MarkAlertReadResponseSchema: GenMessage<MarkAlertReadResponse>;
+
+/**
+ * Dismiss alert
+ *
+ * @generated from message echo.v1.DismissAlertRequest
+ */
+export declare type DismissAlertRequest = Message<"echo.v1.DismissAlertRequest"> & {
+  /**
+   * @generated from field: string alert_id = 1;
+   */
+  alertId: string;
+};
+
+/**
+ * Describes the message echo.v1.DismissAlertRequest.
+ * Use `create(DismissAlertRequestSchema)` to create a new message.
+ */
+export declare const DismissAlertRequestSchema: GenMessage<DismissAlertRequest>;
+
+/**
+ * @generated from message echo.v1.DismissAlertResponse
+ */
+export declare type DismissAlertResponse = Message<"echo.v1.DismissAlertResponse"> & {
+};
+
+/**
+ * Describes the message echo.v1.DismissAlertResponse.
+ * Use `create(DismissAlertResponseSchema)` to create a new message.
+ */
+export declare const DismissAlertResponseSchema: GenMessage<DismissAlertResponse>;
+
+/**
  * @generated from enum echo.v1.WrappedPeriod
  */
 export enum WrappedPeriod {
@@ -557,6 +721,75 @@ export enum WrappedPeriod {
  * Describes the enum echo.v1.WrappedPeriod.
  */
 export declare const WrappedPeriodSchema: GenEnum<WrappedPeriod>;
+
+/**
+ * Alert severity levels
+ *
+ * @generated from enum echo.v1.AlertSeverity
+ */
+export enum AlertSeverity {
+  /**
+   * @generated from enum value: ALERT_SEVERITY_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ALERT_SEVERITY_INFO = 1;
+   */
+  INFO = 1,
+
+  /**
+   * @generated from enum value: ALERT_SEVERITY_WARNING = 2;
+   */
+  WARNING = 2,
+
+  /**
+   * @generated from enum value: ALERT_SEVERITY_CRITICAL = 3;
+   */
+  CRITICAL = 3,
+}
+
+/**
+ * Describes the enum echo.v1.AlertSeverity.
+ */
+export declare const AlertSeveritySchema: GenEnum<AlertSeverity>;
+
+/**
+ * Alert types
+ *
+ * @generated from enum echo.v1.AlertType
+ */
+export enum AlertType {
+  /**
+   * @generated from enum value: ALERT_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ALERT_TYPE_PACE_WARNING = 1;
+   */
+  PACE_WARNING = 1,
+
+  /**
+   * @generated from enum value: ALERT_TYPE_SURPRISE_EXPENSE = 2;
+   */
+  SURPRISE_EXPENSE = 2,
+
+  /**
+   * @generated from enum value: ALERT_TYPE_GOAL_PROGRESS = 3;
+   */
+  GOAL_PROGRESS = 3,
+
+  /**
+   * @generated from enum value: ALERT_TYPE_SUBSCRIPTION_DUE = 4;
+   */
+  SUBSCRIPTION_DUE = 4,
+}
+
+/**
+ * Describes the enum echo.v1.AlertType.
+ */
+export declare const AlertTypeSchema: GenEnum<AlertType>;
 
 /**
  * @generated from service echo.v1.InsightsService
@@ -595,6 +828,32 @@ export declare const InsightsService: GenService<{
     methodKind: "unary";
     input: typeof GetDashboardBlocksRequestSchema;
     output: typeof GetDashboardBlocksResponseSchema;
+  },
+  /**
+   * Alert management
+   *
+   * @generated from rpc echo.v1.InsightsService.ListAlerts
+   */
+  listAlerts: {
+    methodKind: "unary";
+    input: typeof ListAlertsRequestSchema;
+    output: typeof ListAlertsResponseSchema;
+  },
+  /**
+   * @generated from rpc echo.v1.InsightsService.MarkAlertRead
+   */
+  markAlertRead: {
+    methodKind: "unary";
+    input: typeof MarkAlertReadRequestSchema;
+    output: typeof MarkAlertReadResponseSchema;
+  },
+  /**
+   * @generated from rpc echo.v1.InsightsService.DismissAlert
+   */
+  dismissAlert: {
+    methodKind: "unary";
+    input: typeof DismissAlertRequestSchema;
+    output: typeof DismissAlertResponseSchema;
   },
 }>;
 

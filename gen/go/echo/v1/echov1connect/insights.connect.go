@@ -45,6 +45,15 @@ const (
 	// InsightsServiceGetDashboardBlocksProcedure is the fully-qualified name of the InsightsService's
 	// GetDashboardBlocks RPC.
 	InsightsServiceGetDashboardBlocksProcedure = "/echo.v1.InsightsService/GetDashboardBlocks"
+	// InsightsServiceListAlertsProcedure is the fully-qualified name of the InsightsService's
+	// ListAlerts RPC.
+	InsightsServiceListAlertsProcedure = "/echo.v1.InsightsService/ListAlerts"
+	// InsightsServiceMarkAlertReadProcedure is the fully-qualified name of the InsightsService's
+	// MarkAlertRead RPC.
+	InsightsServiceMarkAlertReadProcedure = "/echo.v1.InsightsService/MarkAlertRead"
+	// InsightsServiceDismissAlertProcedure is the fully-qualified name of the InsightsService's
+	// DismissAlert RPC.
+	InsightsServiceDismissAlertProcedure = "/echo.v1.InsightsService/DismissAlert"
 )
 
 // InsightsServiceClient is a client for the echo.v1.InsightsService service.
@@ -54,6 +63,10 @@ type InsightsServiceClient interface {
 	// Spending Pulse - "What changed?" comparative insights
 	GetSpendingPulse(context.Context, *connect.Request[v1.GetSpendingPulseRequest]) (*connect.Response[v1.GetSpendingPulseResponse], error)
 	GetDashboardBlocks(context.Context, *connect.Request[v1.GetDashboardBlocksRequest]) (*connect.Response[v1.GetDashboardBlocksResponse], error)
+	// Alert management
+	ListAlerts(context.Context, *connect.Request[v1.ListAlertsRequest]) (*connect.Response[v1.ListAlertsResponse], error)
+	MarkAlertRead(context.Context, *connect.Request[v1.MarkAlertReadRequest]) (*connect.Response[v1.MarkAlertReadResponse], error)
+	DismissAlert(context.Context, *connect.Request[v1.DismissAlertRequest]) (*connect.Response[v1.DismissAlertResponse], error)
 }
 
 // NewInsightsServiceClient constructs a client for the echo.v1.InsightsService service. By default,
@@ -91,6 +104,24 @@ func NewInsightsServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(insightsServiceMethods.ByName("GetDashboardBlocks")),
 			connect.WithClientOptions(opts...),
 		),
+		listAlerts: connect.NewClient[v1.ListAlertsRequest, v1.ListAlertsResponse](
+			httpClient,
+			baseURL+InsightsServiceListAlertsProcedure,
+			connect.WithSchema(insightsServiceMethods.ByName("ListAlerts")),
+			connect.WithClientOptions(opts...),
+		),
+		markAlertRead: connect.NewClient[v1.MarkAlertReadRequest, v1.MarkAlertReadResponse](
+			httpClient,
+			baseURL+InsightsServiceMarkAlertReadProcedure,
+			connect.WithSchema(insightsServiceMethods.ByName("MarkAlertRead")),
+			connect.WithClientOptions(opts...),
+		),
+		dismissAlert: connect.NewClient[v1.DismissAlertRequest, v1.DismissAlertResponse](
+			httpClient,
+			baseURL+InsightsServiceDismissAlertProcedure,
+			connect.WithSchema(insightsServiceMethods.ByName("DismissAlert")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -100,6 +131,9 @@ type insightsServiceClient struct {
 	getWrapped         *connect.Client[v1.GetWrappedRequest, v1.GetWrappedResponse]
 	getSpendingPulse   *connect.Client[v1.GetSpendingPulseRequest, v1.GetSpendingPulseResponse]
 	getDashboardBlocks *connect.Client[v1.GetDashboardBlocksRequest, v1.GetDashboardBlocksResponse]
+	listAlerts         *connect.Client[v1.ListAlertsRequest, v1.ListAlertsResponse]
+	markAlertRead      *connect.Client[v1.MarkAlertReadRequest, v1.MarkAlertReadResponse]
+	dismissAlert       *connect.Client[v1.DismissAlertRequest, v1.DismissAlertResponse]
 }
 
 // GetMonthlyInsights calls echo.v1.InsightsService.GetMonthlyInsights.
@@ -122,6 +156,21 @@ func (c *insightsServiceClient) GetDashboardBlocks(ctx context.Context, req *con
 	return c.getDashboardBlocks.CallUnary(ctx, req)
 }
 
+// ListAlerts calls echo.v1.InsightsService.ListAlerts.
+func (c *insightsServiceClient) ListAlerts(ctx context.Context, req *connect.Request[v1.ListAlertsRequest]) (*connect.Response[v1.ListAlertsResponse], error) {
+	return c.listAlerts.CallUnary(ctx, req)
+}
+
+// MarkAlertRead calls echo.v1.InsightsService.MarkAlertRead.
+func (c *insightsServiceClient) MarkAlertRead(ctx context.Context, req *connect.Request[v1.MarkAlertReadRequest]) (*connect.Response[v1.MarkAlertReadResponse], error) {
+	return c.markAlertRead.CallUnary(ctx, req)
+}
+
+// DismissAlert calls echo.v1.InsightsService.DismissAlert.
+func (c *insightsServiceClient) DismissAlert(ctx context.Context, req *connect.Request[v1.DismissAlertRequest]) (*connect.Response[v1.DismissAlertResponse], error) {
+	return c.dismissAlert.CallUnary(ctx, req)
+}
+
 // InsightsServiceHandler is an implementation of the echo.v1.InsightsService service.
 type InsightsServiceHandler interface {
 	GetMonthlyInsights(context.Context, *connect.Request[v1.GetMonthlyInsightsRequest]) (*connect.Response[v1.GetMonthlyInsightsResponse], error)
@@ -129,6 +178,10 @@ type InsightsServiceHandler interface {
 	// Spending Pulse - "What changed?" comparative insights
 	GetSpendingPulse(context.Context, *connect.Request[v1.GetSpendingPulseRequest]) (*connect.Response[v1.GetSpendingPulseResponse], error)
 	GetDashboardBlocks(context.Context, *connect.Request[v1.GetDashboardBlocksRequest]) (*connect.Response[v1.GetDashboardBlocksResponse], error)
+	// Alert management
+	ListAlerts(context.Context, *connect.Request[v1.ListAlertsRequest]) (*connect.Response[v1.ListAlertsResponse], error)
+	MarkAlertRead(context.Context, *connect.Request[v1.MarkAlertReadRequest]) (*connect.Response[v1.MarkAlertReadResponse], error)
+	DismissAlert(context.Context, *connect.Request[v1.DismissAlertRequest]) (*connect.Response[v1.DismissAlertResponse], error)
 }
 
 // NewInsightsServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -162,6 +215,24 @@ func NewInsightsServiceHandler(svc InsightsServiceHandler, opts ...connect.Handl
 		connect.WithSchema(insightsServiceMethods.ByName("GetDashboardBlocks")),
 		connect.WithHandlerOptions(opts...),
 	)
+	insightsServiceListAlertsHandler := connect.NewUnaryHandler(
+		InsightsServiceListAlertsProcedure,
+		svc.ListAlerts,
+		connect.WithSchema(insightsServiceMethods.ByName("ListAlerts")),
+		connect.WithHandlerOptions(opts...),
+	)
+	insightsServiceMarkAlertReadHandler := connect.NewUnaryHandler(
+		InsightsServiceMarkAlertReadProcedure,
+		svc.MarkAlertRead,
+		connect.WithSchema(insightsServiceMethods.ByName("MarkAlertRead")),
+		connect.WithHandlerOptions(opts...),
+	)
+	insightsServiceDismissAlertHandler := connect.NewUnaryHandler(
+		InsightsServiceDismissAlertProcedure,
+		svc.DismissAlert,
+		connect.WithSchema(insightsServiceMethods.ByName("DismissAlert")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/echo.v1.InsightsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case InsightsServiceGetMonthlyInsightsProcedure:
@@ -172,6 +243,12 @@ func NewInsightsServiceHandler(svc InsightsServiceHandler, opts ...connect.Handl
 			insightsServiceGetSpendingPulseHandler.ServeHTTP(w, r)
 		case InsightsServiceGetDashboardBlocksProcedure:
 			insightsServiceGetDashboardBlocksHandler.ServeHTTP(w, r)
+		case InsightsServiceListAlertsProcedure:
+			insightsServiceListAlertsHandler.ServeHTTP(w, r)
+		case InsightsServiceMarkAlertReadProcedure:
+			insightsServiceMarkAlertReadHandler.ServeHTTP(w, r)
+		case InsightsServiceDismissAlertProcedure:
+			insightsServiceDismissAlertHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -195,4 +272,16 @@ func (UnimplementedInsightsServiceHandler) GetSpendingPulse(context.Context, *co
 
 func (UnimplementedInsightsServiceHandler) GetDashboardBlocks(context.Context, *connect.Request[v1.GetDashboardBlocksRequest]) (*connect.Response[v1.GetDashboardBlocksResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("echo.v1.InsightsService.GetDashboardBlocks is not implemented"))
+}
+
+func (UnimplementedInsightsServiceHandler) ListAlerts(context.Context, *connect.Request[v1.ListAlertsRequest]) (*connect.Response[v1.ListAlertsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("echo.v1.InsightsService.ListAlerts is not implemented"))
+}
+
+func (UnimplementedInsightsServiceHandler) MarkAlertRead(context.Context, *connect.Request[v1.MarkAlertReadRequest]) (*connect.Response[v1.MarkAlertReadResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("echo.v1.InsightsService.MarkAlertRead is not implemented"))
+}
+
+func (UnimplementedInsightsServiceHandler) DismissAlert(context.Context, *connect.Request[v1.DismissAlertRequest]) (*connect.Response[v1.DismissAlertResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("echo.v1.InsightsService.DismissAlert is not implemented"))
 }

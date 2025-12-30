@@ -72,6 +72,115 @@ func (WrappedPeriod) EnumDescriptor() ([]byte, []int) {
 	return file_echo_v1_insights_proto_rawDescGZIP(), []int{0}
 }
 
+// Alert severity levels
+type AlertSeverity int32
+
+const (
+	AlertSeverity_ALERT_SEVERITY_UNSPECIFIED AlertSeverity = 0
+	AlertSeverity_ALERT_SEVERITY_INFO        AlertSeverity = 1
+	AlertSeverity_ALERT_SEVERITY_WARNING     AlertSeverity = 2
+	AlertSeverity_ALERT_SEVERITY_CRITICAL    AlertSeverity = 3
+)
+
+// Enum value maps for AlertSeverity.
+var (
+	AlertSeverity_name = map[int32]string{
+		0: "ALERT_SEVERITY_UNSPECIFIED",
+		1: "ALERT_SEVERITY_INFO",
+		2: "ALERT_SEVERITY_WARNING",
+		3: "ALERT_SEVERITY_CRITICAL",
+	}
+	AlertSeverity_value = map[string]int32{
+		"ALERT_SEVERITY_UNSPECIFIED": 0,
+		"ALERT_SEVERITY_INFO":        1,
+		"ALERT_SEVERITY_WARNING":     2,
+		"ALERT_SEVERITY_CRITICAL":    3,
+	}
+)
+
+func (x AlertSeverity) Enum() *AlertSeverity {
+	p := new(AlertSeverity)
+	*p = x
+	return p
+}
+
+func (x AlertSeverity) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AlertSeverity) Descriptor() protoreflect.EnumDescriptor {
+	return file_echo_v1_insights_proto_enumTypes[1].Descriptor()
+}
+
+func (AlertSeverity) Type() protoreflect.EnumType {
+	return &file_echo_v1_insights_proto_enumTypes[1]
+}
+
+func (x AlertSeverity) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AlertSeverity.Descriptor instead.
+func (AlertSeverity) EnumDescriptor() ([]byte, []int) {
+	return file_echo_v1_insights_proto_rawDescGZIP(), []int{1}
+}
+
+// Alert types
+type AlertType int32
+
+const (
+	AlertType_ALERT_TYPE_UNSPECIFIED      AlertType = 0
+	AlertType_ALERT_TYPE_PACE_WARNING     AlertType = 1
+	AlertType_ALERT_TYPE_SURPRISE_EXPENSE AlertType = 2
+	AlertType_ALERT_TYPE_GOAL_PROGRESS    AlertType = 3
+	AlertType_ALERT_TYPE_SUBSCRIPTION_DUE AlertType = 4
+)
+
+// Enum value maps for AlertType.
+var (
+	AlertType_name = map[int32]string{
+		0: "ALERT_TYPE_UNSPECIFIED",
+		1: "ALERT_TYPE_PACE_WARNING",
+		2: "ALERT_TYPE_SURPRISE_EXPENSE",
+		3: "ALERT_TYPE_GOAL_PROGRESS",
+		4: "ALERT_TYPE_SUBSCRIPTION_DUE",
+	}
+	AlertType_value = map[string]int32{
+		"ALERT_TYPE_UNSPECIFIED":      0,
+		"ALERT_TYPE_PACE_WARNING":     1,
+		"ALERT_TYPE_SURPRISE_EXPENSE": 2,
+		"ALERT_TYPE_GOAL_PROGRESS":    3,
+		"ALERT_TYPE_SUBSCRIPTION_DUE": 4,
+	}
+)
+
+func (x AlertType) Enum() *AlertType {
+	p := new(AlertType)
+	*p = x
+	return p
+}
+
+func (x AlertType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AlertType) Descriptor() protoreflect.EnumDescriptor {
+	return file_echo_v1_insights_proto_enumTypes[2].Descriptor()
+}
+
+func (AlertType) Type() protoreflect.EnumType {
+	return &file_echo_v1_insights_proto_enumTypes[2]
+}
+
+func (x AlertType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AlertType.Descriptor instead.
+func (AlertType) EnumDescriptor() ([]byte, []int) {
+	return file_echo_v1_insights_proto_rawDescGZIP(), []int{2}
+}
+
 type CategorySpend struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	CategoryId    string                 `protobuf:"bytes,1,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
@@ -1191,6 +1300,382 @@ func (x *GetDashboardBlocksResponse) GetBlocks() []*DashboardBlock {
 	return nil
 }
 
+// Alert message
+type Alert struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	AlertType     AlertType              `protobuf:"varint,3,opt,name=alert_type,json=alertType,proto3,enum=echo.v1.AlertType" json:"alert_type,omitempty"`
+	Severity      AlertSeverity          `protobuf:"varint,4,opt,name=severity,proto3,enum=echo.v1.AlertSeverity" json:"severity,omitempty"`
+	Title         string                 `protobuf:"bytes,5,opt,name=title,proto3" json:"title,omitempty"`
+	Message       string                 `protobuf:"bytes,6,opt,name=message,proto3" json:"message,omitempty"`
+	IsRead        bool                   `protobuf:"varint,7,opt,name=is_read,json=isRead,proto3" json:"is_read,omitempty"`
+	IsDismissed   bool                   `protobuf:"varint,8,opt,name=is_dismissed,json=isDismissed,proto3" json:"is_dismissed,omitempty"`
+	AlertDate     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=alert_date,json=alertDate,proto3" json:"alert_date,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Alert) Reset() {
+	*x = Alert{}
+	mi := &file_echo_v1_insights_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Alert) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Alert) ProtoMessage() {}
+
+func (x *Alert) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_insights_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Alert.ProtoReflect.Descriptor instead.
+func (*Alert) Descriptor() ([]byte, []int) {
+	return file_echo_v1_insights_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *Alert) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *Alert) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *Alert) GetAlertType() AlertType {
+	if x != nil {
+		return x.AlertType
+	}
+	return AlertType_ALERT_TYPE_UNSPECIFIED
+}
+
+func (x *Alert) GetSeverity() AlertSeverity {
+	if x != nil {
+		return x.Severity
+	}
+	return AlertSeverity_ALERT_SEVERITY_UNSPECIFIED
+}
+
+func (x *Alert) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *Alert) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *Alert) GetIsRead() bool {
+	if x != nil {
+		return x.IsRead
+	}
+	return false
+}
+
+func (x *Alert) GetIsDismissed() bool {
+	if x != nil {
+		return x.IsDismissed
+	}
+	return false
+}
+
+func (x *Alert) GetAlertDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.AlertDate
+	}
+	return nil
+}
+
+func (x *Alert) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+// List alerts for user
+type ListAlertsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UnreadOnly    bool                   `protobuf:"varint,1,opt,name=unread_only,json=unreadOnly,proto3" json:"unread_only,omitempty"` // Filter to unread only
+	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAlertsRequest) Reset() {
+	*x = ListAlertsRequest{}
+	mi := &file_echo_v1_insights_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAlertsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAlertsRequest) ProtoMessage() {}
+
+func (x *ListAlertsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_insights_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAlertsRequest.ProtoReflect.Descriptor instead.
+func (*ListAlertsRequest) Descriptor() ([]byte, []int) {
+	return file_echo_v1_insights_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ListAlertsRequest) GetUnreadOnly() bool {
+	if x != nil {
+		return x.UnreadOnly
+	}
+	return false
+}
+
+func (x *ListAlertsRequest) GetLimit() int32 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+type ListAlertsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Alerts        []*Alert               `protobuf:"bytes,1,rep,name=alerts,proto3" json:"alerts,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAlertsResponse) Reset() {
+	*x = ListAlertsResponse{}
+	mi := &file_echo_v1_insights_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAlertsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAlertsResponse) ProtoMessage() {}
+
+func (x *ListAlertsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_insights_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAlertsResponse.ProtoReflect.Descriptor instead.
+func (*ListAlertsResponse) Descriptor() ([]byte, []int) {
+	return file_echo_v1_insights_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ListAlertsResponse) GetAlerts() []*Alert {
+	if x != nil {
+		return x.Alerts
+	}
+	return nil
+}
+
+// Mark alert as read
+type MarkAlertReadRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AlertId       string                 `protobuf:"bytes,1,opt,name=alert_id,json=alertId,proto3" json:"alert_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MarkAlertReadRequest) Reset() {
+	*x = MarkAlertReadRequest{}
+	mi := &file_echo_v1_insights_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MarkAlertReadRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MarkAlertReadRequest) ProtoMessage() {}
+
+func (x *MarkAlertReadRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_insights_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MarkAlertReadRequest.ProtoReflect.Descriptor instead.
+func (*MarkAlertReadRequest) Descriptor() ([]byte, []int) {
+	return file_echo_v1_insights_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *MarkAlertReadRequest) GetAlertId() string {
+	if x != nil {
+		return x.AlertId
+	}
+	return ""
+}
+
+type MarkAlertReadResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MarkAlertReadResponse) Reset() {
+	*x = MarkAlertReadResponse{}
+	mi := &file_echo_v1_insights_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MarkAlertReadResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MarkAlertReadResponse) ProtoMessage() {}
+
+func (x *MarkAlertReadResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_insights_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MarkAlertReadResponse.ProtoReflect.Descriptor instead.
+func (*MarkAlertReadResponse) Descriptor() ([]byte, []int) {
+	return file_echo_v1_insights_proto_rawDescGZIP(), []int{21}
+}
+
+// Dismiss alert
+type DismissAlertRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AlertId       string                 `protobuf:"bytes,1,opt,name=alert_id,json=alertId,proto3" json:"alert_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DismissAlertRequest) Reset() {
+	*x = DismissAlertRequest{}
+	mi := &file_echo_v1_insights_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DismissAlertRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DismissAlertRequest) ProtoMessage() {}
+
+func (x *DismissAlertRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_insights_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DismissAlertRequest.ProtoReflect.Descriptor instead.
+func (*DismissAlertRequest) Descriptor() ([]byte, []int) {
+	return file_echo_v1_insights_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *DismissAlertRequest) GetAlertId() string {
+	if x != nil {
+		return x.AlertId
+	}
+	return ""
+}
+
+type DismissAlertResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DismissAlertResponse) Reset() {
+	*x = DismissAlertResponse{}
+	mi := &file_echo_v1_insights_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DismissAlertResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DismissAlertResponse) ProtoMessage() {}
+
+func (x *DismissAlertResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_insights_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DismissAlertResponse.ProtoReflect.Descriptor instead.
+func (*DismissAlertResponse) Descriptor() ([]byte, []int) {
+	return file_echo_v1_insights_proto_rawDescGZIP(), []int{23}
+}
+
 var File_echo_v1_insights_proto protoreflect.FileDescriptor
 
 const file_echo_v1_insights_proto_rawDesc = "" +
@@ -1300,17 +1785,59 @@ const file_echo_v1_insights_proto_rawDesc = "" +
 	"\a_action\"W\n" +
 	"\x1aGetDashboardBlocksResponse\x129\n" +
 	"\x06blocks\x18\x01 \x03(\v2\x17.echo.v1.DashboardBlockB\b\xbaH\x05\x92\x01\x02\x10\n" +
-	"R\x06blocks*b\n" +
+	"R\x06blocks\"\x8d\x03\n" +
+	"\x05Alert\x12\x18\n" +
+	"\x02id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x02id\x12!\n" +
+	"\auser_id\x18\x02 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x06userId\x121\n" +
+	"\n" +
+	"alert_type\x18\x03 \x01(\x0e2\x12.echo.v1.AlertTypeR\talertType\x122\n" +
+	"\bseverity\x18\x04 \x01(\x0e2\x16.echo.v1.AlertSeverityR\bseverity\x12\x14\n" +
+	"\x05title\x18\x05 \x01(\tR\x05title\x12\x18\n" +
+	"\amessage\x18\x06 \x01(\tR\amessage\x12\x17\n" +
+	"\ais_read\x18\a \x01(\bR\x06isRead\x12!\n" +
+	"\fis_dismissed\x18\b \x01(\bR\visDismissed\x129\n" +
+	"\n" +
+	"alert_date\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\talertDate\x129\n" +
+	"\n" +
+	"created_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"U\n" +
+	"\x11ListAlertsRequest\x12\x1f\n" +
+	"\vunread_only\x18\x01 \x01(\bR\n" +
+	"unreadOnly\x12\x1f\n" +
+	"\x05limit\x18\x02 \x01(\x05B\t\xbaH\x06\x1a\x04\x182(\x01R\x05limit\"<\n" +
+	"\x12ListAlertsResponse\x12&\n" +
+	"\x06alerts\x18\x01 \x03(\v2\x0e.echo.v1.AlertR\x06alerts\";\n" +
+	"\x14MarkAlertReadRequest\x12#\n" +
+	"\balert_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aalertId\"\x17\n" +
+	"\x15MarkAlertReadResponse\":\n" +
+	"\x13DismissAlertRequest\x12#\n" +
+	"\balert_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\aalertId\"\x16\n" +
+	"\x14DismissAlertResponse*b\n" +
 	"\rWrappedPeriod\x12\x1e\n" +
 	"\x1aWRAPPED_PERIOD_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14WRAPPED_PERIOD_MONTH\x10\x01\x12\x17\n" +
-	"\x13WRAPPED_PERIOD_YEAR\x10\x022\xef\x02\n" +
+	"\x13WRAPPED_PERIOD_YEAR\x10\x02*\x81\x01\n" +
+	"\rAlertSeverity\x12\x1e\n" +
+	"\x1aALERT_SEVERITY_UNSPECIFIED\x10\x00\x12\x17\n" +
+	"\x13ALERT_SEVERITY_INFO\x10\x01\x12\x1a\n" +
+	"\x16ALERT_SEVERITY_WARNING\x10\x02\x12\x1b\n" +
+	"\x17ALERT_SEVERITY_CRITICAL\x10\x03*\xa4\x01\n" +
+	"\tAlertType\x12\x1a\n" +
+	"\x16ALERT_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
+	"\x17ALERT_TYPE_PACE_WARNING\x10\x01\x12\x1f\n" +
+	"\x1bALERT_TYPE_SURPRISE_EXPENSE\x10\x02\x12\x1c\n" +
+	"\x18ALERT_TYPE_GOAL_PROGRESS\x10\x03\x12\x1f\n" +
+	"\x1bALERT_TYPE_SUBSCRIPTION_DUE\x10\x042\xd3\x04\n" +
 	"\x0fInsightsService\x12]\n" +
 	"\x12GetMonthlyInsights\x12\".echo.v1.GetMonthlyInsightsRequest\x1a#.echo.v1.GetMonthlyInsightsResponse\x12E\n" +
 	"\n" +
 	"GetWrapped\x12\x1a.echo.v1.GetWrappedRequest\x1a\x1b.echo.v1.GetWrappedResponse\x12W\n" +
 	"\x10GetSpendingPulse\x12 .echo.v1.GetSpendingPulseRequest\x1a!.echo.v1.GetSpendingPulseResponse\x12]\n" +
-	"\x12GetDashboardBlocks\x12\".echo.v1.GetDashboardBlocksRequest\x1a#.echo.v1.GetDashboardBlocksResponseB\xa4\x01\n" +
+	"\x12GetDashboardBlocks\x12\".echo.v1.GetDashboardBlocksRequest\x1a#.echo.v1.GetDashboardBlocksResponse\x12E\n" +
+	"\n" +
+	"ListAlerts\x12\x1a.echo.v1.ListAlertsRequest\x1a\x1b.echo.v1.ListAlertsResponse\x12N\n" +
+	"\rMarkAlertRead\x12\x1d.echo.v1.MarkAlertReadRequest\x1a\x1e.echo.v1.MarkAlertReadResponse\x12K\n" +
+	"\fDismissAlert\x12\x1c.echo.v1.DismissAlertRequest\x1a\x1d.echo.v1.DismissAlertResponseB\xa4\x01\n" +
 	"\vcom.echo.v1B\rInsightsProtoP\x01ZGgithub.com/FACorreiaa/smart-finance-tracker-proto/gen/go/echo/v1;echov1\xa2\x02\x03EXX\xaa\x02\aEcho.V1\xca\x02\bEcho_\\V1\xe2\x02\x14Echo_\\V1\\GPBMetadata\xea\x02\bEcho::V1b\x06proto3"
 
 var (
@@ -1325,76 +1852,96 @@ func file_echo_v1_insights_proto_rawDescGZIP() []byte {
 	return file_echo_v1_insights_proto_rawDescData
 }
 
-var file_echo_v1_insights_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_echo_v1_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_echo_v1_insights_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_echo_v1_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_echo_v1_insights_proto_goTypes = []any{
 	(WrappedPeriod)(0),                 // 0: echo.v1.WrappedPeriod
-	(*CategorySpend)(nil),              // 1: echo.v1.CategorySpend
-	(*MerchantSpend)(nil),              // 2: echo.v1.MerchantSpend
-	(*MonthlyInsights)(nil),            // 3: echo.v1.MonthlyInsights
-	(*GetMonthlyInsightsRequest)(nil),  // 4: echo.v1.GetMonthlyInsightsRequest
-	(*GetMonthlyInsightsResponse)(nil), // 5: echo.v1.GetMonthlyInsightsResponse
-	(*WrappedCard)(nil),                // 6: echo.v1.WrappedCard
-	(*WrappedSummary)(nil),             // 7: echo.v1.WrappedSummary
-	(*GetWrappedRequest)(nil),          // 8: echo.v1.GetWrappedRequest
-	(*GetWrappedResponse)(nil),         // 9: echo.v1.GetWrappedResponse
-	(*GetSpendingPulseRequest)(nil),    // 10: echo.v1.GetSpendingPulseRequest
-	(*SpendingPulse)(nil),              // 11: echo.v1.SpendingPulse
-	(*TopCategorySpend)(nil),           // 12: echo.v1.TopCategorySpend
-	(*SurpriseExpense)(nil),            // 13: echo.v1.SurpriseExpense
-	(*GetSpendingPulseResponse)(nil),   // 14: echo.v1.GetSpendingPulseResponse
-	(*GetDashboardBlocksRequest)(nil),  // 15: echo.v1.GetDashboardBlocksRequest
-	(*DashboardBlock)(nil),             // 16: echo.v1.DashboardBlock
-	(*GetDashboardBlocksResponse)(nil), // 17: echo.v1.GetDashboardBlocksResponse
-	(*Money)(nil),                      // 18: echo.v1.Money
-	(*timestamppb.Timestamp)(nil),      // 19: google.protobuf.Timestamp
+	(AlertSeverity)(0),                 // 1: echo.v1.AlertSeverity
+	(AlertType)(0),                     // 2: echo.v1.AlertType
+	(*CategorySpend)(nil),              // 3: echo.v1.CategorySpend
+	(*MerchantSpend)(nil),              // 4: echo.v1.MerchantSpend
+	(*MonthlyInsights)(nil),            // 5: echo.v1.MonthlyInsights
+	(*GetMonthlyInsightsRequest)(nil),  // 6: echo.v1.GetMonthlyInsightsRequest
+	(*GetMonthlyInsightsResponse)(nil), // 7: echo.v1.GetMonthlyInsightsResponse
+	(*WrappedCard)(nil),                // 8: echo.v1.WrappedCard
+	(*WrappedSummary)(nil),             // 9: echo.v1.WrappedSummary
+	(*GetWrappedRequest)(nil),          // 10: echo.v1.GetWrappedRequest
+	(*GetWrappedResponse)(nil),         // 11: echo.v1.GetWrappedResponse
+	(*GetSpendingPulseRequest)(nil),    // 12: echo.v1.GetSpendingPulseRequest
+	(*SpendingPulse)(nil),              // 13: echo.v1.SpendingPulse
+	(*TopCategorySpend)(nil),           // 14: echo.v1.TopCategorySpend
+	(*SurpriseExpense)(nil),            // 15: echo.v1.SurpriseExpense
+	(*GetSpendingPulseResponse)(nil),   // 16: echo.v1.GetSpendingPulseResponse
+	(*GetDashboardBlocksRequest)(nil),  // 17: echo.v1.GetDashboardBlocksRequest
+	(*DashboardBlock)(nil),             // 18: echo.v1.DashboardBlock
+	(*GetDashboardBlocksResponse)(nil), // 19: echo.v1.GetDashboardBlocksResponse
+	(*Alert)(nil),                      // 20: echo.v1.Alert
+	(*ListAlertsRequest)(nil),          // 21: echo.v1.ListAlertsRequest
+	(*ListAlertsResponse)(nil),         // 22: echo.v1.ListAlertsResponse
+	(*MarkAlertReadRequest)(nil),       // 23: echo.v1.MarkAlertReadRequest
+	(*MarkAlertReadResponse)(nil),      // 24: echo.v1.MarkAlertReadResponse
+	(*DismissAlertRequest)(nil),        // 25: echo.v1.DismissAlertRequest
+	(*DismissAlertResponse)(nil),       // 26: echo.v1.DismissAlertResponse
+	(*Money)(nil),                      // 27: echo.v1.Money
+	(*timestamppb.Timestamp)(nil),      // 28: google.protobuf.Timestamp
 }
 var file_echo_v1_insights_proto_depIdxs = []int32{
-	18, // 0: echo.v1.CategorySpend.total:type_name -> echo.v1.Money
-	18, // 1: echo.v1.MerchantSpend.total:type_name -> echo.v1.Money
-	19, // 2: echo.v1.MonthlyInsights.month_start:type_name -> google.protobuf.Timestamp
-	18, // 3: echo.v1.MonthlyInsights.total_spend:type_name -> echo.v1.Money
-	18, // 4: echo.v1.MonthlyInsights.total_income:type_name -> echo.v1.Money
-	18, // 5: echo.v1.MonthlyInsights.net:type_name -> echo.v1.Money
-	1,  // 6: echo.v1.MonthlyInsights.top_categories:type_name -> echo.v1.CategorySpend
-	2,  // 7: echo.v1.MonthlyInsights.top_merchants:type_name -> echo.v1.MerchantSpend
-	19, // 8: echo.v1.MonthlyInsights.created_at:type_name -> google.protobuf.Timestamp
-	19, // 9: echo.v1.GetMonthlyInsightsRequest.month_start:type_name -> google.protobuf.Timestamp
-	3,  // 10: echo.v1.GetMonthlyInsightsResponse.insights:type_name -> echo.v1.MonthlyInsights
+	27, // 0: echo.v1.CategorySpend.total:type_name -> echo.v1.Money
+	27, // 1: echo.v1.MerchantSpend.total:type_name -> echo.v1.Money
+	28, // 2: echo.v1.MonthlyInsights.month_start:type_name -> google.protobuf.Timestamp
+	27, // 3: echo.v1.MonthlyInsights.total_spend:type_name -> echo.v1.Money
+	27, // 4: echo.v1.MonthlyInsights.total_income:type_name -> echo.v1.Money
+	27, // 5: echo.v1.MonthlyInsights.net:type_name -> echo.v1.Money
+	3,  // 6: echo.v1.MonthlyInsights.top_categories:type_name -> echo.v1.CategorySpend
+	4,  // 7: echo.v1.MonthlyInsights.top_merchants:type_name -> echo.v1.MerchantSpend
+	28, // 8: echo.v1.MonthlyInsights.created_at:type_name -> google.protobuf.Timestamp
+	28, // 9: echo.v1.GetMonthlyInsightsRequest.month_start:type_name -> google.protobuf.Timestamp
+	5,  // 10: echo.v1.GetMonthlyInsightsResponse.insights:type_name -> echo.v1.MonthlyInsights
 	0,  // 11: echo.v1.WrappedSummary.period:type_name -> echo.v1.WrappedPeriod
-	19, // 12: echo.v1.WrappedSummary.period_start:type_name -> google.protobuf.Timestamp
-	19, // 13: echo.v1.WrappedSummary.period_end:type_name -> google.protobuf.Timestamp
-	6,  // 14: echo.v1.WrappedSummary.cards:type_name -> echo.v1.WrappedCard
-	19, // 15: echo.v1.WrappedSummary.created_at:type_name -> google.protobuf.Timestamp
+	28, // 12: echo.v1.WrappedSummary.period_start:type_name -> google.protobuf.Timestamp
+	28, // 13: echo.v1.WrappedSummary.period_end:type_name -> google.protobuf.Timestamp
+	8,  // 14: echo.v1.WrappedSummary.cards:type_name -> echo.v1.WrappedCard
+	28, // 15: echo.v1.WrappedSummary.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 16: echo.v1.GetWrappedRequest.period:type_name -> echo.v1.WrappedPeriod
-	19, // 17: echo.v1.GetWrappedRequest.period_start:type_name -> google.protobuf.Timestamp
-	19, // 18: echo.v1.GetWrappedRequest.period_end:type_name -> google.protobuf.Timestamp
-	7,  // 19: echo.v1.GetWrappedResponse.wrapped:type_name -> echo.v1.WrappedSummary
-	19, // 20: echo.v1.GetSpendingPulseRequest.as_of:type_name -> google.protobuf.Timestamp
-	18, // 21: echo.v1.SpendingPulse.current_month_spend:type_name -> echo.v1.Money
-	18, // 22: echo.v1.SpendingPulse.last_month_spend:type_name -> echo.v1.Money
-	18, // 23: echo.v1.SpendingPulse.spend_delta:type_name -> echo.v1.Money
-	19, // 24: echo.v1.SpendingPulse.as_of_date:type_name -> google.protobuf.Timestamp
-	12, // 25: echo.v1.SpendingPulse.top_categories:type_name -> echo.v1.TopCategorySpend
-	13, // 26: echo.v1.SpendingPulse.surprise_expenses:type_name -> echo.v1.SurpriseExpense
-	18, // 27: echo.v1.TopCategorySpend.amount:type_name -> echo.v1.Money
-	18, // 28: echo.v1.SurpriseExpense.amount:type_name -> echo.v1.Money
-	19, // 29: echo.v1.SurpriseExpense.posted_at:type_name -> google.protobuf.Timestamp
-	11, // 30: echo.v1.GetSpendingPulseResponse.pulse:type_name -> echo.v1.SpendingPulse
-	16, // 31: echo.v1.GetDashboardBlocksResponse.blocks:type_name -> echo.v1.DashboardBlock
-	4,  // 32: echo.v1.InsightsService.GetMonthlyInsights:input_type -> echo.v1.GetMonthlyInsightsRequest
-	8,  // 33: echo.v1.InsightsService.GetWrapped:input_type -> echo.v1.GetWrappedRequest
-	10, // 34: echo.v1.InsightsService.GetSpendingPulse:input_type -> echo.v1.GetSpendingPulseRequest
-	15, // 35: echo.v1.InsightsService.GetDashboardBlocks:input_type -> echo.v1.GetDashboardBlocksRequest
-	5,  // 36: echo.v1.InsightsService.GetMonthlyInsights:output_type -> echo.v1.GetMonthlyInsightsResponse
-	9,  // 37: echo.v1.InsightsService.GetWrapped:output_type -> echo.v1.GetWrappedResponse
-	14, // 38: echo.v1.InsightsService.GetSpendingPulse:output_type -> echo.v1.GetSpendingPulseResponse
-	17, // 39: echo.v1.InsightsService.GetDashboardBlocks:output_type -> echo.v1.GetDashboardBlocksResponse
-	36, // [36:40] is the sub-list for method output_type
-	32, // [32:36] is the sub-list for method input_type
-	32, // [32:32] is the sub-list for extension type_name
-	32, // [32:32] is the sub-list for extension extendee
-	0,  // [0:32] is the sub-list for field type_name
+	28, // 17: echo.v1.GetWrappedRequest.period_start:type_name -> google.protobuf.Timestamp
+	28, // 18: echo.v1.GetWrappedRequest.period_end:type_name -> google.protobuf.Timestamp
+	9,  // 19: echo.v1.GetWrappedResponse.wrapped:type_name -> echo.v1.WrappedSummary
+	28, // 20: echo.v1.GetSpendingPulseRequest.as_of:type_name -> google.protobuf.Timestamp
+	27, // 21: echo.v1.SpendingPulse.current_month_spend:type_name -> echo.v1.Money
+	27, // 22: echo.v1.SpendingPulse.last_month_spend:type_name -> echo.v1.Money
+	27, // 23: echo.v1.SpendingPulse.spend_delta:type_name -> echo.v1.Money
+	28, // 24: echo.v1.SpendingPulse.as_of_date:type_name -> google.protobuf.Timestamp
+	14, // 25: echo.v1.SpendingPulse.top_categories:type_name -> echo.v1.TopCategorySpend
+	15, // 26: echo.v1.SpendingPulse.surprise_expenses:type_name -> echo.v1.SurpriseExpense
+	27, // 27: echo.v1.TopCategorySpend.amount:type_name -> echo.v1.Money
+	27, // 28: echo.v1.SurpriseExpense.amount:type_name -> echo.v1.Money
+	28, // 29: echo.v1.SurpriseExpense.posted_at:type_name -> google.protobuf.Timestamp
+	13, // 30: echo.v1.GetSpendingPulseResponse.pulse:type_name -> echo.v1.SpendingPulse
+	18, // 31: echo.v1.GetDashboardBlocksResponse.blocks:type_name -> echo.v1.DashboardBlock
+	2,  // 32: echo.v1.Alert.alert_type:type_name -> echo.v1.AlertType
+	1,  // 33: echo.v1.Alert.severity:type_name -> echo.v1.AlertSeverity
+	28, // 34: echo.v1.Alert.alert_date:type_name -> google.protobuf.Timestamp
+	28, // 35: echo.v1.Alert.created_at:type_name -> google.protobuf.Timestamp
+	20, // 36: echo.v1.ListAlertsResponse.alerts:type_name -> echo.v1.Alert
+	6,  // 37: echo.v1.InsightsService.GetMonthlyInsights:input_type -> echo.v1.GetMonthlyInsightsRequest
+	10, // 38: echo.v1.InsightsService.GetWrapped:input_type -> echo.v1.GetWrappedRequest
+	12, // 39: echo.v1.InsightsService.GetSpendingPulse:input_type -> echo.v1.GetSpendingPulseRequest
+	17, // 40: echo.v1.InsightsService.GetDashboardBlocks:input_type -> echo.v1.GetDashboardBlocksRequest
+	21, // 41: echo.v1.InsightsService.ListAlerts:input_type -> echo.v1.ListAlertsRequest
+	23, // 42: echo.v1.InsightsService.MarkAlertRead:input_type -> echo.v1.MarkAlertReadRequest
+	25, // 43: echo.v1.InsightsService.DismissAlert:input_type -> echo.v1.DismissAlertRequest
+	7,  // 44: echo.v1.InsightsService.GetMonthlyInsights:output_type -> echo.v1.GetMonthlyInsightsResponse
+	11, // 45: echo.v1.InsightsService.GetWrapped:output_type -> echo.v1.GetWrappedResponse
+	16, // 46: echo.v1.InsightsService.GetSpendingPulse:output_type -> echo.v1.GetSpendingPulseResponse
+	19, // 47: echo.v1.InsightsService.GetDashboardBlocks:output_type -> echo.v1.GetDashboardBlocksResponse
+	22, // 48: echo.v1.InsightsService.ListAlerts:output_type -> echo.v1.ListAlertsResponse
+	24, // 49: echo.v1.InsightsService.MarkAlertRead:output_type -> echo.v1.MarkAlertReadResponse
+	26, // 50: echo.v1.InsightsService.DismissAlert:output_type -> echo.v1.DismissAlertResponse
+	44, // [44:51] is the sub-list for method output_type
+	37, // [37:44] is the sub-list for method input_type
+	37, // [37:37] is the sub-list for extension type_name
+	37, // [37:37] is the sub-list for extension extendee
+	0,  // [0:37] is the sub-list for field type_name
 }
 
 func init() { file_echo_v1_insights_proto_init() }
@@ -1412,8 +1959,8 @@ func file_echo_v1_insights_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_echo_v1_insights_proto_rawDesc), len(file_echo_v1_insights_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   17,
+			NumEnums:      3,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

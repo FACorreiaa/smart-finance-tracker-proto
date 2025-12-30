@@ -728,11 +728,23 @@
             <ul>
               
                 <li>
+                  <a href="#echo.v1.Alert"><span class="badge">M</span>Alert</a>
+                </li>
+              
+                <li>
                   <a href="#echo.v1.CategorySpend"><span class="badge">M</span>CategorySpend</a>
                 </li>
               
                 <li>
                   <a href="#echo.v1.DashboardBlock"><span class="badge">M</span>DashboardBlock</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.DismissAlertRequest"><span class="badge">M</span>DismissAlertRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.DismissAlertResponse"><span class="badge">M</span>DismissAlertResponse</a>
                 </li>
               
                 <li>
@@ -768,6 +780,22 @@
                 </li>
               
                 <li>
+                  <a href="#echo.v1.ListAlertsRequest"><span class="badge">M</span>ListAlertsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.ListAlertsResponse"><span class="badge">M</span>ListAlertsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.MarkAlertReadRequest"><span class="badge">M</span>MarkAlertReadRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.MarkAlertReadResponse"><span class="badge">M</span>MarkAlertReadResponse</a>
+                </li>
+              
+                <li>
                   <a href="#echo.v1.MerchantSpend"><span class="badge">M</span>MerchantSpend</a>
                 </li>
               
@@ -795,6 +823,14 @@
                   <a href="#echo.v1.WrappedSummary"><span class="badge">M</span>WrappedSummary</a>
                 </li>
               
+              
+                <li>
+                  <a href="#echo.v1.AlertSeverity"><span class="badge">E</span>AlertSeverity</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.AlertType"><span class="badge">E</span>AlertType</a>
+                </li>
               
                 <li>
                   <a href="#echo.v1.WrappedPeriod"><span class="badge">E</span>WrappedPeriod</a>
@@ -5644,6 +5680,93 @@
       <p></p>
 
       
+        <h3 id="echo.v1.Alert">Alert</h3>
+        <p>Alert message</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>user_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>alert_type</td>
+                  <td><a href="#echo.v1.AlertType">AlertType</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>severity</td>
+                  <td><a href="#echo.v1.AlertSeverity">AlertSeverity</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>title</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>is_read</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>is_dismissed</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>alert_date</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="echo.v1.CategorySpend">CategorySpend</h3>
         <p></p>
 
@@ -5738,6 +5861,37 @@
           </table>
 
           
+
+        
+      
+        <h3 id="echo.v1.DismissAlertRequest">DismissAlertRequest</h3>
+        <p>Dismiss alert</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>alert_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="echo.v1.DismissAlertResponse">DismissAlertResponse</h3>
+        <p></p>
+
+        
 
         
       
@@ -5934,6 +6088,92 @@
           </table>
 
           
+
+        
+      
+        <h3 id="echo.v1.ListAlertsRequest">ListAlertsRequest</h3>
+        <p>List alerts for user</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>unread_only</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Filter to unread only </p></td>
+                </tr>
+              
+                <tr>
+                  <td>limit</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="echo.v1.ListAlertsResponse">ListAlertsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>alerts</td>
+                  <td><a href="#echo.v1.Alert">Alert</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="echo.v1.MarkAlertReadRequest">MarkAlertReadRequest</h3>
+        <p>Mark alert as read</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>alert_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="echo.v1.MarkAlertReadResponse">MarkAlertReadResponse</h3>
+        <p></p>
+
+        
 
         
       
@@ -6366,6 +6606,82 @@
       
 
       
+        <h3 id="echo.v1.AlertSeverity">AlertSeverity</h3>
+        <p>Alert severity levels</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ALERT_SEVERITY_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ALERT_SEVERITY_INFO</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ALERT_SEVERITY_WARNING</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ALERT_SEVERITY_CRITICAL</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="echo.v1.AlertType">AlertType</h3>
+        <p>Alert types</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ALERT_TYPE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ALERT_TYPE_PACE_WARNING</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ALERT_TYPE_SURPRISE_EXPENSE</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ALERT_TYPE_GOAL_PROGRESS</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ALERT_TYPE_SUBSCRIPTION_DUE</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
         <h3 id="echo.v1.WrappedPeriod">WrappedPeriod</h3>
         <p></p>
         <table class="enum-table">
@@ -6432,6 +6748,27 @@
                 <td>GetDashboardBlocks</td>
                 <td><a href="#echo.v1.GetDashboardBlocksRequest">GetDashboardBlocksRequest</a></td>
                 <td><a href="#echo.v1.GetDashboardBlocksResponse">GetDashboardBlocksResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ListAlerts</td>
+                <td><a href="#echo.v1.ListAlertsRequest">ListAlertsRequest</a></td>
+                <td><a href="#echo.v1.ListAlertsResponse">ListAlertsResponse</a></td>
+                <td><p>Alert management</p></td>
+              </tr>
+            
+              <tr>
+                <td>MarkAlertRead</td>
+                <td><a href="#echo.v1.MarkAlertReadRequest">MarkAlertReadRequest</a></td>
+                <td><a href="#echo.v1.MarkAlertReadResponse">MarkAlertReadResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DismissAlert</td>
+                <td><a href="#echo.v1.DismissAlertRequest">DismissAlertRequest</a></td>
+                <td><a href="#echo.v1.DismissAlertResponse">DismissAlertResponse</a></td>
                 <td><p></p></td>
               </tr>
             
