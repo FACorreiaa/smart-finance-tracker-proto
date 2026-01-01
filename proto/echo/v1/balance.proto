@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+package echo.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+import "echo/v1/common.proto";
+import "echo/v1/finance.proto";
+
+// BalanceService computes user balances from transactions
+// Phase 1: CSV-only (computed from transaction sum)
+// Phase 2: Real banking APIs (direct balance + pending transactions)
+service BalanceService {
+  // Get current balance aggregated across all accounts
+  rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse);
+  
+  // Get daily balance history for charts
+  rpc GetBalanceHistory(GetBalanceHistoryRequest) returns (GetBalanceHistoryResponse);
+}
+
+// Balance for a single account
+message AccountBalance {
+  string account_id = 1 [(buf.validate.field).string = { uuid: true }];
+  string account_name = 2 [(buf.validate.field).string = { max_len: 120 }];
+  AccountType account_type = 3;
+  
+  // Liquid cash balance (checking, savings, cash)
+  Money cash_balance = 4;
+  
+  // Investment balance (stocks, crypto - volatile)
+  Money investment_balance = 5;
+  
+  // 24h change for "alive" feel
+  Money change_24h = 6;
+  
+  // Last transaction date for this account
+  google.protobuf.Timestamp last_activity = 7;
+}
+
+message GetBalanceRequest {
+  // If empty, returns all accounts for authenticated user
+  optional string account_id = 1 [(buf.validate.field).string = { uuid: true }];
+}
+
+message GetBalanceResponse {
+  // Total across all accounts
+  Money total_net_worth = 1;
+  
+  // Cash available minus upcoming bills (safe to spend)
+  Money safe_to_spend = 2;
+  
+  // Total investment value (stocks + crypto)
+  Money total_investments = 3;
+  
+  // Breakdown by account
+  repeated AccountBalance balances = 4;
+  
+  // True if balance is estimated from CSV only (no real bank connection)
+  bool is_estimated = 5;
+  
+  // Total upcoming bills (from recurring subscriptions)
+  Money upcoming_bills = 6;
+}
+
+// Request for balance history (for charts)
+message GetBalanceHistoryRequest {
+  // Number of days to look back (max 365)
+  int32 days = 1 [(buf.validate.field).int32 = { gte: 1 lte: 365 }];
+  
+  // If set, only for this account
+  optional string account_id = 2 [(buf.validate.field).string = { uuid: true }];
+}
+
+// Daily balance snapshot
+message DailyBalance {
+  google.protobuf.Timestamp date = 1;
+  Money balance = 2;
+  Money change = 3; // Change from previous day
+}
+
+message GetBalanceHistoryResponse {
+  repeated DailyBalance history = 1;
+  
+  // Summary stats
+  Money highest_balance = 2;
+  Money lowest_balance = 3;
+  Money average_balance = 4;
+}

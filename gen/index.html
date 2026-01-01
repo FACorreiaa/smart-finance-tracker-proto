@@ -605,6 +605,45 @@
         
           
           <li>
+            <a href="#echo%2fv1%2fbalance.proto">echo/v1/balance.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#echo.v1.AccountBalance"><span class="badge">M</span>AccountBalance</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.DailyBalance"><span class="badge">M</span>DailyBalance</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.GetBalanceHistoryRequest"><span class="badge">M</span>GetBalanceHistoryRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.GetBalanceHistoryResponse"><span class="badge">M</span>GetBalanceHistoryResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.GetBalanceRequest"><span class="badge">M</span>GetBalanceRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#echo.v1.GetBalanceResponse"><span class="badge">M</span>GetBalanceResponse</a>
+                </li>
+              
+              
+              
+              
+                <li>
+                  <a href="#echo.v1.BalanceService"><span class="badge">S</span>BalanceService</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#echo%2fv1%2fimports.proto">echo/v1/imports.proto</a>
             <ul>
               
@@ -4507,6 +4546,309 @@
                 <td><a href="#echo.v1.ListCategoryRulesRequest">ListCategoryRulesRequest</a></td>
                 <td><a href="#echo.v1.ListCategoryRulesResponse">ListCategoryRulesResponse</a></td>
                 <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="echo/v1/balance.proto">echo/v1/balance.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="echo.v1.AccountBalance">AccountBalance</h3>
+        <p>Balance for a single account</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>account_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>account_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>account_type</td>
+                  <td><a href="#echo.v1.AccountType">AccountType</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cash_balance</td>
+                  <td><a href="#echo.v1.Money">Money</a></td>
+                  <td></td>
+                  <td><p>Liquid cash balance (checking, savings, cash) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>investment_balance</td>
+                  <td><a href="#echo.v1.Money">Money</a></td>
+                  <td></td>
+                  <td><p>Investment balance (stocks, crypto - volatile) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>change_24h</td>
+                  <td><a href="#echo.v1.Money">Money</a></td>
+                  <td></td>
+                  <td><p>24h change for &#34;alive&#34; feel </p></td>
+                </tr>
+              
+                <tr>
+                  <td>last_activity</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Last transaction date for this account </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="echo.v1.DailyBalance">DailyBalance</h3>
+        <p>Daily balance snapshot</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>date</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>balance</td>
+                  <td><a href="#echo.v1.Money">Money</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>change</td>
+                  <td><a href="#echo.v1.Money">Money</a></td>
+                  <td></td>
+                  <td><p>Change from previous day </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="echo.v1.GetBalanceHistoryRequest">GetBalanceHistoryRequest</h3>
+        <p>Request for balance history (for charts)</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>days</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of days to look back (max 365) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>account_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>If set, only for this account </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="echo.v1.GetBalanceHistoryResponse">GetBalanceHistoryResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>history</td>
+                  <td><a href="#echo.v1.DailyBalance">DailyBalance</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>highest_balance</td>
+                  <td><a href="#echo.v1.Money">Money</a></td>
+                  <td></td>
+                  <td><p>Summary stats </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lowest_balance</td>
+                  <td><a href="#echo.v1.Money">Money</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>average_balance</td>
+                  <td><a href="#echo.v1.Money">Money</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="echo.v1.GetBalanceRequest">GetBalanceRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>account_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>If empty, returns all accounts for authenticated user </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="echo.v1.GetBalanceResponse">GetBalanceResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>total_net_worth</td>
+                  <td><a href="#echo.v1.Money">Money</a></td>
+                  <td></td>
+                  <td><p>Total across all accounts </p></td>
+                </tr>
+              
+                <tr>
+                  <td>safe_to_spend</td>
+                  <td><a href="#echo.v1.Money">Money</a></td>
+                  <td></td>
+                  <td><p>Cash available minus upcoming bills (safe to spend) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>total_investments</td>
+                  <td><a href="#echo.v1.Money">Money</a></td>
+                  <td></td>
+                  <td><p>Total investment value (stocks &#43; crypto) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>balances</td>
+                  <td><a href="#echo.v1.AccountBalance">AccountBalance</a></td>
+                  <td>repeated</td>
+                  <td><p>Breakdown by account </p></td>
+                </tr>
+              
+                <tr>
+                  <td>is_estimated</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>True if balance is estimated from CSV only (no real bank connection) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>upcoming_bills</td>
+                  <td><a href="#echo.v1.Money">Money</a></td>
+                  <td></td>
+                  <td><p>Total upcoming bills (from recurring subscriptions) </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+        <h3 id="echo.v1.BalanceService">BalanceService</h3>
+        <p>BalanceService computes user balances from transactions</p><p>Phase 1: CSV-only (computed from transaction sum)</p><p>Phase 2: Real banking APIs (direct balance + pending transactions)</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>GetBalance</td>
+                <td><a href="#echo.v1.GetBalanceRequest">GetBalanceRequest</a></td>
+                <td><a href="#echo.v1.GetBalanceResponse">GetBalanceResponse</a></td>
+                <td><p>Get current balance aggregated across all accounts</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetBalanceHistory</td>
+                <td><a href="#echo.v1.GetBalanceHistoryRequest">GetBalanceHistoryRequest</a></td>
+                <td><a href="#echo.v1.GetBalanceHistoryResponse">GetBalanceHistoryResponse</a></td>
+                <td><p>Get daily balance history for charts</p></td>
               </tr>
             
           </tbody>
