@@ -2443,6 +2443,171 @@ func (x *ListCategoryRulesResponse) GetRules() []*CategoryRule {
 	return nil
 }
 
+// Quick Capture: Manual transaction entry from natural language
+type CreateManualTransactionRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Natural language input, e.g. "Coffee 1$" or "Dinner €25"
+	RawText string `protobuf:"bytes,1,opt,name=raw_text,json=rawText,proto3" json:"raw_text,omitempty"`
+	// Optional overrides for parsed values
+	AmountMinor   *int64                 `protobuf:"varint,2,opt,name=amount_minor,json=amountMinor,proto3,oneof" json:"amount_minor,omitempty"`
+	CategoryId    *string                `protobuf:"bytes,3,opt,name=category_id,json=categoryId,proto3,oneof" json:"category_id,omitempty"`
+	Description   *string                `protobuf:"bytes,4,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	Date          *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=date,proto3,oneof" json:"date,omitempty"`
+	AccountId     *string                `protobuf:"bytes,6,opt,name=account_id,json=accountId,proto3,oneof" json:"account_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateManualTransactionRequest) Reset() {
+	*x = CreateManualTransactionRequest{}
+	mi := &file_echo_v1_finance_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateManualTransactionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateManualTransactionRequest) ProtoMessage() {}
+
+func (x *CreateManualTransactionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_finance_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateManualTransactionRequest.ProtoReflect.Descriptor instead.
+func (*CreateManualTransactionRequest) Descriptor() ([]byte, []int) {
+	return file_echo_v1_finance_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *CreateManualTransactionRequest) GetRawText() string {
+	if x != nil {
+		return x.RawText
+	}
+	return ""
+}
+
+func (x *CreateManualTransactionRequest) GetAmountMinor() int64 {
+	if x != nil && x.AmountMinor != nil {
+		return *x.AmountMinor
+	}
+	return 0
+}
+
+func (x *CreateManualTransactionRequest) GetCategoryId() string {
+	if x != nil && x.CategoryId != nil {
+		return *x.CategoryId
+	}
+	return ""
+}
+
+func (x *CreateManualTransactionRequest) GetDescription() string {
+	if x != nil && x.Description != nil {
+		return *x.Description
+	}
+	return ""
+}
+
+func (x *CreateManualTransactionRequest) GetDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Date
+	}
+	return nil
+}
+
+func (x *CreateManualTransactionRequest) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+type CreateManualTransactionResponse struct {
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Transaction *Transaction           `protobuf:"bytes,1,opt,name=transaction,proto3" json:"transaction,omitempty"`
+	// Parsed interpretation feedback
+	ParsedDescription   string  `protobuf:"bytes,2,opt,name=parsed_description,json=parsedDescription,proto3" json:"parsed_description,omitempty"`
+	ParsedAmountMinor   int64   `protobuf:"varint,3,opt,name=parsed_amount_minor,json=parsedAmountMinor,proto3" json:"parsed_amount_minor,omitempty"`
+	SuggestedCategoryId *string `protobuf:"bytes,4,opt,name=suggested_category_id,json=suggestedCategoryId,proto3,oneof" json:"suggested_category_id,omitempty"`
+	// Budget impact feedback: "This puts you at 95% of your Fun budget"
+	BudgetImpact  *string `protobuf:"bytes,5,opt,name=budget_impact,json=budgetImpact,proto3,oneof" json:"budget_impact,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateManualTransactionResponse) Reset() {
+	*x = CreateManualTransactionResponse{}
+	mi := &file_echo_v1_finance_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateManualTransactionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateManualTransactionResponse) ProtoMessage() {}
+
+func (x *CreateManualTransactionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_finance_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateManualTransactionResponse.ProtoReflect.Descriptor instead.
+func (*CreateManualTransactionResponse) Descriptor() ([]byte, []int) {
+	return file_echo_v1_finance_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *CreateManualTransactionResponse) GetTransaction() *Transaction {
+	if x != nil {
+		return x.Transaction
+	}
+	return nil
+}
+
+func (x *CreateManualTransactionResponse) GetParsedDescription() string {
+	if x != nil {
+		return x.ParsedDescription
+	}
+	return ""
+}
+
+func (x *CreateManualTransactionResponse) GetParsedAmountMinor() int64 {
+	if x != nil {
+		return x.ParsedAmountMinor
+	}
+	return 0
+}
+
+func (x *CreateManualTransactionResponse) GetSuggestedCategoryId() string {
+	if x != nil && x.SuggestedCategoryId != nil {
+		return *x.SuggestedCategoryId
+	}
+	return ""
+}
+
+func (x *CreateManualTransactionResponse) GetBudgetImpact() string {
+	if x != nil && x.BudgetImpact != nil {
+		return *x.BudgetImpact
+	}
+	return ""
+}
+
 var File_echo_v1_finance_proto protoreflect.FileDescriptor
 
 const file_echo_v1_finance_proto_rawDesc = "" +
@@ -2658,7 +2823,30 @@ const file_echo_v1_finance_proto_rawDesc = "" +
 	"\x14transactions_updated\x18\x02 \x01(\x03R\x13transactionsUpdated\"\x1a\n" +
 	"\x18ListCategoryRulesRequest\"S\n" +
 	"\x19ListCategoryRulesResponse\x126\n" +
-	"\x05rules\x18\x01 \x03(\v2\x15.echo.v1.CategoryRuleB\t\xbaH\x06\x92\x01\x03\x10\xe8\aR\x05rules*\xe1\x01\n" +
+	"\x05rules\x18\x01 \x03(\v2\x15.echo.v1.CategoryRuleB\t\xbaH\x06\x92\x01\x03\x10\xe8\aR\x05rules\"\x97\x03\n" +
+	"\x1eCreateManualTransactionRequest\x12%\n" +
+	"\braw_text\x18\x01 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\x80\x04R\arawText\x12A\n" +
+	"\famount_minor\x18\x02 \x01(\x03B\x19\xbaH\x16\"\x14\x18\x80\x80\xb1\xa2\xb9\xd1\xcc\x01(\x80\x80\xcf\xddƮ\xb3\xfe\xff\x01H\x00R\vamountMinor\x88\x01\x01\x12.\n" +
+	"\vcategory_id\x18\x03 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x01R\n" +
+	"categoryId\x88\x01\x01\x12/\n" +
+	"\vdescription\x18\x04 \x01(\tB\b\xbaH\x05r\x03\x18\x80\x04H\x02R\vdescription\x88\x01\x01\x123\n" +
+	"\x04date\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\x04date\x88\x01\x01\x12,\n" +
+	"\n" +
+	"account_id\x18\x06 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01H\x04R\taccountId\x88\x01\x01B\x0f\n" +
+	"\r_amount_minorB\x0e\n" +
+	"\f_category_idB\x0e\n" +
+	"\f_descriptionB\a\n" +
+	"\x05_dateB\r\n" +
+	"\v_account_id\"\xcf\x02\n" +
+	"\x1fCreateManualTransactionResponse\x12>\n" +
+	"\vtransaction\x18\x01 \x01(\v2\x14.echo.v1.TransactionB\x06\xbaH\x03\xc8\x01\x01R\vtransaction\x12-\n" +
+	"\x12parsed_description\x18\x02 \x01(\tR\x11parsedDescription\x12.\n" +
+	"\x13parsed_amount_minor\x18\x03 \x01(\x03R\x11parsedAmountMinor\x127\n" +
+	"\x15suggested_category_id\x18\x04 \x01(\tH\x00R\x13suggestedCategoryId\x88\x01\x01\x12(\n" +
+	"\rbudget_impact\x18\x05 \x01(\tH\x01R\fbudgetImpact\x88\x01\x01B\x18\n" +
+	"\x16_suggested_category_idB\x10\n" +
+	"\x0e_budget_impact*\xe1\x01\n" +
 	"\vAccountType\x12\x1c\n" +
 	"\x18ACCOUNT_TYPE_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11ACCOUNT_TYPE_CASH\x10\x01\x12\x19\n" +
@@ -2696,7 +2884,7 @@ const file_echo_v1_finance_proto_rawDesc = "" +
 	"\x19RECURRING_CADENCE_MONTHLY\x10\x02\x12\x1f\n" +
 	"\x1bRECURRING_CADENCE_QUARTERLY\x10\x03\x12\x1c\n" +
 	"\x18RECURRING_CADENCE_ANNUAL\x10\x04\x12\x1d\n" +
-	"\x19RECURRING_CADENCE_UNKNOWN\x10\x052\xad\b\n" +
+	"\x19RECURRING_CADENCE_UNKNOWN\x10\x052\x9b\t\n" +
 	"\x0eFinanceService\x12N\n" +
 	"\rCreateAccount\x12\x1d.echo.v1.CreateAccountRequest\x1a\x1e.echo.v1.CreateAccountResponse\x12K\n" +
 	"\fListAccounts\x12\x1c.echo.v1.ListAccountsRequest\x1a\x1d.echo.v1.ListAccountsResponse\x12Q\n" +
@@ -2704,7 +2892,8 @@ const file_echo_v1_finance_proto_rawDesc = "" +
 	"\x0eListCategories\x12\x1e.echo.v1.ListCategoriesRequest\x1a\x1f.echo.v1.ListCategoriesResponse\x12f\n" +
 	"\x15ImportTransactionsCsv\x12%.echo.v1.ImportTransactionsCsvRequest\x1a&.echo.v1.ImportTransactionsCsvResponse\x12W\n" +
 	"\x10ListTransactions\x12 .echo.v1.ListTransactionsRequest\x1a!.echo.v1.ListTransactionsResponse\x12Z\n" +
-	"\x11DeleteImportBatch\x12!.echo.v1.DeleteImportBatchRequest\x1a\".echo.v1.DeleteImportBatchResponse\x12E\n" +
+	"\x11DeleteImportBatch\x12!.echo.v1.DeleteImportBatchRequest\x1a\".echo.v1.DeleteImportBatchResponse\x12l\n" +
+	"\x17CreateManualTransaction\x12'.echo.v1.CreateManualTransactionRequest\x1a(.echo.v1.CreateManualTransactionResponse\x12E\n" +
 	"\n" +
 	"CreateGoal\x12\x1a.echo.v1.CreateGoalRequest\x1a\x1b.echo.v1.CreateGoalResponse\x12B\n" +
 	"\tListGoals\x12\x19.echo.v1.ListGoalsRequest\x1a\x1a.echo.v1.ListGoalsResponse\x12u\n" +
@@ -2726,7 +2915,7 @@ func file_echo_v1_finance_proto_rawDescGZIP() []byte {
 }
 
 var file_echo_v1_finance_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_echo_v1_finance_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
+var file_echo_v1_finance_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_echo_v1_finance_proto_goTypes = []any{
 	(AccountType)(0),                           // 0: echo.v1.AccountType
 	(TransactionSource)(0),                     // 1: echo.v1.TransactionSource
@@ -2765,88 +2954,94 @@ var file_echo_v1_finance_proto_goTypes = []any{
 	(*CreateCategoryRuleResponse)(nil),         // 34: echo.v1.CreateCategoryRuleResponse
 	(*ListCategoryRulesRequest)(nil),           // 35: echo.v1.ListCategoryRulesRequest
 	(*ListCategoryRulesResponse)(nil),          // 36: echo.v1.ListCategoryRulesResponse
-	(*timestamppb.Timestamp)(nil),              // 37: google.protobuf.Timestamp
-	(*Money)(nil),                              // 38: echo.v1.Money
-	(*PageRequest)(nil),                        // 39: echo.v1.PageRequest
-	(*TimeRange)(nil),                          // 40: echo.v1.TimeRange
-	(*PageResponse)(nil),                       // 41: echo.v1.PageResponse
+	(*CreateManualTransactionRequest)(nil),     // 37: echo.v1.CreateManualTransactionRequest
+	(*CreateManualTransactionResponse)(nil),    // 38: echo.v1.CreateManualTransactionResponse
+	(*timestamppb.Timestamp)(nil),              // 39: google.protobuf.Timestamp
+	(*Money)(nil),                              // 40: echo.v1.Money
+	(*PageRequest)(nil),                        // 41: echo.v1.PageRequest
+	(*TimeRange)(nil),                          // 42: echo.v1.TimeRange
+	(*PageResponse)(nil),                       // 43: echo.v1.PageResponse
 }
 var file_echo_v1_finance_proto_depIdxs = []int32{
 	0,  // 0: echo.v1.Account.type:type_name -> echo.v1.AccountType
-	37, // 1: echo.v1.Account.created_at:type_name -> google.protobuf.Timestamp
-	37, // 2: echo.v1.Account.updated_at:type_name -> google.protobuf.Timestamp
+	39, // 1: echo.v1.Account.created_at:type_name -> google.protobuf.Timestamp
+	39, // 2: echo.v1.Account.updated_at:type_name -> google.protobuf.Timestamp
 	0,  // 3: echo.v1.CreateAccountRequest.type:type_name -> echo.v1.AccountType
 	6,  // 4: echo.v1.CreateAccountResponse.account:type_name -> echo.v1.Account
 	6,  // 5: echo.v1.ListAccountsResponse.accounts:type_name -> echo.v1.Account
-	37, // 6: echo.v1.Category.created_at:type_name -> google.protobuf.Timestamp
-	37, // 7: echo.v1.Category.updated_at:type_name -> google.protobuf.Timestamp
+	39, // 6: echo.v1.Category.created_at:type_name -> google.protobuf.Timestamp
+	39, // 7: echo.v1.Category.updated_at:type_name -> google.protobuf.Timestamp
 	11, // 8: echo.v1.CreateCategoryResponse.category:type_name -> echo.v1.Category
 	11, // 9: echo.v1.ListCategoriesResponse.categories:type_name -> echo.v1.Category
-	37, // 10: echo.v1.Transaction.posted_at:type_name -> google.protobuf.Timestamp
-	38, // 11: echo.v1.Transaction.amount:type_name -> echo.v1.Money
+	39, // 10: echo.v1.Transaction.posted_at:type_name -> google.protobuf.Timestamp
+	40, // 11: echo.v1.Transaction.amount:type_name -> echo.v1.Money
 	1,  // 12: echo.v1.Transaction.source:type_name -> echo.v1.TransactionSource
-	37, // 13: echo.v1.Transaction.created_at:type_name -> google.protobuf.Timestamp
-	37, // 14: echo.v1.Transaction.updated_at:type_name -> google.protobuf.Timestamp
+	39, // 13: echo.v1.Transaction.created_at:type_name -> google.protobuf.Timestamp
+	39, // 14: echo.v1.Transaction.updated_at:type_name -> google.protobuf.Timestamp
 	17, // 15: echo.v1.ImportTransactionsCsvRequest.mapping:type_name -> echo.v1.CsvMapping
-	39, // 16: echo.v1.ListTransactionsRequest.page:type_name -> echo.v1.PageRequest
-	40, // 17: echo.v1.ListTransactionsRequest.time_range:type_name -> echo.v1.TimeRange
+	41, // 16: echo.v1.ListTransactionsRequest.page:type_name -> echo.v1.PageRequest
+	42, // 17: echo.v1.ListTransactionsRequest.time_range:type_name -> echo.v1.TimeRange
 	16, // 18: echo.v1.ListTransactionsResponse.transactions:type_name -> echo.v1.Transaction
-	41, // 19: echo.v1.ListTransactionsResponse.page:type_name -> echo.v1.PageResponse
+	43, // 19: echo.v1.ListTransactionsResponse.page:type_name -> echo.v1.PageResponse
 	2,  // 20: echo.v1.Goal.type:type_name -> echo.v1.GoalType
 	3,  // 21: echo.v1.Goal.status:type_name -> echo.v1.GoalStatus
-	38, // 22: echo.v1.Goal.target:type_name -> echo.v1.Money
-	37, // 23: echo.v1.Goal.start_at:type_name -> google.protobuf.Timestamp
-	37, // 24: echo.v1.Goal.end_at:type_name -> google.protobuf.Timestamp
-	37, // 25: echo.v1.Goal.created_at:type_name -> google.protobuf.Timestamp
-	37, // 26: echo.v1.Goal.updated_at:type_name -> google.protobuf.Timestamp
+	40, // 22: echo.v1.Goal.target:type_name -> echo.v1.Money
+	39, // 23: echo.v1.Goal.start_at:type_name -> google.protobuf.Timestamp
+	39, // 24: echo.v1.Goal.end_at:type_name -> google.protobuf.Timestamp
+	39, // 25: echo.v1.Goal.created_at:type_name -> google.protobuf.Timestamp
+	39, // 26: echo.v1.Goal.updated_at:type_name -> google.protobuf.Timestamp
 	2,  // 27: echo.v1.CreateGoalRequest.type:type_name -> echo.v1.GoalType
-	38, // 28: echo.v1.CreateGoalRequest.target:type_name -> echo.v1.Money
-	37, // 29: echo.v1.CreateGoalRequest.start_at:type_name -> google.protobuf.Timestamp
-	37, // 30: echo.v1.CreateGoalRequest.end_at:type_name -> google.protobuf.Timestamp
+	40, // 28: echo.v1.CreateGoalRequest.target:type_name -> echo.v1.Money
+	39, // 29: echo.v1.CreateGoalRequest.start_at:type_name -> google.protobuf.Timestamp
+	39, // 30: echo.v1.CreateGoalRequest.end_at:type_name -> google.protobuf.Timestamp
 	24, // 31: echo.v1.CreateGoalResponse.goal:type_name -> echo.v1.Goal
 	24, // 32: echo.v1.ListGoalsResponse.goals:type_name -> echo.v1.Goal
-	38, // 33: echo.v1.RecurringSubscription.amount:type_name -> echo.v1.Money
+	40, // 33: echo.v1.RecurringSubscription.amount:type_name -> echo.v1.Money
 	5,  // 34: echo.v1.RecurringSubscription.cadence:type_name -> echo.v1.RecurringCadence
 	4,  // 35: echo.v1.RecurringSubscription.status:type_name -> echo.v1.RecurringStatus
-	37, // 36: echo.v1.RecurringSubscription.first_seen_at:type_name -> google.protobuf.Timestamp
-	37, // 37: echo.v1.RecurringSubscription.last_seen_at:type_name -> google.protobuf.Timestamp
-	37, // 38: echo.v1.RecurringSubscription.next_expected_at:type_name -> google.protobuf.Timestamp
-	37, // 39: echo.v1.RecurringSubscription.created_at:type_name -> google.protobuf.Timestamp
-	37, // 40: echo.v1.RecurringSubscription.updated_at:type_name -> google.protobuf.Timestamp
+	39, // 36: echo.v1.RecurringSubscription.first_seen_at:type_name -> google.protobuf.Timestamp
+	39, // 37: echo.v1.RecurringSubscription.last_seen_at:type_name -> google.protobuf.Timestamp
+	39, // 38: echo.v1.RecurringSubscription.next_expected_at:type_name -> google.protobuf.Timestamp
+	39, // 39: echo.v1.RecurringSubscription.created_at:type_name -> google.protobuf.Timestamp
+	39, // 40: echo.v1.RecurringSubscription.updated_at:type_name -> google.protobuf.Timestamp
 	29, // 41: echo.v1.ListRecurringSubscriptionsResponse.subscriptions:type_name -> echo.v1.RecurringSubscription
-	37, // 42: echo.v1.CategoryRule.created_at:type_name -> google.protobuf.Timestamp
-	37, // 43: echo.v1.CategoryRule.updated_at:type_name -> google.protobuf.Timestamp
+	39, // 42: echo.v1.CategoryRule.created_at:type_name -> google.protobuf.Timestamp
+	39, // 43: echo.v1.CategoryRule.updated_at:type_name -> google.protobuf.Timestamp
 	32, // 44: echo.v1.CreateCategoryRuleResponse.rule:type_name -> echo.v1.CategoryRule
 	32, // 45: echo.v1.ListCategoryRulesResponse.rules:type_name -> echo.v1.CategoryRule
-	7,  // 46: echo.v1.FinanceService.CreateAccount:input_type -> echo.v1.CreateAccountRequest
-	9,  // 47: echo.v1.FinanceService.ListAccounts:input_type -> echo.v1.ListAccountsRequest
-	12, // 48: echo.v1.FinanceService.CreateCategory:input_type -> echo.v1.CreateCategoryRequest
-	14, // 49: echo.v1.FinanceService.ListCategories:input_type -> echo.v1.ListCategoriesRequest
-	18, // 50: echo.v1.FinanceService.ImportTransactionsCsv:input_type -> echo.v1.ImportTransactionsCsvRequest
-	20, // 51: echo.v1.FinanceService.ListTransactions:input_type -> echo.v1.ListTransactionsRequest
-	22, // 52: echo.v1.FinanceService.DeleteImportBatch:input_type -> echo.v1.DeleteImportBatchRequest
-	25, // 53: echo.v1.FinanceService.CreateGoal:input_type -> echo.v1.CreateGoalRequest
-	27, // 54: echo.v1.FinanceService.ListGoals:input_type -> echo.v1.ListGoalsRequest
-	30, // 55: echo.v1.FinanceService.ListRecurringSubscriptions:input_type -> echo.v1.ListRecurringSubscriptionsRequest
-	33, // 56: echo.v1.FinanceService.CreateCategoryRule:input_type -> echo.v1.CreateCategoryRuleRequest
-	35, // 57: echo.v1.FinanceService.ListCategoryRules:input_type -> echo.v1.ListCategoryRulesRequest
-	8,  // 58: echo.v1.FinanceService.CreateAccount:output_type -> echo.v1.CreateAccountResponse
-	10, // 59: echo.v1.FinanceService.ListAccounts:output_type -> echo.v1.ListAccountsResponse
-	13, // 60: echo.v1.FinanceService.CreateCategory:output_type -> echo.v1.CreateCategoryResponse
-	15, // 61: echo.v1.FinanceService.ListCategories:output_type -> echo.v1.ListCategoriesResponse
-	19, // 62: echo.v1.FinanceService.ImportTransactionsCsv:output_type -> echo.v1.ImportTransactionsCsvResponse
-	21, // 63: echo.v1.FinanceService.ListTransactions:output_type -> echo.v1.ListTransactionsResponse
-	23, // 64: echo.v1.FinanceService.DeleteImportBatch:output_type -> echo.v1.DeleteImportBatchResponse
-	26, // 65: echo.v1.FinanceService.CreateGoal:output_type -> echo.v1.CreateGoalResponse
-	28, // 66: echo.v1.FinanceService.ListGoals:output_type -> echo.v1.ListGoalsResponse
-	31, // 67: echo.v1.FinanceService.ListRecurringSubscriptions:output_type -> echo.v1.ListRecurringSubscriptionsResponse
-	34, // 68: echo.v1.FinanceService.CreateCategoryRule:output_type -> echo.v1.CreateCategoryRuleResponse
-	36, // 69: echo.v1.FinanceService.ListCategoryRules:output_type -> echo.v1.ListCategoryRulesResponse
-	58, // [58:70] is the sub-list for method output_type
-	46, // [46:58] is the sub-list for method input_type
-	46, // [46:46] is the sub-list for extension type_name
-	46, // [46:46] is the sub-list for extension extendee
-	0,  // [0:46] is the sub-list for field type_name
+	39, // 46: echo.v1.CreateManualTransactionRequest.date:type_name -> google.protobuf.Timestamp
+	16, // 47: echo.v1.CreateManualTransactionResponse.transaction:type_name -> echo.v1.Transaction
+	7,  // 48: echo.v1.FinanceService.CreateAccount:input_type -> echo.v1.CreateAccountRequest
+	9,  // 49: echo.v1.FinanceService.ListAccounts:input_type -> echo.v1.ListAccountsRequest
+	12, // 50: echo.v1.FinanceService.CreateCategory:input_type -> echo.v1.CreateCategoryRequest
+	14, // 51: echo.v1.FinanceService.ListCategories:input_type -> echo.v1.ListCategoriesRequest
+	18, // 52: echo.v1.FinanceService.ImportTransactionsCsv:input_type -> echo.v1.ImportTransactionsCsvRequest
+	20, // 53: echo.v1.FinanceService.ListTransactions:input_type -> echo.v1.ListTransactionsRequest
+	22, // 54: echo.v1.FinanceService.DeleteImportBatch:input_type -> echo.v1.DeleteImportBatchRequest
+	37, // 55: echo.v1.FinanceService.CreateManualTransaction:input_type -> echo.v1.CreateManualTransactionRequest
+	25, // 56: echo.v1.FinanceService.CreateGoal:input_type -> echo.v1.CreateGoalRequest
+	27, // 57: echo.v1.FinanceService.ListGoals:input_type -> echo.v1.ListGoalsRequest
+	30, // 58: echo.v1.FinanceService.ListRecurringSubscriptions:input_type -> echo.v1.ListRecurringSubscriptionsRequest
+	33, // 59: echo.v1.FinanceService.CreateCategoryRule:input_type -> echo.v1.CreateCategoryRuleRequest
+	35, // 60: echo.v1.FinanceService.ListCategoryRules:input_type -> echo.v1.ListCategoryRulesRequest
+	8,  // 61: echo.v1.FinanceService.CreateAccount:output_type -> echo.v1.CreateAccountResponse
+	10, // 62: echo.v1.FinanceService.ListAccounts:output_type -> echo.v1.ListAccountsResponse
+	13, // 63: echo.v1.FinanceService.CreateCategory:output_type -> echo.v1.CreateCategoryResponse
+	15, // 64: echo.v1.FinanceService.ListCategories:output_type -> echo.v1.ListCategoriesResponse
+	19, // 65: echo.v1.FinanceService.ImportTransactionsCsv:output_type -> echo.v1.ImportTransactionsCsvResponse
+	21, // 66: echo.v1.FinanceService.ListTransactions:output_type -> echo.v1.ListTransactionsResponse
+	23, // 67: echo.v1.FinanceService.DeleteImportBatch:output_type -> echo.v1.DeleteImportBatchResponse
+	38, // 68: echo.v1.FinanceService.CreateManualTransaction:output_type -> echo.v1.CreateManualTransactionResponse
+	26, // 69: echo.v1.FinanceService.CreateGoal:output_type -> echo.v1.CreateGoalResponse
+	28, // 70: echo.v1.FinanceService.ListGoals:output_type -> echo.v1.ListGoalsResponse
+	31, // 71: echo.v1.FinanceService.ListRecurringSubscriptions:output_type -> echo.v1.ListRecurringSubscriptionsResponse
+	34, // 72: echo.v1.FinanceService.CreateCategoryRule:output_type -> echo.v1.CreateCategoryRuleResponse
+	36, // 73: echo.v1.FinanceService.ListCategoryRules:output_type -> echo.v1.ListCategoryRulesResponse
+	61, // [61:74] is the sub-list for method output_type
+	48, // [48:61] is the sub-list for method input_type
+	48, // [48:48] is the sub-list for extension type_name
+	48, // [48:48] is the sub-list for extension extendee
+	0,  // [0:48] is the sub-list for field type_name
 }
 
 func init() { file_echo_v1_finance_proto_init() }
@@ -2864,13 +3059,15 @@ func file_echo_v1_finance_proto_init() {
 	file_echo_v1_finance_proto_msgTypes[14].OneofWrappers = []any{}
 	file_echo_v1_finance_proto_msgTypes[26].OneofWrappers = []any{}
 	file_echo_v1_finance_proto_msgTypes[27].OneofWrappers = []any{}
+	file_echo_v1_finance_proto_msgTypes[31].OneofWrappers = []any{}
+	file_echo_v1_finance_proto_msgTypes[32].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_echo_v1_finance_proto_rawDesc), len(file_echo_v1_finance_proto_rawDesc)),
 			NumEnums:      6,
-			NumMessages:   31,
+			NumMessages:   33,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

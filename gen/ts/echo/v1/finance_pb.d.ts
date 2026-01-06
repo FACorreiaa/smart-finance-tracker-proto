@@ -985,6 +985,93 @@ export declare type ListCategoryRulesResponse = Message<"echo.v1.ListCategoryRul
 export declare const ListCategoryRulesResponseSchema: GenMessage<ListCategoryRulesResponse>;
 
 /**
+ * Quick Capture: Manual transaction entry from natural language
+ *
+ * @generated from message echo.v1.CreateManualTransactionRequest
+ */
+export declare type CreateManualTransactionRequest = Message<"echo.v1.CreateManualTransactionRequest"> & {
+  /**
+   * Natural language input, e.g. "Coffee 1$" or "Dinner €25"
+   *
+   * @generated from field: string raw_text = 1;
+   */
+  rawText: string;
+
+  /**
+   * Optional overrides for parsed values
+   *
+   * @generated from field: optional int64 amount_minor = 2;
+   */
+  amountMinor?: bigint;
+
+  /**
+   * @generated from field: optional string category_id = 3;
+   */
+  categoryId?: string;
+
+  /**
+   * @generated from field: optional string description = 4;
+   */
+  description?: string;
+
+  /**
+   * @generated from field: optional google.protobuf.Timestamp date = 5;
+   */
+  date?: Timestamp;
+
+  /**
+   * @generated from field: optional string account_id = 6;
+   */
+  accountId?: string;
+};
+
+/**
+ * Describes the message echo.v1.CreateManualTransactionRequest.
+ * Use `create(CreateManualTransactionRequestSchema)` to create a new message.
+ */
+export declare const CreateManualTransactionRequestSchema: GenMessage<CreateManualTransactionRequest>;
+
+/**
+ * @generated from message echo.v1.CreateManualTransactionResponse
+ */
+export declare type CreateManualTransactionResponse = Message<"echo.v1.CreateManualTransactionResponse"> & {
+  /**
+   * @generated from field: echo.v1.Transaction transaction = 1;
+   */
+  transaction?: Transaction;
+
+  /**
+   * Parsed interpretation feedback
+   *
+   * @generated from field: string parsed_description = 2;
+   */
+  parsedDescription: string;
+
+  /**
+   * @generated from field: int64 parsed_amount_minor = 3;
+   */
+  parsedAmountMinor: bigint;
+
+  /**
+   * @generated from field: optional string suggested_category_id = 4;
+   */
+  suggestedCategoryId?: string;
+
+  /**
+   * Budget impact feedback: "This puts you at 95% of your Fun budget"
+   *
+   * @generated from field: optional string budget_impact = 5;
+   */
+  budgetImpact?: string;
+};
+
+/**
+ * Describes the message echo.v1.CreateManualTransactionResponse.
+ * Use `create(CreateManualTransactionResponseSchema)` to create a new message.
+ */
+export declare const CreateManualTransactionResponseSchema: GenMessage<CreateManualTransactionResponse>;
+
+/**
  * @generated from enum echo.v1.AccountType
  */
 export enum AccountType {
@@ -1258,6 +1345,16 @@ export declare const FinanceService: GenService<{
     methodKind: "unary";
     input: typeof DeleteImportBatchRequestSchema;
     output: typeof DeleteImportBatchResponseSchema;
+  },
+  /**
+   * Quick Capture: Create a transaction from natural language input
+   *
+   * @generated from rpc echo.v1.FinanceService.CreateManualTransaction
+   */
+  createManualTransaction: {
+    methodKind: "unary";
+    input: typeof CreateManualTransactionRequestSchema;
+    output: typeof CreateManualTransactionResponseSchema;
   },
   /**
    * @generated from rpc echo.v1.FinanceService.CreateGoal

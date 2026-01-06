@@ -18,6 +18,9 @@ service FinanceService {
   rpc ListTransactions(ListTransactionsRequest) returns (ListTransactionsResponse);
   rpc DeleteImportBatch(DeleteImportBatchRequest) returns (DeleteImportBatchResponse);
 
+  // Quick Capture: Create a transaction from natural language input
+  rpc CreateManualTransaction(CreateManualTransactionRequest) returns (CreateManualTransactionResponse);
+
   rpc CreateGoal(CreateGoalRequest) returns (CreateGoalResponse);
   rpc ListGoals(ListGoalsRequest) returns (ListGoalsResponse);
 
@@ -312,4 +315,29 @@ message ListCategoryRulesRequest {}
 
 message ListCategoryRulesResponse {
   repeated CategoryRule rules = 1 [(buf.validate.field).repeated = { max_items: 1000 }];
+}
+
+// Quick Capture: Manual transaction entry from natural language
+message CreateManualTransactionRequest {
+  // Natural language input, e.g. "Coffee 1$" or "Dinner €25"
+  string raw_text = 1 [(buf.validate.field).string = { min_len: 1 max_len: 512 }];
+  
+  // Optional overrides for parsed values
+  optional int64 amount_minor = 2 [(buf.validate.field).int64 = { gte: -900000000000000 lte: 900000000000000 }];
+  optional string category_id = 3 [(buf.validate.field).string = { uuid: true }];
+  optional string description = 4 [(buf.validate.field).string = { max_len: 512 }];
+  optional google.protobuf.Timestamp date = 5;
+  optional string account_id = 6 [(buf.validate.field).string = { uuid: true }];
+}
+
+message CreateManualTransactionResponse {
+  Transaction transaction = 1 [(buf.validate.field).required = true];
+  
+  // Parsed interpretation feedback
+  string parsed_description = 2;
+  int64 parsed_amount_minor = 3;
+  optional string suggested_category_id = 4;
+  
+  // Budget impact feedback: "This puts you at 95% of your Fun budget"
+  optional string budget_impact = 5;
 }
