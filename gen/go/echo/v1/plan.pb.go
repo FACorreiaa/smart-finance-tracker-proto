@@ -2058,7 +2058,8 @@ type ExcelSheetAnalysis struct {
 	RowCount           int32                  `protobuf:"varint,3,opt,name=row_count,json=rowCount,proto3" json:"row_count,omitempty"`
 	FormulaCount       int32                  `protobuf:"varint,4,opt,name=formula_count,json=formulaCount,proto3" json:"formula_count,omitempty"`
 	DetectedCategories []string               `protobuf:"bytes,5,rep,name=detected_categories,json=detectedCategories,proto3" json:"detected_categories,omitempty"`
-	MonthColumns       []string               `protobuf:"bytes,6,rep,name=month_columns,json=monthColumns,proto3" json:"month_columns,omitempty"` // e.g., ["jan-26", "feb-26"]
+	MonthColumns       []string               `protobuf:"bytes,6,rep,name=month_columns,json=monthColumns,proto3" json:"month_columns,omitempty"`          // e.g., ["jan-26", "feb-26"]
+	DetectedMapping    *DetectedColumnMapping `protobuf:"bytes,7,opt,name=detected_mapping,json=detectedMapping,proto3" json:"detected_mapping,omitempty"` // Auto-detected column layout
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -2135,6 +2136,90 @@ func (x *ExcelSheetAnalysis) GetMonthColumns() []string {
 	return nil
 }
 
+func (x *ExcelSheetAnalysis) GetDetectedMapping() *DetectedColumnMapping {
+	if x != nil {
+		return x.DetectedMapping
+	}
+	return nil
+}
+
+// DetectedColumnMapping contains auto-detected column positions for import
+type DetectedColumnMapping struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	CategoryColumn   string                 `protobuf:"bytes,1,opt,name=category_column,json=categoryColumn,proto3" json:"category_column,omitempty"`       // Detected column for categories (e.g., "A")
+	ValueColumn      string                 `protobuf:"bytes,2,opt,name=value_column,json=valueColumn,proto3" json:"value_column,omitempty"`                // Detected column for values (e.g., "C")
+	HeaderRow        int32                  `protobuf:"varint,3,opt,name=header_row,json=headerRow,proto3" json:"header_row,omitempty"`                     // Detected header row (1-indexed)
+	PercentageColumn string                 `protobuf:"bytes,4,opt,name=percentage_column,json=percentageColumn,proto3" json:"percentage_column,omitempty"` // Detected column for percentages (optional)
+	Confidence       float64                `protobuf:"fixed64,5,opt,name=confidence,proto3" json:"confidence,omitempty"`                                   // Detection confidence 0-1 (0.9+ = high confidence)
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *DetectedColumnMapping) Reset() {
+	*x = DetectedColumnMapping{}
+	mi := &file_echo_v1_plan_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DetectedColumnMapping) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DetectedColumnMapping) ProtoMessage() {}
+
+func (x *DetectedColumnMapping) ProtoReflect() protoreflect.Message {
+	mi := &file_echo_v1_plan_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DetectedColumnMapping.ProtoReflect.Descriptor instead.
+func (*DetectedColumnMapping) Descriptor() ([]byte, []int) {
+	return file_echo_v1_plan_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *DetectedColumnMapping) GetCategoryColumn() string {
+	if x != nil {
+		return x.CategoryColumn
+	}
+	return ""
+}
+
+func (x *DetectedColumnMapping) GetValueColumn() string {
+	if x != nil {
+		return x.ValueColumn
+	}
+	return ""
+}
+
+func (x *DetectedColumnMapping) GetHeaderRow() int32 {
+	if x != nil {
+		return x.HeaderRow
+	}
+	return 0
+}
+
+func (x *DetectedColumnMapping) GetPercentageColumn() string {
+	if x != nil {
+		return x.PercentageColumn
+	}
+	return ""
+}
+
+func (x *DetectedColumnMapping) GetConfidence() float64 {
+	if x != nil {
+		return x.Confidence
+	}
+	return 0
+}
+
 // ComputePlanActuals request - calculates actual spending from transactions
 type ComputePlanActualsRequest struct {
 	state  protoimpl.MessageState `protogen:"open.v1"`
@@ -2150,7 +2235,7 @@ type ComputePlanActualsRequest struct {
 
 func (x *ComputePlanActualsRequest) Reset() {
 	*x = ComputePlanActualsRequest{}
-	mi := &file_echo_v1_plan_proto_msgTypes[29]
+	mi := &file_echo_v1_plan_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2162,7 +2247,7 @@ func (x *ComputePlanActualsRequest) String() string {
 func (*ComputePlanActualsRequest) ProtoMessage() {}
 
 func (x *ComputePlanActualsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_echo_v1_plan_proto_msgTypes[29]
+	mi := &file_echo_v1_plan_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2175,7 +2260,7 @@ func (x *ComputePlanActualsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ComputePlanActualsRequest.ProtoReflect.Descriptor instead.
 func (*ComputePlanActualsRequest) Descriptor() ([]byte, []int) {
-	return file_echo_v1_plan_proto_rawDescGZIP(), []int{29}
+	return file_echo_v1_plan_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *ComputePlanActualsRequest) GetPlanId() string {
@@ -2221,7 +2306,7 @@ type ComputePlanActualsResponse struct {
 
 func (x *ComputePlanActualsResponse) Reset() {
 	*x = ComputePlanActualsResponse{}
-	mi := &file_echo_v1_plan_proto_msgTypes[30]
+	mi := &file_echo_v1_plan_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2233,7 +2318,7 @@ func (x *ComputePlanActualsResponse) String() string {
 func (*ComputePlanActualsResponse) ProtoMessage() {}
 
 func (x *ComputePlanActualsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_echo_v1_plan_proto_msgTypes[30]
+	mi := &file_echo_v1_plan_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2246,7 +2331,7 @@ func (x *ComputePlanActualsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ComputePlanActualsResponse.ProtoReflect.Descriptor instead.
 func (*ComputePlanActualsResponse) Descriptor() ([]byte, []int) {
-	return file_echo_v1_plan_proto_rawDescGZIP(), []int{30}
+	return file_echo_v1_plan_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *ComputePlanActualsResponse) GetPlan() *UserPlan {
@@ -2288,7 +2373,7 @@ type UnmatchedItem struct {
 
 func (x *UnmatchedItem) Reset() {
 	*x = UnmatchedItem{}
-	mi := &file_echo_v1_plan_proto_msgTypes[31]
+	mi := &file_echo_v1_plan_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2300,7 +2385,7 @@ func (x *UnmatchedItem) String() string {
 func (*UnmatchedItem) ProtoMessage() {}
 
 func (x *UnmatchedItem) ProtoReflect() protoreflect.Message {
-	mi := &file_echo_v1_plan_proto_msgTypes[31]
+	mi := &file_echo_v1_plan_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2313,7 +2398,7 @@ func (x *UnmatchedItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnmatchedItem.ProtoReflect.Descriptor instead.
 func (*UnmatchedItem) Descriptor() ([]byte, []int) {
-	return file_echo_v1_plan_proto_rawDescGZIP(), []int{31}
+	return file_echo_v1_plan_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *UnmatchedItem) GetItemId() string {
@@ -2511,14 +2596,24 @@ const file_echo_v1_plan_proto_rawDesc = "" +
 	"\afile_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x06fileId\"{\n" +
 	"\x1bAnalyzeExcelForPlanResponse\x123\n" +
 	"\x06sheets\x18\x01 \x03(\v2\x1b.echo.v1.ExcelSheetAnalysisR\x06sheets\x12'\n" +
-	"\x0fsuggested_sheet\x18\x02 \x01(\tR\x0esuggestedSheet\"\xe6\x01\n" +
+	"\x0fsuggested_sheet\x18\x02 \x01(\tR\x0esuggestedSheet\"\xb1\x02\n" +
 	"\x12ExcelSheetAnalysis\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12$\n" +
 	"\x0eis_living_plan\x18\x02 \x01(\bR\fisLivingPlan\x12\x1b\n" +
 	"\trow_count\x18\x03 \x01(\x05R\browCount\x12#\n" +
 	"\rformula_count\x18\x04 \x01(\x05R\fformulaCount\x12/\n" +
 	"\x13detected_categories\x18\x05 \x03(\tR\x12detectedCategories\x12#\n" +
-	"\rmonth_columns\x18\x06 \x03(\tR\fmonthColumns\"\xca\x01\n" +
+	"\rmonth_columns\x18\x06 \x03(\tR\fmonthColumns\x12I\n" +
+	"\x10detected_mapping\x18\a \x01(\v2\x1e.echo.v1.DetectedColumnMappingR\x0fdetectedMapping\"\xcf\x01\n" +
+	"\x15DetectedColumnMapping\x12'\n" +
+	"\x0fcategory_column\x18\x01 \x01(\tR\x0ecategoryColumn\x12!\n" +
+	"\fvalue_column\x18\x02 \x01(\tR\vvalueColumn\x12\x1d\n" +
+	"\n" +
+	"header_row\x18\x03 \x01(\x05R\theaderRow\x12+\n" +
+	"\x11percentage_column\x18\x04 \x01(\tR\x10percentageColumn\x12\x1e\n" +
+	"\n" +
+	"confidence\x18\x05 \x01(\x01R\n" +
+	"confidence\"\xca\x01\n" +
 	"\x19ComputePlanActualsRequest\x12!\n" +
 	"\aplan_id\x18\x01 \x01(\tB\b\xbaH\x05r\x03\xb0\x01\x01R\x06planId\x129\n" +
 	"\n" +
@@ -2587,7 +2682,7 @@ func file_echo_v1_plan_proto_rawDescGZIP() []byte {
 }
 
 var file_echo_v1_plan_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_echo_v1_plan_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
+var file_echo_v1_plan_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
 var file_echo_v1_plan_proto_goTypes = []any{
 	(PlanSourceType)(0),                 // 0: echo.v1.PlanSourceType
 	(PlanStatus)(0),                     // 1: echo.v1.PlanStatus
@@ -2622,49 +2717,50 @@ var file_echo_v1_plan_proto_goTypes = []any{
 	(*AnalyzeExcelForPlanRequest)(nil),  // 30: echo.v1.AnalyzeExcelForPlanRequest
 	(*AnalyzeExcelForPlanResponse)(nil), // 31: echo.v1.AnalyzeExcelForPlanResponse
 	(*ExcelSheetAnalysis)(nil),          // 32: echo.v1.ExcelSheetAnalysis
-	(*ComputePlanActualsRequest)(nil),   // 33: echo.v1.ComputePlanActualsRequest
-	(*ComputePlanActualsResponse)(nil),  // 34: echo.v1.ComputePlanActualsResponse
-	(*UnmatchedItem)(nil),               // 35: echo.v1.UnmatchedItem
-	nil,                                 // 36: echo.v1.PlanCategoryGroup.LabelsEntry
-	nil,                                 // 37: echo.v1.PlanCategory.LabelsEntry
-	nil,                                 // 38: echo.v1.PlanItem.LabelsEntry
-	nil,                                 // 39: echo.v1.PlanConfig.FormulaMappingsEntry
-	nil,                                 // 40: echo.v1.CreateCategoryGroupInput.LabelsEntry
-	nil,                                 // 41: echo.v1.CreateCategoryInput.LabelsEntry
-	nil,                                 // 42: echo.v1.CreateItemInput.LabelsEntry
-	(*Money)(nil),                       // 43: echo.v1.Money
-	(*timestamppb.Timestamp)(nil),       // 44: google.protobuf.Timestamp
+	(*DetectedColumnMapping)(nil),       // 33: echo.v1.DetectedColumnMapping
+	(*ComputePlanActualsRequest)(nil),   // 34: echo.v1.ComputePlanActualsRequest
+	(*ComputePlanActualsResponse)(nil),  // 35: echo.v1.ComputePlanActualsResponse
+	(*UnmatchedItem)(nil),               // 36: echo.v1.UnmatchedItem
+	nil,                                 // 37: echo.v1.PlanCategoryGroup.LabelsEntry
+	nil,                                 // 38: echo.v1.PlanCategory.LabelsEntry
+	nil,                                 // 39: echo.v1.PlanItem.LabelsEntry
+	nil,                                 // 40: echo.v1.PlanConfig.FormulaMappingsEntry
+	nil,                                 // 41: echo.v1.CreateCategoryGroupInput.LabelsEntry
+	nil,                                 // 42: echo.v1.CreateCategoryInput.LabelsEntry
+	nil,                                 // 43: echo.v1.CreateItemInput.LabelsEntry
+	(*Money)(nil),                       // 44: echo.v1.Money
+	(*timestamppb.Timestamp)(nil),       // 45: google.protobuf.Timestamp
 }
 var file_echo_v1_plan_proto_depIdxs = []int32{
 	1,  // 0: echo.v1.UserPlan.status:type_name -> echo.v1.PlanStatus
 	0,  // 1: echo.v1.UserPlan.source_type:type_name -> echo.v1.PlanSourceType
-	43, // 2: echo.v1.UserPlan.total_income:type_name -> echo.v1.Money
-	43, // 3: echo.v1.UserPlan.total_expenses:type_name -> echo.v1.Money
-	43, // 4: echo.v1.UserPlan.surplus:type_name -> echo.v1.Money
+	44, // 2: echo.v1.UserPlan.total_income:type_name -> echo.v1.Money
+	44, // 3: echo.v1.UserPlan.total_expenses:type_name -> echo.v1.Money
+	44, // 4: echo.v1.UserPlan.surplus:type_name -> echo.v1.Money
 	5,  // 5: echo.v1.UserPlan.category_groups:type_name -> echo.v1.PlanCategoryGroup
 	8,  // 6: echo.v1.UserPlan.config:type_name -> echo.v1.PlanConfig
-	44, // 7: echo.v1.UserPlan.created_at:type_name -> google.protobuf.Timestamp
-	44, // 8: echo.v1.UserPlan.updated_at:type_name -> google.protobuf.Timestamp
+	45, // 7: echo.v1.UserPlan.created_at:type_name -> google.protobuf.Timestamp
+	45, // 8: echo.v1.UserPlan.updated_at:type_name -> google.protobuf.Timestamp
 	6,  // 9: echo.v1.PlanCategoryGroup.categories:type_name -> echo.v1.PlanCategory
-	36, // 10: echo.v1.PlanCategoryGroup.labels:type_name -> echo.v1.PlanCategoryGroup.LabelsEntry
+	37, // 10: echo.v1.PlanCategoryGroup.labels:type_name -> echo.v1.PlanCategoryGroup.LabelsEntry
 	7,  // 11: echo.v1.PlanCategory.items:type_name -> echo.v1.PlanItem
-	43, // 12: echo.v1.PlanCategory.budgeted_total:type_name -> echo.v1.Money
-	43, // 13: echo.v1.PlanCategory.actual_total:type_name -> echo.v1.Money
-	37, // 14: echo.v1.PlanCategory.labels:type_name -> echo.v1.PlanCategory.LabelsEntry
-	43, // 15: echo.v1.PlanItem.budgeted:type_name -> echo.v1.Money
-	43, // 16: echo.v1.PlanItem.actual:type_name -> echo.v1.Money
+	44, // 12: echo.v1.PlanCategory.budgeted_total:type_name -> echo.v1.Money
+	44, // 13: echo.v1.PlanCategory.actual_total:type_name -> echo.v1.Money
+	38, // 14: echo.v1.PlanCategory.labels:type_name -> echo.v1.PlanCategory.LabelsEntry
+	44, // 15: echo.v1.PlanItem.budgeted:type_name -> echo.v1.Money
+	44, // 16: echo.v1.PlanItem.actual:type_name -> echo.v1.Money
 	2,  // 17: echo.v1.PlanItem.widget_type:type_name -> echo.v1.WidgetType
 	3,  // 18: echo.v1.PlanItem.field_type:type_name -> echo.v1.FieldType
-	38, // 19: echo.v1.PlanItem.labels:type_name -> echo.v1.PlanItem.LabelsEntry
-	39, // 20: echo.v1.PlanConfig.formula_mappings:type_name -> echo.v1.PlanConfig.FormulaMappingsEntry
+	39, // 19: echo.v1.PlanItem.labels:type_name -> echo.v1.PlanItem.LabelsEntry
+	40, // 20: echo.v1.PlanConfig.formula_mappings:type_name -> echo.v1.PlanConfig.FormulaMappingsEntry
 	10, // 21: echo.v1.CreatePlanRequest.category_groups:type_name -> echo.v1.CreateCategoryGroupInput
 	11, // 22: echo.v1.CreateCategoryGroupInput.categories:type_name -> echo.v1.CreateCategoryInput
-	40, // 23: echo.v1.CreateCategoryGroupInput.labels:type_name -> echo.v1.CreateCategoryGroupInput.LabelsEntry
+	41, // 23: echo.v1.CreateCategoryGroupInput.labels:type_name -> echo.v1.CreateCategoryGroupInput.LabelsEntry
 	12, // 24: echo.v1.CreateCategoryInput.items:type_name -> echo.v1.CreateItemInput
-	41, // 25: echo.v1.CreateCategoryInput.labels:type_name -> echo.v1.CreateCategoryInput.LabelsEntry
+	42, // 25: echo.v1.CreateCategoryInput.labels:type_name -> echo.v1.CreateCategoryInput.LabelsEntry
 	2,  // 26: echo.v1.CreateItemInput.widget_type:type_name -> echo.v1.WidgetType
 	3,  // 27: echo.v1.CreateItemInput.field_type:type_name -> echo.v1.FieldType
-	42, // 28: echo.v1.CreateItemInput.labels:type_name -> echo.v1.CreateItemInput.LabelsEntry
+	43, // 28: echo.v1.CreateItemInput.labels:type_name -> echo.v1.CreateItemInput.LabelsEntry
 	4,  // 29: echo.v1.CreatePlanResponse.plan:type_name -> echo.v1.UserPlan
 	4,  // 30: echo.v1.GetPlanResponse.plan:type_name -> echo.v1.UserPlan
 	1,  // 31: echo.v1.ListPlansRequest.status_filter:type_name -> echo.v1.PlanStatus
@@ -2676,35 +2772,36 @@ var file_echo_v1_plan_proto_depIdxs = []int32{
 	28, // 37: echo.v1.ImportPlanFromExcelRequest.mapping:type_name -> echo.v1.ExcelMappingConfig
 	4,  // 38: echo.v1.ImportPlanFromExcelResponse.plan:type_name -> echo.v1.UserPlan
 	32, // 39: echo.v1.AnalyzeExcelForPlanResponse.sheets:type_name -> echo.v1.ExcelSheetAnalysis
-	44, // 40: echo.v1.ComputePlanActualsRequest.start_date:type_name -> google.protobuf.Timestamp
-	44, // 41: echo.v1.ComputePlanActualsRequest.end_date:type_name -> google.protobuf.Timestamp
-	4,  // 42: echo.v1.ComputePlanActualsResponse.plan:type_name -> echo.v1.UserPlan
-	35, // 43: echo.v1.ComputePlanActualsResponse.unmatched_items:type_name -> echo.v1.UnmatchedItem
-	9,  // 44: echo.v1.PlanService.CreatePlan:input_type -> echo.v1.CreatePlanRequest
-	14, // 45: echo.v1.PlanService.GetPlan:input_type -> echo.v1.GetPlanRequest
-	16, // 46: echo.v1.PlanService.ListPlans:input_type -> echo.v1.ListPlansRequest
-	18, // 47: echo.v1.PlanService.UpdatePlan:input_type -> echo.v1.UpdatePlanRequest
-	21, // 48: echo.v1.PlanService.DeletePlan:input_type -> echo.v1.DeletePlanRequest
-	23, // 49: echo.v1.PlanService.SetActivePlan:input_type -> echo.v1.SetActivePlanRequest
-	25, // 50: echo.v1.PlanService.DuplicatePlan:input_type -> echo.v1.DuplicatePlanRequest
-	27, // 51: echo.v1.PlanService.ImportPlanFromExcel:input_type -> echo.v1.ImportPlanFromExcelRequest
-	30, // 52: echo.v1.PlanService.AnalyzeExcelForPlan:input_type -> echo.v1.AnalyzeExcelForPlanRequest
-	33, // 53: echo.v1.PlanService.ComputePlanActuals:input_type -> echo.v1.ComputePlanActualsRequest
-	13, // 54: echo.v1.PlanService.CreatePlan:output_type -> echo.v1.CreatePlanResponse
-	15, // 55: echo.v1.PlanService.GetPlan:output_type -> echo.v1.GetPlanResponse
-	17, // 56: echo.v1.PlanService.ListPlans:output_type -> echo.v1.ListPlansResponse
-	20, // 57: echo.v1.PlanService.UpdatePlan:output_type -> echo.v1.UpdatePlanResponse
-	22, // 58: echo.v1.PlanService.DeletePlan:output_type -> echo.v1.DeletePlanResponse
-	24, // 59: echo.v1.PlanService.SetActivePlan:output_type -> echo.v1.SetActivePlanResponse
-	26, // 60: echo.v1.PlanService.DuplicatePlan:output_type -> echo.v1.DuplicatePlanResponse
-	29, // 61: echo.v1.PlanService.ImportPlanFromExcel:output_type -> echo.v1.ImportPlanFromExcelResponse
-	31, // 62: echo.v1.PlanService.AnalyzeExcelForPlan:output_type -> echo.v1.AnalyzeExcelForPlanResponse
-	34, // 63: echo.v1.PlanService.ComputePlanActuals:output_type -> echo.v1.ComputePlanActualsResponse
-	54, // [54:64] is the sub-list for method output_type
-	44, // [44:54] is the sub-list for method input_type
-	44, // [44:44] is the sub-list for extension type_name
-	44, // [44:44] is the sub-list for extension extendee
-	0,  // [0:44] is the sub-list for field type_name
+	33, // 40: echo.v1.ExcelSheetAnalysis.detected_mapping:type_name -> echo.v1.DetectedColumnMapping
+	45, // 41: echo.v1.ComputePlanActualsRequest.start_date:type_name -> google.protobuf.Timestamp
+	45, // 42: echo.v1.ComputePlanActualsRequest.end_date:type_name -> google.protobuf.Timestamp
+	4,  // 43: echo.v1.ComputePlanActualsResponse.plan:type_name -> echo.v1.UserPlan
+	36, // 44: echo.v1.ComputePlanActualsResponse.unmatched_items:type_name -> echo.v1.UnmatchedItem
+	9,  // 45: echo.v1.PlanService.CreatePlan:input_type -> echo.v1.CreatePlanRequest
+	14, // 46: echo.v1.PlanService.GetPlan:input_type -> echo.v1.GetPlanRequest
+	16, // 47: echo.v1.PlanService.ListPlans:input_type -> echo.v1.ListPlansRequest
+	18, // 48: echo.v1.PlanService.UpdatePlan:input_type -> echo.v1.UpdatePlanRequest
+	21, // 49: echo.v1.PlanService.DeletePlan:input_type -> echo.v1.DeletePlanRequest
+	23, // 50: echo.v1.PlanService.SetActivePlan:input_type -> echo.v1.SetActivePlanRequest
+	25, // 51: echo.v1.PlanService.DuplicatePlan:input_type -> echo.v1.DuplicatePlanRequest
+	27, // 52: echo.v1.PlanService.ImportPlanFromExcel:input_type -> echo.v1.ImportPlanFromExcelRequest
+	30, // 53: echo.v1.PlanService.AnalyzeExcelForPlan:input_type -> echo.v1.AnalyzeExcelForPlanRequest
+	34, // 54: echo.v1.PlanService.ComputePlanActuals:input_type -> echo.v1.ComputePlanActualsRequest
+	13, // 55: echo.v1.PlanService.CreatePlan:output_type -> echo.v1.CreatePlanResponse
+	15, // 56: echo.v1.PlanService.GetPlan:output_type -> echo.v1.GetPlanResponse
+	17, // 57: echo.v1.PlanService.ListPlans:output_type -> echo.v1.ListPlansResponse
+	20, // 58: echo.v1.PlanService.UpdatePlan:output_type -> echo.v1.UpdatePlanResponse
+	22, // 59: echo.v1.PlanService.DeletePlan:output_type -> echo.v1.DeletePlanResponse
+	24, // 60: echo.v1.PlanService.SetActivePlan:output_type -> echo.v1.SetActivePlanResponse
+	26, // 61: echo.v1.PlanService.DuplicatePlan:output_type -> echo.v1.DuplicatePlanResponse
+	29, // 62: echo.v1.PlanService.ImportPlanFromExcel:output_type -> echo.v1.ImportPlanFromExcelResponse
+	31, // 63: echo.v1.PlanService.AnalyzeExcelForPlan:output_type -> echo.v1.AnalyzeExcelForPlanResponse
+	35, // 64: echo.v1.PlanService.ComputePlanActuals:output_type -> echo.v1.ComputePlanActualsResponse
+	55, // [55:65] is the sub-list for method output_type
+	45, // [45:55] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_echo_v1_plan_proto_init() }
@@ -2720,7 +2817,7 @@ func file_echo_v1_plan_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_echo_v1_plan_proto_rawDesc), len(file_echo_v1_plan_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   39,
+			NumMessages:   40,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

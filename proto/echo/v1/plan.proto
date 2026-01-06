@@ -299,6 +299,16 @@ message ExcelSheetAnalysis {
   int32 formula_count = 4;
   repeated string detected_categories = 5;
   repeated string month_columns = 6;  // e.g., ["jan-26", "feb-26"]
+  DetectedColumnMapping detected_mapping = 7; // Auto-detected column layout
+}
+
+// DetectedColumnMapping contains auto-detected column positions for import
+message DetectedColumnMapping {
+  string category_column = 1;   // Detected column for categories (e.g., "A")
+  string value_column = 2;      // Detected column for values (e.g., "C")
+  int32 header_row = 3;         // Detected header row (1-indexed)
+  string percentage_column = 4; // Detected column for percentages (optional)
+  double confidence = 5;        // Detection confidence 0-1 (0.9+ = high confidence)
 }
 
 // ComputePlanActuals request - calculates actual spending from transactions

@@ -1136,6 +1136,10 @@
                 </li>
               
                 <li>
+                  <a href="#echo.v1.DetectedColumnMapping"><span class="badge">M</span>DetectedColumnMapping</a>
+                </li>
+              
+                <li>
                   <a href="#echo.v1.DuplicatePlanRequest"><span class="badge">M</span>DuplicatePlanRequest</a>
                 </li>
               
@@ -9678,6 +9682,58 @@
 
         
       
+        <h3 id="echo.v1.DetectedColumnMapping">DetectedColumnMapping</h3>
+        <p>DetectedColumnMapping contains auto-detected column positions for import</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>category_column</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Detected column for categories (e.g., &#34;A&#34;) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value_column</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Detected column for values (e.g., &#34;C&#34;) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>header_row</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Detected header row (1-indexed) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>percentage_column</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Detected column for percentages (optional) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>confidence</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Detection confidence 0-1 (0.9&#43; = high confidence) </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="echo.v1.DuplicatePlanRequest">DuplicatePlanRequest</h3>
         <p></p>
 
@@ -9835,6 +9891,13 @@
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>e.g., [&#34;jan-26&#34;, &#34;feb-26&#34;] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>detected_mapping</td>
+                  <td><a href="#echo.v1.DetectedColumnMapping">DetectedColumnMapping</a></td>
+                  <td></td>
+                  <td><p>Auto-detected column layout </p></td>
                 </tr>
               
             </tbody>

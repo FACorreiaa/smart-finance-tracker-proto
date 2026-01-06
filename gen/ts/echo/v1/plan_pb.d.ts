@@ -896,6 +896,13 @@ export declare type ExcelSheetAnalysis = Message<"echo.v1.ExcelSheetAnalysis"> &
    * @generated from field: repeated string month_columns = 6;
    */
   monthColumns: string[];
+
+  /**
+   * Auto-detected column layout
+   *
+   * @generated from field: echo.v1.DetectedColumnMapping detected_mapping = 7;
+   */
+  detectedMapping?: DetectedColumnMapping;
 };
 
 /**
@@ -903,6 +910,54 @@ export declare type ExcelSheetAnalysis = Message<"echo.v1.ExcelSheetAnalysis"> &
  * Use `create(ExcelSheetAnalysisSchema)` to create a new message.
  */
 export declare const ExcelSheetAnalysisSchema: GenMessage<ExcelSheetAnalysis>;
+
+/**
+ * DetectedColumnMapping contains auto-detected column positions for import
+ *
+ * @generated from message echo.v1.DetectedColumnMapping
+ */
+export declare type DetectedColumnMapping = Message<"echo.v1.DetectedColumnMapping"> & {
+  /**
+   * Detected column for categories (e.g., "A")
+   *
+   * @generated from field: string category_column = 1;
+   */
+  categoryColumn: string;
+
+  /**
+   * Detected column for values (e.g., "C")
+   *
+   * @generated from field: string value_column = 2;
+   */
+  valueColumn: string;
+
+  /**
+   * Detected header row (1-indexed)
+   *
+   * @generated from field: int32 header_row = 3;
+   */
+  headerRow: number;
+
+  /**
+   * Detected column for percentages (optional)
+   *
+   * @generated from field: string percentage_column = 4;
+   */
+  percentageColumn: string;
+
+  /**
+   * Detection confidence 0-1 (0.9+ = high confidence)
+   *
+   * @generated from field: double confidence = 5;
+   */
+  confidence: number;
+};
+
+/**
+ * Describes the message echo.v1.DetectedColumnMapping.
+ * Use `create(DetectedColumnMappingSchema)` to create a new message.
+ */
+export declare const DetectedColumnMappingSchema: GenMessage<DetectedColumnMapping>;
 
 /**
  * ComputePlanActuals request - calculates actual spending from transactions
