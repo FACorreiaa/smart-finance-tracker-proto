@@ -907,6 +907,10 @@
                 </li>
               
                 <li>
+                  <a href="#echo.v1.BehavioralArchetype"><span class="badge">M</span>BehavioralArchetype</a>
+                </li>
+              
+                <li>
                   <a href="#echo.v1.CategorySpend"><span class="badge">M</span>CategorySpend</a>
                 </li>
               
@@ -7956,6 +7960,79 @@ Number of times seen </p></td>
 
         
       
+        <h3 id="echo.v1.BehavioralArchetype">BehavioralArchetype</h3>
+        <p>Behavioral archetype detected from spending patterns ("Coffee Enthusiast", "Subscription King")</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>e.g., &#34;coffee_enthusiast&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>title</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;Coffee Enthusiast&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;You spent €85 at coffee shops&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>emoji</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;☕&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rank</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>1 = primary archetype </p></td>
+                </tr>
+              
+                <tr>
+                  <td>category_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>merchant_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>amount</td>
+                  <td><a href="#echo.v1.Money">Money</a></td>
+                  <td></td>
+                  <td><p>Amount that triggered this archetype </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="echo.v1.CategorySpend">CategorySpend</h3>
         <p></p>
 
@@ -9258,6 +9335,20 @@ Positive = spent more, negative = spent less </p></td>
                   <td><a href="#echo.v1.WrappedCard">WrappedCard</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>archetypes</td>
+                  <td><a href="#echo.v1.BehavioralArchetype">BehavioralArchetype</a></td>
+                  <td>repeated</td>
+                  <td><p>Behavioral archetypes (&#34;Coffee Enthusiast&#34;, &#34;Night Owl&#34;) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>share_url</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Shareable URL for this wrapped summary </p></td>
                 </tr>
               
                 <tr>

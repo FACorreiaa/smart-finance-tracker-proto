@@ -345,6 +345,71 @@ export declare type WrappedCard = Message<"echo.v1.WrappedCard"> & {
 export declare const WrappedCardSchema: GenMessage<WrappedCard>;
 
 /**
+ * Behavioral archetype detected from spending patterns ("Coffee Enthusiast", "Subscription King")
+ *
+ * @generated from message echo.v1.BehavioralArchetype
+ */
+export declare type BehavioralArchetype = Message<"echo.v1.BehavioralArchetype"> & {
+  /**
+   * e.g., "coffee_enthusiast"
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * "Coffee Enthusiast"
+   *
+   * @generated from field: string title = 2;
+   */
+  title: string;
+
+  /**
+   * "You spent €85 at coffee shops"
+   *
+   * @generated from field: string description = 3;
+   */
+  description: string;
+
+  /**
+   * "☕"
+   *
+   * @generated from field: string emoji = 4;
+   */
+  emoji: string;
+
+  /**
+   * 1 = primary archetype
+   *
+   * @generated from field: int32 rank = 5;
+   */
+  rank: number;
+
+  /**
+   * @generated from field: optional string category_id = 6;
+   */
+  categoryId?: string;
+
+  /**
+   * @generated from field: optional string merchant_name = 7;
+   */
+  merchantName?: string;
+
+  /**
+   * Amount that triggered this archetype
+   *
+   * @generated from field: echo.v1.Money amount = 8;
+   */
+  amount?: Money;
+};
+
+/**
+ * Describes the message echo.v1.BehavioralArchetype.
+ * Use `create(BehavioralArchetypeSchema)` to create a new message.
+ */
+export declare const BehavioralArchetypeSchema: GenMessage<BehavioralArchetype>;
+
+/**
  * @generated from message echo.v1.WrappedSummary
  */
 export declare type WrappedSummary = Message<"echo.v1.WrappedSummary"> & {
@@ -377,6 +442,20 @@ export declare type WrappedSummary = Message<"echo.v1.WrappedSummary"> & {
    * @generated from field: repeated echo.v1.WrappedCard cards = 10;
    */
   cards: WrappedCard[];
+
+  /**
+   * Behavioral archetypes ("Coffee Enthusiast", "Night Owl")
+   *
+   * @generated from field: repeated echo.v1.BehavioralArchetype archetypes = 15;
+   */
+  archetypes: BehavioralArchetype[];
+
+  /**
+   * Shareable URL for this wrapped summary
+   *
+   * @generated from field: string share_url = 16;
+   */
+  shareUrl: string;
 
   /**
    * @generated from field: google.protobuf.Timestamp created_at = 20;

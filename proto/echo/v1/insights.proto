@@ -151,6 +151,18 @@ message WrappedCard {
   string accent = 4 [(buf.validate.field).string = { max_len: 32 }];
 }
 
+// Behavioral archetype detected from spending patterns ("Coffee Enthusiast", "Subscription King")
+message BehavioralArchetype {
+  string id = 1 [(buf.validate.field).string = { min_len: 1, max_len: 64 }];  // e.g., "coffee_enthusiast"
+  string title = 2 [(buf.validate.field).string = { min_len: 1, max_len: 64 }];  // "Coffee Enthusiast"
+  string description = 3 [(buf.validate.field).string = { max_len: 256 }];  // "You spent €85 at coffee shops"
+  string emoji = 4 [(buf.validate.field).string = { max_len: 8 }];  // "☕"
+  int32 rank = 5 [(buf.validate.field).int32 = { gte: 1, lte: 10 }];  // 1 = primary archetype
+  optional string category_id = 6 [(buf.validate.field).string = { uuid: true }];
+  optional string merchant_name = 7 [(buf.validate.field).string = { max_len: 128 }];
+  Money amount = 8;  // Amount that triggered this archetype
+}
+
 message WrappedSummary {
   string id = 1 [(buf.validate.field).string = { uuid: true }];
   string user_id = 2 [(buf.validate.field).string = { uuid: true }];
@@ -158,6 +170,13 @@ message WrappedSummary {
   google.protobuf.Timestamp period_start = 4 [(buf.validate.field).required = true];
   google.protobuf.Timestamp period_end = 5 [(buf.validate.field).required = true];
   repeated WrappedCard cards = 10 [(buf.validate.field).repeated = { max_items: 200 }];
+  
+  // Behavioral archetypes ("Coffee Enthusiast", "Night Owl")
+  repeated BehavioralArchetype archetypes = 15 [(buf.validate.field).repeated = { max_items: 5 }];
+  
+  // Shareable URL for this wrapped summary
+  string share_url = 16 [(buf.validate.field).string = { max_len: 512 }];
+  
   google.protobuf.Timestamp created_at = 20 [(buf.validate.field).required = true];
 }
 
