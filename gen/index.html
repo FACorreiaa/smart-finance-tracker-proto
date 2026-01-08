@@ -1373,6 +1373,10 @@
                 </li>
               
                 <li>
+                  <a href="#echo.v1.ItemType"><span class="badge">E</span>ItemType</a>
+                </li>
+              
+                <li>
                   <a href="#echo.v1.PlanSourceType"><span class="badge">E</span>PlanSourceType</a>
                 </li>
               
@@ -11110,6 +11114,13 @@ Positive = spent more, negative = spent less </p></td>
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>item_type</td>
+                  <td><a href="#echo.v1.ItemType">ItemType</a></td>
+                  <td></td>
+                  <td><p>What tab this item appears in </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -12075,6 +12086,27 @@ Positive = spent more, negative = spent less </p></td>
                   <td><p>i18n labels </p></td>
                 </tr>
               
+                <tr>
+                  <td>item_type</td>
+                  <td><a href="#echo.v1.ItemType">ItemType</a></td>
+                  <td></td>
+                  <td><p>Item type - determines which tab this item appears in </p></td>
+                </tr>
+              
+                <tr>
+                  <td>recurring_subscription_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Link to recurring subscription (for auto-synced subscriptions) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>goal_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Link to goal (for savings targets) </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -12452,6 +12484,47 @@ Positive = spent more, negative = spent less </p></td>
                 <td>FIELD_TYPE_TEXT</td>
                 <td>4</td>
                 <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="echo.v1.ItemType">ItemType</h3>
+        <p>Item types for plan items - determines which tab displays this item</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ITEM_TYPE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ITEM_TYPE_BUDGET</td>
+                <td>1</td>
+                <td><p>Regular expense tracked in Budgets tab</p></td>
+              </tr>
+            
+              <tr>
+                <td>ITEM_TYPE_RECURRING</td>
+                <td>2</td>
+                <td><p>Subscription tracked in Recurring tab</p></td>
+              </tr>
+            
+              <tr>
+                <td>ITEM_TYPE_GOAL</td>
+                <td>3</td>
+                <td><p>Savings target tracked in Goals tab</p></td>
+              </tr>
+            
+              <tr>
+                <td>ITEM_TYPE_INCOME</td>
+                <td>4</td>
+                <td><p>Income source</p></td>
               </tr>
             
           </tbody>

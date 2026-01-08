@@ -289,6 +289,27 @@ export declare type PlanItem = Message<"echo.v1.PlanItem"> & {
    * @generated from field: map<string, string> labels = 12;
    */
   labels: { [key: string]: string };
+
+  /**
+   * Item type - determines which tab this item appears in
+   *
+   * @generated from field: echo.v1.ItemType item_type = 13;
+   */
+  itemType: ItemType;
+
+  /**
+   * Link to recurring subscription (for auto-synced subscriptions)
+   *
+   * @generated from field: optional string recurring_subscription_id = 14;
+   */
+  recurringSubscriptionId?: string;
+
+  /**
+   * Link to goal (for savings targets)
+   *
+   * @generated from field: optional string goal_id = 15;
+   */
+  goalId?: string;
 };
 
 /**
@@ -460,6 +481,13 @@ export declare type CreateItemInput = Message<"echo.v1.CreateItemInput"> & {
    * @generated from field: map<string, string> labels = 5;
    */
   labels: { [key: string]: string };
+
+  /**
+   * What tab this item appears in
+   *
+   * @generated from field: echo.v1.ItemType item_type = 6;
+   */
+  itemType: ItemType;
 };
 
 /**
@@ -1232,6 +1260,51 @@ export enum FieldType {
  * Describes the enum echo.v1.FieldType.
  */
 export declare const FieldTypeSchema: GenEnum<FieldType>;
+
+/**
+ * Item types for plan items - determines which tab displays this item
+ *
+ * @generated from enum echo.v1.ItemType
+ */
+export enum ItemType {
+  /**
+   * @generated from enum value: ITEM_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * Regular expense tracked in Budgets tab
+   *
+   * @generated from enum value: ITEM_TYPE_BUDGET = 1;
+   */
+  BUDGET = 1,
+
+  /**
+   * Subscription tracked in Recurring tab  
+   *
+   * @generated from enum value: ITEM_TYPE_RECURRING = 2;
+   */
+  RECURRING = 2,
+
+  /**
+   * Savings target tracked in Goals tab
+   *
+   * @generated from enum value: ITEM_TYPE_GOAL = 3;
+   */
+  GOAL = 3,
+
+  /**
+   * Income source
+   *
+   * @generated from enum value: ITEM_TYPE_INCOME = 4;
+   */
+  INCOME = 4,
+}
+
+/**
+ * Describes the enum echo.v1.ItemType.
+ */
+export declare const ItemTypeSchema: GenEnum<ItemType>;
 
 /**
  * PlanService manages user financial plans

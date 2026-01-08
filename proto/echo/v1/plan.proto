@@ -75,6 +75,15 @@ enum FieldType {
   FIELD_TYPE_TEXT = 4;
 }
 
+// Item types for plan items - determines which tab displays this item
+enum ItemType {
+  ITEM_TYPE_UNSPECIFIED = 0;
+  ITEM_TYPE_BUDGET = 1;      // Regular expense tracked in Budgets tab
+  ITEM_TYPE_RECURRING = 2;   // Subscription tracked in Recurring tab  
+  ITEM_TYPE_GOAL = 3;        // Savings target tracked in Goals tab
+  ITEM_TYPE_INCOME = 4;      // Income source
+}
+
 // UserPlan represents a user's financial plan
 message UserPlan {
   string id = 1;
@@ -155,6 +164,15 @@ message PlanItem {
 
   // i18n labels
   map<string, string> labels = 12;
+
+  // Item type - determines which tab this item appears in
+  ItemType item_type = 13;
+
+  // Link to recurring subscription (for auto-synced subscriptions)
+  optional string recurring_subscription_id = 14;
+
+  // Link to goal (for savings targets)
+  optional string goal_id = 15;
 }
 
 // PlanConfig holds plan-level configuration
@@ -199,6 +217,7 @@ message CreateItemInput {
   WidgetType widget_type = 3;
   FieldType field_type = 4;
   map<string, string> labels = 5;
+  ItemType item_type = 6;  // What tab this item appears in
 }
 
 message CreatePlanResponse {
