@@ -1079,6 +1079,7 @@ func (x *CreatePlanRequest) GetCategoryGroups() []*CreateCategoryGroupInput {
 
 type CreateCategoryGroupInput struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            *string                `protobuf:"bytes,6,opt,name=id,proto3,oneof" json:"id,omitempty"` // Optional ID for updates
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Color         string                 `protobuf:"bytes,2,opt,name=color,proto3" json:"color,omitempty"`
 	TargetPercent float64                `protobuf:"fixed64,3,opt,name=target_percent,json=targetPercent,proto3" json:"target_percent,omitempty"`
@@ -1118,6 +1119,13 @@ func (*CreateCategoryGroupInput) Descriptor() ([]byte, []int) {
 	return file_echo_v1_plan_proto_rawDescGZIP(), []int{6}
 }
 
+func (x *CreateCategoryGroupInput) GetId() string {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return ""
+}
+
 func (x *CreateCategoryGroupInput) GetName() string {
 	if x != nil {
 		return x.Name
@@ -1155,6 +1163,7 @@ func (x *CreateCategoryGroupInput) GetLabels() map[string]string {
 
 type CreateCategoryInput struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            *string                `protobuf:"bytes,5,opt,name=id,proto3,oneof" json:"id,omitempty"` // Optional ID for updates
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Icon          string                 `protobuf:"bytes,2,opt,name=icon,proto3" json:"icon,omitempty"`
 	Items         []*CreateItemInput     `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
@@ -1193,6 +1202,13 @@ func (*CreateCategoryInput) Descriptor() ([]byte, []int) {
 	return file_echo_v1_plan_proto_rawDescGZIP(), []int{7}
 }
 
+func (x *CreateCategoryInput) GetId() string {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return ""
+}
+
 func (x *CreateCategoryInput) GetName() string {
 	if x != nil {
 		return x.Name
@@ -1223,6 +1239,7 @@ func (x *CreateCategoryInput) GetLabels() map[string]string {
 
 type CreateItemInput struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
+	Id                 *string                `protobuf:"bytes,9,opt,name=id,proto3,oneof" json:"id,omitempty"` // Optional ID for updates
 	Name               string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	BudgetedMinor      int64                  `protobuf:"varint,2,opt,name=budgeted_minor,json=budgetedMinor,proto3" json:"budgeted_minor,omitempty"`
 	WidgetType         WidgetType             `protobuf:"varint,3,opt,name=widget_type,json=widgetType,proto3,enum=echo.v1.WidgetType" json:"widget_type,omitempty"`
@@ -1263,6 +1280,13 @@ func (x *CreateItemInput) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateItemInput.ProtoReflect.Descriptor instead.
 func (*CreateItemInput) Descriptor() ([]byte, []int) {
 	return file_echo_v1_plan_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *CreateItemInput) GetId() string {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return ""
 }
 
 func (x *CreateItemInput) GetName() string {
@@ -4337,8 +4361,9 @@ const file_echo_v1_plan_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12#\n" +
 	"\rcurrency_code\x18\x03 \x01(\tR\fcurrencyCode\x12J\n" +
-	"\x0fcategory_groups\x18\x04 \x03(\v2!.echo.v1.CreateCategoryGroupInputR\x0ecategoryGroups\"\xb4\x02\n" +
-	"\x18CreateCategoryGroupInput\x12\x1b\n" +
+	"\x0fcategory_groups\x18\x04 \x03(\v2!.echo.v1.CreateCategoryGroupInputR\x0ecategoryGroups\"\xd0\x02\n" +
+	"\x18CreateCategoryGroupInput\x12\x13\n" +
+	"\x02id\x18\x06 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x14\n" +
 	"\x05color\x18\x02 \x01(\tR\x05color\x12%\n" +
 	"\x0etarget_percent\x18\x03 \x01(\x01R\rtargetPercent\x12<\n" +
@@ -4348,16 +4373,20 @@ const file_echo_v1_plan_proto_rawDesc = "" +
 	"\x06labels\x18\x05 \x03(\v2-.echo.v1.CreateCategoryGroupInput.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf3\x01\n" +
-	"\x13CreateCategoryInput\x12\x1b\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x05\n" +
+	"\x03_id\"\x8f\x02\n" +
+	"\x13CreateCategoryInput\x12\x13\n" +
+	"\x02id\x18\x05 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x12\n" +
 	"\x04icon\x18\x02 \x01(\tR\x04icon\x12.\n" +
 	"\x05items\x18\x03 \x03(\v2\x18.echo.v1.CreateItemInputR\x05items\x12@\n" +
 	"\x06labels\x18\x04 \x03(\v2(.echo.v1.CreateCategoryInput.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe7\x03\n" +
-	"\x0fCreateItemInput\x12\x1b\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x05\n" +
+	"\x03_id\"\x83\x04\n" +
+	"\x0fCreateItemInput\x12\x13\n" +
+	"\x02id\x18\t \x01(\tH\x00R\x02id\x88\x01\x01\x12\x1b\n" +
 	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12%\n" +
 	"\x0ebudgeted_minor\x18\x02 \x01(\x03R\rbudgetedMinor\x124\n" +
 	"\vwidget_type\x18\x03 \x01(\x0e2\x13.echo.v1.WidgetTypeR\n" +
@@ -4366,11 +4395,12 @@ const file_echo_v1_plan_proto_rawDesc = "" +
 	"field_type\x18\x04 \x01(\x0e2\x12.echo.v1.FieldTypeR\tfieldType\x12<\n" +
 	"\x06labels\x18\x05 \x03(\v2$.echo.v1.CreateItemInput.LabelsEntryR\x06labels\x12.\n" +
 	"\titem_type\x18\x06 \x01(\x0e2\x11.echo.v1.ItemTypeR\bitemType\x12 \n" +
-	"\tconfig_id\x18\a \x01(\tH\x00R\bconfigId\x88\x01\x01\x125\n" +
-	"\x14initial_actual_minor\x18\b \x01(\x03H\x01R\x12initialActualMinor\x88\x01\x01\x1a9\n" +
+	"\tconfig_id\x18\a \x01(\tH\x01R\bconfigId\x88\x01\x01\x125\n" +
+	"\x14initial_actual_minor\x18\b \x01(\x03H\x02R\x12initialActualMinor\x88\x01\x01\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x05\n" +
+	"\x03_idB\f\n" +
 	"\n" +
 	"_config_idB\x17\n" +
 	"\x15_initial_actual_minor\";\n" +
@@ -4890,6 +4920,8 @@ func file_echo_v1_plan_proto_init() {
 	}
 	file_echo_v1_common_proto_init()
 	file_echo_v1_plan_proto_msgTypes[3].OneofWrappers = []any{}
+	file_echo_v1_plan_proto_msgTypes[6].OneofWrappers = []any{}
+	file_echo_v1_plan_proto_msgTypes[7].OneofWrappers = []any{}
 	file_echo_v1_plan_proto_msgTypes[8].OneofWrappers = []any{}
 	file_echo_v1_plan_proto_msgTypes[14].OneofWrappers = []any{}
 	file_echo_v1_plan_proto_msgTypes[41].OneofWrappers = []any{}

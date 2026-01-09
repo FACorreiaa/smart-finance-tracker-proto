@@ -398,6 +398,13 @@ export declare const CreatePlanRequestSchema: GenMessage<CreatePlanRequest>;
  */
 export declare type CreateCategoryGroupInput = Message<"echo.v1.CreateCategoryGroupInput"> & {
   /**
+   * Optional ID for updates
+   *
+   * @generated from field: optional string id = 6;
+   */
+  id?: string;
+
+  /**
    * @generated from field: string name = 1;
    */
   name: string;
@@ -434,6 +441,13 @@ export declare const CreateCategoryGroupInputSchema: GenMessage<CreateCategoryGr
  */
 export declare type CreateCategoryInput = Message<"echo.v1.CreateCategoryInput"> & {
   /**
+   * Optional ID for updates
+   *
+   * @generated from field: optional string id = 5;
+   */
+  id?: string;
+
+  /**
    * @generated from field: string name = 1;
    */
   name: string;
@@ -464,6 +478,13 @@ export declare const CreateCategoryInputSchema: GenMessage<CreateCategoryInput>;
  * @generated from message echo.v1.CreateItemInput
  */
 export declare type CreateItemInput = Message<"echo.v1.CreateItemInput"> & {
+  /**
+   * Optional ID for updates
+   *
+   * @generated from field: optional string id = 9;
+   */
+  id?: string;
+
   /**
    * @generated from field: string name = 1;
    */

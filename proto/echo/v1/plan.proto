@@ -259,6 +259,7 @@ message CreatePlanRequest {
 }
 
 message CreateCategoryGroupInput {
+  optional string id = 6; // Optional ID for updates
   string name = 1 [(buf.validate.field).string.min_len = 1];
   string color = 2;
   double target_percent = 3;
@@ -267,6 +268,7 @@ message CreateCategoryGroupInput {
 }
 
 message CreateCategoryInput {
+  optional string id = 5; // Optional ID for updates
   string name = 1 [(buf.validate.field).string.min_len = 1];
   string icon = 2;
   repeated CreateItemInput items = 3;
@@ -274,6 +276,7 @@ message CreateCategoryInput {
 }
 
 message CreateItemInput {
+  optional string id = 9; // Optional ID for updates
   string name = 1 [(buf.validate.field).string.min_len = 1];
   int64 budgeted_minor = 2;
   WidgetType widget_type = 3;
